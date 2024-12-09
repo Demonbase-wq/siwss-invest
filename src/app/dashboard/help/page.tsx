@@ -1,4 +1,4 @@
-import HelpDesk from '@/components/Desk/HelpDesk'
+import HelpDesk from '@/components/userDashboard/Desk/HelpDesk'
 import React from 'react'
 
 const page = () => {

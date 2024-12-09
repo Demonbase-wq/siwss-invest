@@ -1,4 +1,4 @@
-import ViewTickets from '@/components/Desk/ViewTickets'
+import ViewTickets from '@/components/userDashboard/Desk/ViewTickets'
 import React from 'react'
 
 const page = () => {

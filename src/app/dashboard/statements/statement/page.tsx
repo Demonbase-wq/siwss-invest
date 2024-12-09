@@ -1,4 +1,4 @@
-import StatementPage from '@/components/Bank/Statement'
+import StatementPage from '@/components/userDashboard/Bank/Statement'
 import React from 'react'
 
 const page = () => {

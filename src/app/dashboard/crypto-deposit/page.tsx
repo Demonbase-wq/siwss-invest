@@ -1,4 +1,4 @@
-import CryptoDeposit from '@/components/Check/Crypto'
+import CryptoDeposit from '@/components/userDashboard/Check/Crypto'
 import React from 'react'
 
 const page = () => {

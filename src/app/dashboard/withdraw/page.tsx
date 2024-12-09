@@ -1,4 +1,4 @@
-import WIth from '@/components/Withdrawal/WIth'
+import WIth from '@/components/userDashboard/Withdrawal/WIth'
 import React from 'react'
 
 const page = () => {

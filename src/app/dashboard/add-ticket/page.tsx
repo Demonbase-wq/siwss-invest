@@ -1,4 +1,4 @@
-import Ticketform from '@/components/Desk/Ticketform'
+import Ticketform from '@/components/userDashboard/Desk/Ticketform'
 import React from 'react'
 
 const page = () => {
