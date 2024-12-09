@@ -8,7 +8,7 @@ const FooterB = () => {
         <div className="px-4">
           <div className="flex flex-col items-center lg:flex-row lg:justify-between gap-4 lg:gap-0">
             <p className="text-center">
-              Copyright © 2024 <a href="/" className="text-accent">CmProTrading</a> All Rights Reserved
+              Copyright © 2024 <Link href="/" className="text-accent">CmProTrading</Link> All Rights Reserved
             </p>
             <div>
                 <ul className="flex items-center gap-4">
