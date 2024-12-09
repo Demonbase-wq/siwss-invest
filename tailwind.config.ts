@@ -8,11 +8,25 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'wave-pattern': "url('/wave.svg')",
+      },
+      container: {
+        screens: {
+          lg: '1000px', // Custom max-width for large screens
+        },
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#030834",
+        secondary: "#00b3b3",
+        accent: '#ec3f77',
+        neutral: "#f2f2f2",
+        text: "#333333",
+        // Add more custom colors here
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
 } satisfies Config;
