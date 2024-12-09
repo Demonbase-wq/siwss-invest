@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const Navbar = () => {
@@ -36,73 +37,73 @@ const Navbar = () => {
         <div className="navbar">
           <div className="navbar-start">
             <div className="h-[50px]">
-              <a href="/">
+              <Link href="/">
                 <img
                   src="/nav-logo.png"
                   alt="logo"
                   className="h-full w-full object-cover"
                 />
-              </a>
+              </Link>
             </div>
           </div>
 
           <div className="hidden lg:navbar-end lg:flex text-white">
             <ul className=" flex items-center gap-5 uppercase">
               <li>
-                <a
+                <Link
                   href="/"
                   className="hover:text-accent font-semibold  transition-all ease-in-out duration-[0.2s]"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/about"
                   className="hover:text-accent font-semibold   transition-all ease-in-out duration-[0.2s]"
                 >
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/faq"
                   className="hover:text-accent font-semibold  transition-all ease-in-out duration-[0.2s]"
                 >
                   FAQ
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/contact"
                   className="hover:text-accent font-semibold  transition-all ease-in-out duration-[0.2s]"
                 >
                   Contact Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/#investment"
                   className="hover:text-accent font-semibold  transition-all ease-in-out duration-[0.2s]"
                 >
                   Investment
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/login"
                   className="hover:text-accent font-semibold  transition-all ease-in-out duration-[0.2s]"
                 >
                   Login
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/signup"
                   className="hover:text-accent font-semibold  transition-all ease-in-out duration-[0.2s]"
                 >
                   Sign Up
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -140,62 +141,62 @@ const Navbar = () => {
         >
           <div className="p-6">
             <div>
-              <a href="/">
+              <Link href="/">
                 <img
                   src="/nav-logo.png"
                   alt="logo"
                   className="h-full w-full object-cover"
                 />
-              </a>
+              </Link>
             </div>
           </div>
 
           <ul className="flex flex-col gap-6 p-6 text-white">
             <li>
-              <a
+              <Link
                 href="#"
                 className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
               >
                 Features
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#"
                 className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
               >
                 Pricing
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#"
                 className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
               >
                 Contact
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#"
                 className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
               >
                 About
-              </a>
+              </Link>
             </li>
           </ul>
 
           <div className="p-6 flex flex-col gap-4 text-white">
-            <a href="/login">
+            <Link href="/login">
               <button className="border-white border-[1px] h-[2.5rem] text-center rounded-[30px] w-[120px] text-white">
                 Login
               </button>
-            </a>
-            <a href="/signup">
+            </Link>
+            <Link href="/signup">
               <button className="border-white border-[1px] h-[2.5rem] text-center rounded-[30px] w-[120px] text-white">
                 Sign Up
               </button>
-            </a>
+            </Link>
           </div>
         </div>
 

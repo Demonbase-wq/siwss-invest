@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const FooterB = () => {
@@ -11,9 +12,9 @@ const FooterB = () => {
             </p>
             <div>
                 <ul className="flex items-center gap-4">
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/T&C">Terms & Conditions</a></li>
-                    <li><a href="/privacy-policy">Privacy</a></li>
+                    <li><Link href="/about">About</Link></li>
+                    <li><Link href="/T&C">Terms & Conditions</Link></li>
+                    <li><Link href="/privacy-policy">Privacy</Link></li>
                 </ul>
             </div>
           </div>
