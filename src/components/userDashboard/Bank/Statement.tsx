@@ -32,7 +32,7 @@ const Statement: React.FC = () => {
         const input = document.getElementById('print-section');
         html2canvas(input as HTMLElement)
             .then(function (canvas) {
-                let anchorTag = document.createElement("a");
+                const anchorTag = document.createElement("a");
                 anchorTag.download = `invoice-${id}.png`;
                 anchorTag.href = canvas.toDataURL();
                 anchorTag.click();

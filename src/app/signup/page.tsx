@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { GiCancel } from "react-icons/gi";
 import { GrStatusGood } from "react-icons/gr";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface FormData {
   first_name: string;
@@ -92,7 +93,7 @@ const SignUp: React.FC = () => {
     const file = inputFileRef.current.files[0];
 
     const response = await fetch(
-      `https://crest-bank.vercel.app/api/upload-image?filename=${file.name}`,
+      `https://cmtradingpro.vercel.app/api/upload-image?filename=${file.name}`,
       {
         method: "POST",
         body: file,
@@ -160,7 +161,7 @@ const SignUp: React.FC = () => {
       const { confirmPassword, ...newData } = data;
 
       const response = await axios.post(
-        "https://crest-bank.vercel.app/api/signup",
+        "https://.vercel.app/api/signup",
         newData
       );
 
@@ -340,9 +341,9 @@ const SignUp: React.FC = () => {
                   </div>
 
                   <div className="text-sm">
-                    <a href="/login" className="">
+                    <Link href="/login" className="">
                       Login
-                    </a>
+                    </Link>
                   </div>
                 </div>
               <button

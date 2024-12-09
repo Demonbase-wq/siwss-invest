@@ -9,6 +9,7 @@ import Image from "./Image";
 import Accordion from "../Random/AccordionItem";
 import LogoutDesktop from "./LogoutDesktop";
 import { useState } from "react";
+import Link from "next/link";
 
 
 
@@ -36,13 +37,13 @@ const Sidebar = () => {
                     >
                         <div className="navbar-start z-50">
                             <div className="lg:h-[50px] lg:w-[65px] h-[45px] w-[55px]">
-                                <a href="/">
+                                <Link href="/">
                                     <img
                                         src="/crest.png"
                                         alt="logo"
                                         className="h-full w-full object-cover"
                                     />
-                                </a>
+                                </Link>
                             </div>
                         </div>
 

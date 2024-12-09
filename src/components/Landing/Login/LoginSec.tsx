@@ -5,6 +5,7 @@ import axios from "axios";
 import { loginAction } from "./loginAction";
 import { GiCancel } from "react-icons/gi";
 import { GrStatusGood } from "react-icons/gr";
+import Link from "next/link";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -118,13 +119,13 @@ const LoginPage: React.FC = () => {
         </dialog>
         <div className="bg-[#161150] text-white p-8 md:w-1/2 flex flex-col justify-center">
           <div className="">
-            <a href="/">
+            <Link href="/">
               <img
                 src="/nav-logo.png"
                 alt="logo"
                 className="h-full w-full object-cover"
               />
-            </a>
+            </Link>
           </div>
           <h1 className="text-3xl font-bold mt-4">Welcome to CmTradingPro!</h1>
           <p className="mt-2 font-light">The world&apos;s #1 broker!!</p>
@@ -176,15 +177,15 @@ const LoginPage: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="text-sm">
-                    <a href="#" className="text-[#7e8299] text-[12px]">
+                    <Link href="#" className="text-[#7e8299] text-[12px]">
                       Forgot your password?
-                    </a>
+                    </Link>
                   </div>
 
                   <div>
-                    <a href="/signup" className="text-primary text-[12px]">
+                    <Link href="/signup" className="text-primary text-[12px]">
                       Create new account
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div>
