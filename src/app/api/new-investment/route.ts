@@ -25,9 +25,13 @@ export async function POST(request: Request) {
 
   try {
     const userRecord = await users.find(session.user.id as string);
-
+    const user_balance = userRecord?.fields.balance as number;
     if (!userRecord) {
-      return Response.json({ error: "User not found." }, { status: 404 });
+      return Response.json({ error: "User not found." }, { status: 200 });
+    }
+
+    if(amount > user_balance){
+        return Response.json({ error: "Insufficient funds." }, { status: 200 });
     }
 
     const timezone = userRecord.fields.timezone || "UTC";
@@ -57,6 +61,12 @@ export async function POST(request: Request) {
       net_profit: netProfit,
     });
 
+    const newBalance = user_balance - amount;
+
+    await users.update(session.user.id as string, {
+        balance: newBalance,
+    })
+    
     const investmentId = investmentRecord.id;
     const user_name = `${userRecord.fields.first_name} ${userRecord.fields.last_name}`;
     const start_date = investmentRecord?.fields.start_date as string;
