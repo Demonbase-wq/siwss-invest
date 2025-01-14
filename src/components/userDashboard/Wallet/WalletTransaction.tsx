@@ -36,7 +36,7 @@ const WalletTransaction: React.FC = () => {
       console.log(rowData);
       setLoading(false);
     }
-  }, [data]);
+  }, [data, rowData]);
 
   const [colDefs, setColDefs] = useState<ColDef[]>([
     {
