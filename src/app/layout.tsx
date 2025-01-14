@@ -13,8 +13,8 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "SwissPipsAI",
-  description: ": Your Trusted Partner in Smart Investments",
+  title: "SwissPipsAI.",
+  description: "Your Trusted Partner in Smart Investments.",
 };
 
 export default function RootLayout({
