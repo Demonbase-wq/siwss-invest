@@ -27,15 +27,15 @@ const WalletTransaction: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (data) {
-      const transactions = data?.transactions.map((transaction: any) => ({
+    if (data?.transactions) {
+      const transactions = data.transactions.map((transaction: any) => ({
         ...transaction.fields, // Spread the fields object
         id: transaction.id, // Add the top-level id
       }));
       if (transactions) setRowData(transactions);
       setLoading(false);
     }
-  }, [data, rowData]);
+  }, [data]);
 
   const [colDefs, setColDefs] = useState<ColDef[]>([
     {
