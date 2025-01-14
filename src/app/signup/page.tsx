@@ -27,14 +27,6 @@ interface FormData {
 }
 
 const SignUp: React.FC = () => {
-  const searchParams = useSearchParams();
-  const ref = searchParams.get("ref");
-  const { register, handleSubmit, watch, setValue, reset } = useForm<FormData>({
-    defaultValues: {
-      referralCode: ref || "", // Set referral code from URL as the default
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Capture timezone during form initialization
-    },
-  });
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [countries, setCountries] = useState<{ name: string; iso2: string }[]>(
     []
@@ -44,6 +36,26 @@ const SignUp: React.FC = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
+  const [referralCode, setReferralCode] = useState<string>("");
+
+  // Extract referral code from URL
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get("ref");
+    if (ref) setReferralCode(ref);
+  }, []);
+
+  const { register, handleSubmit, watch, setValue, reset } = useForm<FormData>({
+    defaultValues: {
+      referralCode: "", // Set referral code from URL as the default
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Capture timezone during form initialization
+    },
+  });
+
+  // Set referral code in form on load
+  useEffect(() => {
+    setValue("referralCode", referralCode);
+  }, [referralCode, setValue]);
 
   useEffect(() => {
     // Fetch countries with ISO2 codes
