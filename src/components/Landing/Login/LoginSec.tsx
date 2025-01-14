@@ -54,7 +54,6 @@ const LoginPage: React.FC = () => {
         headers: {
           'Content-Type': 'application/json', // Specify the content type
           Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`, // Example for adding an auth token
-          Referer: 'https://www.swisspipsai.com', // Add Referer if required
         },
       });
       if (response?.data.catchError) {
