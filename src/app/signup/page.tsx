@@ -113,7 +113,7 @@ const SignUp: React.FC = () => {
 
     const file = inputFileRef.current.files[0];
 
-    const response = await fetch(`/api/upload-image?filename=${file.name}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/upload-image?filename=${file.name}`, {
       method: "POST",
       body: file,
     });
@@ -154,7 +154,7 @@ const SignUp: React.FC = () => {
 
       const { confirmPassword, ...newData } = data;
 
-      const response = await axios.post("/api/signup", newData);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/signup`, newData);
 
       if (response.data.success) {
         toast.dismiss(toastId);
@@ -381,7 +381,7 @@ const VerifyPin: React.FC = () => {
   const onSubmit: SubmitHandler<{ pin: string }> = async (data) => {
     const toastId = toast.loading("Verifying");
     try {
-      const response = await axios.post("/api/verify-pin", data);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/verify-pin`, data);
       console.log(response.status);
       if (response.status === 200) {
         toast.dismiss(toastId);

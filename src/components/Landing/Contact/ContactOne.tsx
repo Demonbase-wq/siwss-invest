@@ -31,7 +31,7 @@ const ContactOne = () => {
 
     const toastId = toast.loading("Sending your message...");
     try {
-      const response = await axios.post("/api/contact-support", formData);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/contact-support`, formData);
       const message = response?.data.message;
       const error = response?.data.error;
       if (message) {

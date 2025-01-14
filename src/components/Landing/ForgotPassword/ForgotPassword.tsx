@@ -44,7 +44,7 @@ export default function ForgotPasswordForm() {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const toastId = toast.loading("Sending reset link...");
     try {
-      const response = await axios.post("/api/request-reset", values);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/request-reset`, values);
       const error = await response?.data.error;
       const message = await response?.data.message;
       if (message) {

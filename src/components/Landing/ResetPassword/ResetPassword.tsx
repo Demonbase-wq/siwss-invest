@@ -63,7 +63,7 @@ export default function ResetPasswordForm() {
 
     const toastId = toast.loading("Resetting password..."); // Show loading toast
     try {
-      const response = await axios.post("/api/reset-password", {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/reset-password`, {
         token,
         password: values.password,
       });
