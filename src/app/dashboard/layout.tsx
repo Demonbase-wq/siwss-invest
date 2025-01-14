@@ -1,14 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import BreadCrumb from "@/components/BreadCrumb";
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
