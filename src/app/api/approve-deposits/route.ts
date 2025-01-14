@@ -136,7 +136,7 @@ export async function POST(request: Request) {
                     <p><strong>Transaction ID:</strong> ${transaction[0].id}</p>
                     <p><strong>Date Credited:</strong> ${formattedUpdatedDate}</p>
                 </div>
-                <p>Your account balance has been updated to reflect this deposit. You can now use these funds for trading or other activities on our platform.</p>
+                <p>Your account balance has been updated to reflect this deposit. You can now use these funds to invest on our platform.</p>
                 <p>If you have any questions or notice any discrepancies, please don't hesitate to contact our support team.</p>
                 <a href="https://swisspipsai.com/dashboard" class="button">View Account Balance</a>
             </div>

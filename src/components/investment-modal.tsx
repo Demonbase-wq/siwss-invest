@@ -92,7 +92,6 @@ export default function InvestmentModal({
       );
       return;
     }
-    const toastId = toast.loading("Processing your investment...");
 
     const data = {
       name: investmentDetails.name,
@@ -100,6 +99,8 @@ export default function InvestmentModal({
       estimatedROI: plan.estimatedROI,
       duration: plan.duration,
     };
+    
+    const toastId = toast.loading("Processing your investment...");
 
     try {
       const response = await axios.post("/api/new-investment", data);

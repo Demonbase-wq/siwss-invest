@@ -21,6 +21,7 @@ import MarketInsights from "@/components/market-insights";
 import { formatNumber } from "@/lib/util";
 import InvestmentPieChart from "@/components/InvestmentPieChart";
 import React from "react";
+import Link from "next/link";
 
 interface KPI {
   label: string;
@@ -150,19 +151,25 @@ export default function DashboardPage() {
             </div>
             <div className="flex-col gap-3 flex ">
               <div>
-                <Button variant="outline" className="w-full">
-                  <Plus className="mr-2 h-4 w-4" /> Add Funds
-                </Button>
+                <Link href="/dashboard/deposit">
+                  <Button variant="outline" className="w-full">
+                    <Plus className="mr-2 h-4 w-4" /> Add Funds
+                  </Button>
+                </Link>
               </div>
               <div>
-                <Button variant="outline" className="w-full">
-                  <MinusCircle className="mr-2 h-4 w-4" /> Withdraw
-                </Button>
+                <Link href="/dashboard/withdraw">
+                  <Button variant="outline" className="w-full">
+                    <MinusCircle className="mr-2 h-4 w-4" /> Withdraw
+                  </Button>
+                </Link>
               </div>
               <div>
-                <Button variant="secondary" className="w-full">
-                  <TrendingUp className="mr-2 h-4 w-4" /> Invest Now
-                </Button>
+                <Link href='/dashboard/investments/new'>
+                  <Button variant="secondary" className="w-full">
+                    <TrendingUp className="mr-2 h-4 w-4" /> Invest Now
+                  </Button>
+                </Link>
               </div>
             </div>
           </CardContent>
@@ -239,7 +246,7 @@ export default function DashboardPage() {
       {/* Charts Section */}
       <div className="flex flex-col md:flex-row items-start gap-4 w-full">
         <div className="w-full lg:w-[60%]">
-          <InvestmentChart data={dailyProfits} timezone={user?.timezone}/>
+          <InvestmentChart data={dailyProfits} timezone={user?.timezone} />
         </div>
 
         <div className="w-full lg:w-[40%]">
