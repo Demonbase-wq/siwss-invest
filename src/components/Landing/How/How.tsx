@@ -6,13 +6,13 @@ const How = () => {
       <div className="mycontainer">
         <div className="px-4 flex flex-col gap-10">
           <div className="flex flex-col gap-4">
-            <h2 className="text-center text-white font-bold text-[30px] leading-[40px] lg:text-[46px] lg:leading-[54px]">
-              How to start
+            <h2 className="text-center text-white font-bold text-[25px] leading-[40px] lg:text-[46px] lg:leading-[54px]">
+              How to Get Started
             </h2>
 
             <p className="text-center w-auto lg:w-[480px] my-0 mx-auto">
-              Help agencies to define their new business objectives and then
-              create professional software.
+              Begin your journey with SwissPipsAI in three simple steps and
+              watch your investments grow with AI precision.
             </p>
           </div>
 

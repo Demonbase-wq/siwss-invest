@@ -1,414 +1,316 @@
-'use client'
-import React, { useState, useEffect } from 'react'
+"use client";
 import useSWR from "swr";
-import { FaPlus } from "react-icons/fa6";
-import { formatNumber, formatDate, containsTransfer } from '../../../lib/util';
-import { FaChevronDown } from "react-icons/fa";
-import { FaChevronUp } from "react-icons/fa";
+import {
+  ArrowUpRight,
+  ArrowDownRight,
+  Plus,
+  MinusCircle,
+  TrendingUp,
+  Users,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import InvestmentChart from "@/components/investment-chart";
+import MarketInsights from "@/components/market-insights";
+import { formatNumber } from "@/lib/util";
+import InvestmentPieChart from "@/components/InvestmentPieChart";
+import React from "react";
 
-
-
-interface Transaction {
-    id: string;
-    fields: {
-        payment_account: string,
-        date: string,
-        user_id: string,
-        type: string,
-        amount: number,
-        status: string,
-    };
+interface KPI {
+  label: string;
+  value: number;
+  change: number;
+  trend: "up" | "down";
 }
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
+export default function DashboardPage() {
+  const { data: investments } = useSWR("/api/get-investments", fetcher);
+  const { data: transactions } = useSWR("/api/transactions", fetcher);
+  const { data: user } = useSWR("/api/get-user", fetcher);
+  const { data: dailyProfits } = useSWR(`/api/userdailyprofits`, fetcher);
+  const { data: marketNews } = useSWR(`/api/market-news`, fetcher);
+  const [loading, setLoading] = React.useState(true);
 
-const Main = () => {
-    const { data } = useSWR("/api/transactions", fetcher);
-    const { data: user } = useSWR("/api/get-user", fetcher);
-    const [loading, setLoading] = useState(true)
+  React.useEffect(() => {
+    if (investments && transactions && user && dailyProfits && marketNews) {
+      setLoading(false);
+    }
+  }, [investments, transactions, user, dailyProfits, marketNews]);
 
-
-    useEffect(() => {
-        if (data && user) {
-            setLoading(false)
-        }
-    }, [data, user]);
-
-    // let inflow = 0;
-    // if (data) {
-    //     inflow = data.transactions.reduce((acc: any, transaction: Transaction) => {
-    //         return acc + transaction.fields.amount;
-    //     }, 0)
-    // }
-
-
-
+  if (
+    loading ||
+    !investments ||
+    !transactions ||
+    !user ||
+    !dailyProfits ||
+    !marketNews
+  ) {
     return (
-        <div className='md:pt-6 pt-6 pb-6 md:pb-24'>
-            <div className="mycontainer md:hidden">
-                <dialog id="loading-modal" className={`modal bg-[#004080] ${loading ? 'opacity-100' : ''}`}>
-                    <div className='flex items-center justify-center gap-3'>
-                        <span className="loading loading-ring loading-lg bg-white"></span>
-                    </div>
-                </dialog>
-                <div className="px-4">
-                    <div>
-                        <div className='flex flex-col gap-6'>
-                            {/* top */}
-                            <div className='flex flex-col md:flex-row gap-6'>
-                                {/* top left */}
-                                <div className='flex md:flex-[1.6] justify-center md:justify-start items-center'>
-                                    <div className='bg-white w-full sm:max-w-sm pb-3 rounded-[13px] flex flex-col'>
-                                        <div className='bg-primary relative flex flex-col gap-6 rounded-[13px] px-4 pt-3 pb-[80px]'>
-                                            <div className='flex justify-between items-center'>
-                                                <div className='flex gap-2 items-center bg-[#00000074] py-1 rounded-[30px] px-2'>
-                                                    <div className='w-[40px] h-[40px] rounded-full border-[1px] border-primary'>
-                                                        <img src={user?.img} alt="" className='object-cover h-full w-full rounded-full' />
-                                                    </div>
-
-                                                    <p className='text-[11px] md:text-[14px] font-medium text-white'>{user?.first_name + " " + user?.last_name}</p>
-                                                </div>
-
-                                                <div className='flex items-center justify-center p-3 rounded-[15px] bg-[#00000074]'>
-                                                    <FaPlus size={18} color='white' />
-                                                </div>
-                                            </div>
-
-                                            <div className='flex justify-between items-center'>
-                                                <p className='text-white text-[14px]'>Balance:</p>
-
-                                                <p className='text-white text-[14px]'>${formatNumber(user?.balance_current)}</p>
-                                            </div>
-
-                                            <div className='flex justify-between absolute bottom-[-20px] left-0 right-0 px-4'>
-                                                <div className='bg-white flex flex-col gap-1 w-[40%] shadow-xl p-3 rounded-[8px]'>
-                                                    <div className='flex justify-between items-center'>
-                                                        <p className='text-[12px] md:text-[14px]'>inflow</p>
-
-                                                        <FaChevronDown size={12} color='green' />
-
-                                                    </div>
-
-                                                    <p className='text-green-500 md:text-[14px] sm:text-[12px] text-[70%]'>${formatNumber(user?.inflow)}</p>
-                                                </div>
-                                                <div className='bg-white shadow-xl flex flex-col gap-1 w-[40%] p-3 rounded-[8px]'>
-                                                    <div className='flex justify-between items-center'>
-                                                        <p className='text-[12px] md:text-[14px]'>outflow</p>
-
-                                                        <FaChevronUp size={12} color='red' />
-
-                                                    </div>
-
-                                                    <p className='text-red-500 md:text-[14px] sm:text-[12px] text-[70%]'>${formatNumber(user?.outflow)}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* middle top */}
-                                        <div className='mt-10 px-4 flex flex-col gap-2'>
-                                            <div className='flex justify-between items-center'>
-                                                <p className='text-gray-500 text-[13px] md:text-[14px]'>Loan Balance:</p>
-
-                                                <p className='text-[14px] text-[#805dca]'>${user ? formatNumber(user?.loan_balance) : formatNumber(0)}</p>
-                                            </div>
-                                            <div className='flex justify-between items-center'>
-                                                <p className='text-gray-500 text-[13px] md:text-[14px]'>Savings Balance:</p>
-
-                                                <p className='text-[#2196f3] text-[14px]'>${user ? formatNumber(user?.balance_savings) : formatNumber(0)}</p>
-                                            </div>
-                                            <div className='flex justify-between items-center'>
-                                                <p className='text-gray-500 text-[13px] md:text-[14px]'>Account Balance:</p>
-
-                                                <p className='text-[#2196f3] text-[14px]'>${formatNumber(user?.balance_current)}</p>
-                                            </div>
-                                        </div>
-                                        {/* middle top */}
-
-                                        <div className='mt-5 px-7 justify-between flex'>
-                                            <button className='text-[13px] py-[6px] px-[11px] rounded-[8px] text-[#805dca] bg-[#5c1ac32b] md:text-[14px]'>View Details</button>
-
-                                            <a href='/dashboard/profile' className='text-[13px] py-[6px] px-[11px] rounded-[8px] text-[#009688] bg-[#00968830] md:text-[14px]'>Account Details</a>
-                                        </div>
-                                    </div>
-                                    {/* top left */}
-                                </div>
-
-
-
-                                {/* top right */}
-                                <div className='md:flex-[3]'>
-                                    <div className='bg-white rounded-[10px] p-3 flex flex-col gap-4'>
-                                        <div className='flex justify-between items-center'>
-                                            <p>Transactions</p>
-
-                                            <div className='flex gap-[2px] items-center'>
-                                                <div className='h-[4px] w-[4px] bg-gray-500 rounded-full'></div>
-                                                <div className='h-[4px] w-[4px] bg-gray-500 rounded-full'></div>
-                                                <div className='h-[4px] w-[4px] bg-gray-500 rounded-full'></div>
-                                            </div>
-                                        </div>
-
-                                        <div className='flex flex-col gap-6'>
-                                            {data?.transactions?.map((data: Transaction, index: any) => (
-                                                <div key={data.id} className='flex items-center justify-between'>
-                                                    <div className='flex items-center gap-2'>
-                                                        <div className='flex items-center justify-center p-3 rounded-[15px] bg-[#BAE7FF]'>
-                                                            <FaPlus size={15} color='#2196f3' />
-                                                        </div>
-
-                                                        <div className='flex flex-col gap-1'>
-                                                            <p className='font-bold text-primary text-[13px]'>{data.fields.type}</p>
-
-                                                            <p className='text-gray-500 text-[13px]'>{formatDate(data.fields.date)}</p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div>
-                                                        <p className={`text-green-500 text-[13px] ${containsTransfer(data.fields.type) ? 'text-red-500' : ''}`}>{containsTransfer(data.fields.type) ? '-$' + formatNumber(data.fields.amount) : '+$' + formatNumber(data.fields.amount)}</p>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* top right */}
-                            </div>
-                            {/* top */}
-
-                            {/* bottom */}
-                            <div className=' flex flex-col md:flex-row md:items-center gap-4'>
-                                <div className='p-3 bg-white rounded-md md:flex-1 flex flex-col gap-9'>
-                                    <div className='flex justify-between items-center'>
-                                        <p className='text-[17px]'>Statistics</p>
-
-                                        <div className='flex gap-[2px] items-center'>
-                                            <div className='h-[4px] w-[4px] bg-gray-500 rounded-full'></div>
-                                            <div className='h-[4px] w-[4px] bg-gray-500 rounded-full'></div>
-                                            <div className='h-[4px] w-[4px] bg-gray-500 rounded-full'></div>
-                                        </div>
-                                    </div>
-
-                                    <div className='px-3 md:px-6 flex justify-between items-center'>
-                                        <div>
-                                            <p className='text-[13px] text-gray-500 font-semibold'>Total Visits</p>
-
-                                            <p className='text-[#f8538d] text-[13px] font-medium md:text-[18px]'>423,964</p>
-                                        </div>
-                                        <div>
-                                            <p className='text-[13px] text-gray-500 font-semibold'>Paid Visits</p>
-
-                                            <p className='text-[#f8538d] text-[13px] font-medium md:text-[18px]'>7,929</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='p-3 bg-white rounded-md md:flex-1 flex flex-col gap-8'>
-                                    <div className='flex justify-between items-center'>
-                                        <p className='text-[14px] md:text-[23px] font-semibold'>Current Account</p>
-                                    </div>
-
-                                    <div className='flex items-center'>
-                                        <p className='text-[#2196f3] text-[14px] md:text-[30px] font-medium'>({user ? user?.current_account : 0})</p>
-                                    </div>
-                                </div>
-                                <div className='p-3 bg-white rounded-md md:flex-1 flex flex-col gap-8'>
-                                    <div className='flex justify-between items-center'>
-                                        <p className='text-[14px] md:text-[23px] font-semibold'>Savings Account</p>
-                                    </div>
-
-                                    <div className='flex items-center'>
-                                        <p className='text-[#2196f3] text-[14px] md:text-[30px] font-medium'>({user ? user?.savings_account : 0})</p>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* bottom */}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="hidden md:block">
-                <dialog id="loading-modal" className={`modal bg-[#004080] ${loading ? 'opacity-100' : ''}`}>
-                    <div className='flex items-center justify-center gap-3'>
-                        <span className="loading loading-ring loading-lg bg-white"></span>
-                    </div>
-                </dialog>
-                <div className="px-4">
-                    <div>
-                        <div className='flex flex-col gap-6'>
-                            {/* top */}
-                            <div className='flex flex-col md:flex-row gap-6'>
-                                {/* top left */}
-                                <div className='flex md:flex-[1.6] justify-center md:justify-start items-center'>
-                                    <div className='bg-white w-full sm:max-w-sm pb-3 rounded-[13px] flex flex-col'>
-                                        <div className='bg-primary relative flex flex-col gap-6 rounded-[13px] px-4 pt-3 pb-[80px]'>
-                                            <div className='flex justify-between items-center'>
-                                                <div className='flex gap-2 items-center bg-[#00000074] py-1 rounded-[30px] px-2'>
-                                                    <div className='w-[40px] h-[40px] rounded-full border-[1px] border-primary'>
-                                                        <img src={user?.img} alt="" className='object-cover h-full w-full rounded-full' />
-                                                    </div>
-
-                                                    <p className='text-[11px] md:text-[14px] font-medium text-white'>{user?.first_name + " " + user?.last_name}</p>
-                                                </div>
-
-                                                <div className='flex items-center justify-center p-3 rounded-[15px] bg-[#00000074]'>
-                                                    <FaPlus size={18} color='white' />
-                                                </div>
-                                            </div>
-
-                                            <div className='flex justify-between items-center'>
-                                                <p className='text-white text-[14px]'>Balance:</p>
-
-                                                <p className='text-white text-[14px]'>${formatNumber(user?.balance_current)}</p>
-                                            </div>
-
-                                            <div className='flex justify-between absolute bottom-[-20px] left-0 right-0 px-4'>
-                                                <div className='bg-white flex flex-col gap-1 w-[40%] shadow-xl p-3 rounded-[8px]'>
-                                                    <div className='flex justify-between items-center'>
-                                                        <p className='text-[12px] md:text-[14px]'>inflow</p>
-
-                                                        <FaChevronDown size={12} color='green' />
-
-                                                    </div>
-
-                                                    <p className='text-green-500 md:text-[14px] sm:text-[12px] text-[70%]'>${formatNumber(user?.inflow)}</p>
-                                                </div>
-                                                <div className='bg-white shadow-xl flex flex-col gap-1 w-[40%] p-3 rounded-[8px]'>
-                                                    <div className='flex justify-between items-center'>
-                                                        <p className='text-[12px] md:text-[14px]'>outflow</p>
-
-                                                        <FaChevronUp size={12} color='red' />
-
-                                                    </div>
-
-                                                    <p className='text-red-500 md:text-[14px] sm:text-[12px] text-[70%]'>${formatNumber(user?.outflow)}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* middle top */}
-                                        <div className='mt-10 px-4 flex flex-col gap-2'>
-                                            <div className='flex justify-between items-center'>
-                                                <p className='text-gray-500 text-[13px] md:text-[14px]'>Loan Balance:</p>
-
-                                                <p className='text-[14px] text-[#805dca]'>${user ? formatNumber(user?.loan_balance) : formatNumber(0)}</p>
-                                            </div>
-                                            <div className='flex justify-between items-center'>
-                                                <p className='text-gray-500 text-[13px] md:text-[14px]'>Saving Balance:</p>
-
-                                                <p className='text-[#2196f3] text-[14px]'>${user ? formatNumber(user?.balance_savings) : formatNumber(0)}</p>
-                                            </div>
-                                            <div className='flex justify-between items-center'>
-                                                <p className='text-gray-500 text-[13px] md:text-[14px]'>Current Balance</p>
-
-                                                <p className='text-[#2196f3] text-[14px]'>${user ? formatNumber(user?.balance_current) : formatNumber(0)}</p>
-                                            </div>
-                                        </div>
-                                        {/* middle top */}
-
-                                        <div className='mt-5 px-7 justify-between flex'>
-                                            <button className='text-[13px] py-[6px] px-[11px] rounded-[8px] text-[#805dca] bg-[#5c1ac32b] md:text-[14px]'>View Details</button>
-
-                                            <a href='/dashboard/profile' className='text-[13px] py-[6px] px-[11px] rounded-[8px] text-[#009688] bg-[#00968830] md:text-[14px]'>Account Details</a>
-                                        </div>
-                                    </div>
-                                    {/* top left */}
-                                </div>
-
-
-
-                                {/* top right */}
-                                <div className='md:flex-[3]'>
-                                    <div className='bg-white rounded-[10px] p-3 flex flex-col gap-4'>
-                                        <div className='flex justify-between items-center'>
-                                            <p>Transactions</p>
-
-                                            <div className='flex gap-[2px] items-center'>
-                                                <div className='h-[4px] w-[4px] bg-gray-500 rounded-full'></div>
-                                                <div className='h-[4px] w-[4px] bg-gray-500 rounded-full'></div>
-                                                <div className='h-[4px] w-[4px] bg-gray-500 rounded-full'></div>
-                                            </div>
-                                        </div>
-
-                                        <div className='flex flex-col gap-6'>
-                                            {data?.transactions?.map((data: Transaction, index: any) => (
-                                                <div key={data.id} className='flex items-center justify-between'>
-                                                    <div className='flex items-center gap-2'>
-                                                        <div className='flex items-center justify-center p-3 rounded-[15px] bg-[#BAE7FF]'>
-                                                            <FaPlus size={15} color='#2196f3' />
-                                                        </div>
-
-                                                        <div className='flex flex-col gap-1'>
-                                                            <p className='font-bold text-primary text-[13px]'>{data.fields.type}</p>
-
-                                                            <p className='text-gray-500 text-[13px]'>{formatDate(data.fields.date)}</p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div>
-                                                        <p className={`text-green-500 text-[13px] ${containsTransfer(data.fields.type) ? 'text-red-500' : ''}`}>{containsTransfer(data.fields.type) ? '-$' + formatNumber(data.fields.amount) : '+$' + formatNumber(data.fields.amount)}</p>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* top right */}
-                            </div>
-                            {/* top */}
-
-                            {/* bottom */}
-                            <div className=' flex flex-col md:flex-row md:items-center gap-4'>
-                                <div className='p-3 bg-white rounded-md md:flex-1 flex flex-col gap-9'>
-                                    <div className='flex justify-between items-center'>
-                                        <p className='text-[17px]'>Statistics</p>
-
-                                        <div className='flex gap-[2px] items-center'>
-                                            <div className='h-[4px] w-[4px] bg-gray-500 rounded-full'></div>
-                                            <div className='h-[4px] w-[4px] bg-gray-500 rounded-full'></div>
-                                            <div className='h-[4px] w-[4px] bg-gray-500 rounded-full'></div>
-                                        </div>
-                                    </div>
-
-                                    <div className='px-3 md:px-6 flex justify-between items-center'>
-                                        <div>
-                                            <p className='text-[13px] text-gray-500 font-semibold'>Total Visits</p>
-
-                                            <p className='text-[#f8538d] text-[13px] font-medium md:text-[18px]'>423,964</p>
-                                        </div>
-                                        <div>
-                                            <p className='text-[13px] text-gray-500 font-semibold'>Paid Visits</p>
-
-                                            <p className='text-[#f8538d] text-[13px] font-medium md:text-[18px]'>7,929</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='p-3 bg-white rounded-md md:flex-1 flex flex-col gap-8'>
-                                    <div className='flex justify-between items-center'>
-                                        <p className='text-[14px] md:text-[23px] font-semibold'>Current Account</p>
-                                    </div>
-
-                                    <div className='flex items-center'>
-                                        <p className='text-[#2196f3] text-[14px] md:text-[30px] font-medium'>({user ? user?.current_account : 0})</p>
-                                    </div>
-                                </div>
-                                <div className='p-3 bg-white rounded-md md:flex-1 flex flex-col gap-8'>
-                                    <div className='flex justify-between items-center'>
-                                        <p className='text-[14px] md:text-[23px] font-semibold'>Savings Account</p>
-                                    </div>
-
-                                    <div className='flex items-center'>
-                                        <p className='text-[#2196f3] text-[14px] md:text-[30px] font-medium'>({user ? user?.savings_account : 0})</p>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* bottom */}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+      <dialog
+        id="loading-modal"
+        className={`modal bg-primary ${loading ? "opacity-100" : ""}`}
+      >
+        <div className="flex items-center justify-center gap-3">
+          <span className="loading loading-dots loading-lg bg-white"></span>
         </div>
-    )
-}
+      </dialog>
+    );
+  }
 
-export default Main
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  // Convert yesterday's date to ISO format without time
+  const yesterdayISO = yesterday.toISOString().split("T")[0];
+
+  // Calculate total profits from the previous day
+  // const yesterdayProfits =
+  //   dailyProfits?.dailyProfits
+  //     .filter((profit: any) => profit.date.startsWith(yesterdayISO)) // Adjusted to check for the date prefix
+  //     .reduce((sum: number, profit: any) => sum + profit.profit, 0) || 0;
+
+  // 1. Calculate Portfolio Value
+  const portfolioValue = investments.investments
+    .filter((investment: any) => investment.fields.status === "Active")
+    .reduce(
+      (sum: number, investment: any) => sum + investment.fields.amount,
+      0
+    );
+
+  // 1. Calculate Total Expected Profit
+  const totalExpectedProfit = investments.investments
+    .filter((investment: any) => investment.fields.status === "Active")
+    .reduce(
+      (sum: number, investment: any) =>
+        sum + investment.fields.amount * investment.fields.roi,
+      0
+    );
+
+  // 2. Calculate Total Earned So Far
+  const totalEarned = dailyProfits.dailyProfits.reduce(
+    (sum: number, profit: any) => sum + profit.profit,
+    0
+  );
+
+  // 3. Calculate Yesterday's Profit
+  const yesterdayProfits = dailyProfits.dailyProfits
+    .filter((profit: any) => profit.date.startsWith(yesterdayISO))
+    .reduce((sum: number, profit: any) => sum + profit.profit, 0);
+
+  // 4. Calculate Net Profit Percentage So Far
+  const netProfitPercentage = totalExpectedProfit
+    ? ((totalEarned / totalExpectedProfit) * 100).toFixed(2)
+    : 0;
+
+  // 5. Calculate Yesterday's Additional Percentage
+  const yesterdayProfitPercentage = totalExpectedProfit
+    ? ((yesterdayProfits / totalExpectedProfit) * 100).toFixed(2)
+    : 0;
+
+  return (
+    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+      <h2 className="text-3xl font-bold tracking-tight mb-4">Dashboard</h2>
+
+      {/* KPIs Section */}
+      <div className="grid gap-4 md:grid-cols-3">
+        {/* Current Balance Card */}
+        <Card className="col-span-1">
+          <CardHeader>
+            <CardTitle className="text-sm font-medium">
+              Current Balance
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex justify-between items-center mb-4">
+              <div className="text-2xl font-bold">
+                ${formatNumber(user?.balance)}
+              </div>
+              <div
+                className={`flex items-center ${
+                  yesterdayProfits >= 0 ? "text-green-500" : "text-red-500"
+                }`}
+              >
+                {yesterdayProfits >= 0 ? (
+                  <ArrowUpRight className="h-4 w-4 mr-1" />
+                ) : (
+                  <ArrowDownRight className="h-4 w-4 mr-1" />
+                )}
+                <span className="text-sm font-medium">
+                  ${yesterdayProfits.toLocaleString()} Yesterday
+                </span>
+              </div>
+            </div>
+            <div className="flex-col gap-3 flex ">
+              <div>
+                <Button variant="outline" className="w-full">
+                  <Plus className="mr-2 h-4 w-4" /> Add Funds
+                </Button>
+              </div>
+              <div>
+                <Button variant="outline" className="w-full">
+                  <MinusCircle className="mr-2 h-4 w-4" /> Withdraw
+                </Button>
+              </div>
+              <div>
+                <Button variant="secondary" className="w-full">
+                  <TrendingUp className="mr-2 h-4 w-4" /> Invest Now
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Portfolio Value and Net Profit Card */}
+        <Card className="col-span-1">
+          <CardHeader>
+            <CardTitle className="text-sm font-medium">
+              Portfolio Overview
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 flex flex-col gap-3">
+            <div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium">Portfolio Value</span>
+                <ArrowUpRight className="h-4 w-4 text-green-500" />
+              </div>
+              <div className="text-2xl font-bold">
+                ${portfolioValue.toLocaleString()}
+              </div>
+              <p className="text-xs flex items-center gap-3 text-green-500">
+                +{netProfitPercentage}% <TrendingUp className="mr-2 h-4 w-4" />
+              </p>
+            </div>
+            <div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium">Net Profit</span>
+                <ArrowUpRight className="h-4 w-4 text-green-500" />
+              </div>
+              <div className="text-2xl font-bold">
+                ${totalEarned.toLocaleString()} ({netProfitPercentage}%)
+              </div>
+              <p className="text-xs text-green-500">
+                +{yesterdayProfitPercentage}% Yesterday
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* ROI and Referral Profit Card */}
+        <Card className="col-span-1">
+          <CardHeader>
+            <CardTitle className="text-sm font-medium">
+              Performance Metrics
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 flex flex-col gap-3">
+            <div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium">ROI</span>
+                <ArrowUpRight className="h-4 w-4 text-green-500" />
+              </div>
+              <div className="text-2xl font-bold flex items-center text-green-500 gap-5">
+                {netProfitPercentage}% <TrendingUp className="mr-2 h-4 w-4" />
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium">Referral Balance</span>
+                <Users className="h-4 w-4 text-blue-500" />
+              </div>
+              <div className="text-2xl font-bold">
+                ${formatNumber(user?.referral_earnings)}
+              </div>
+            </div>
+            <Button variant="outline" className="w-full">
+              <Users className="mr-2 h-4 w-4" /> Refer Friends
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Charts Section */}
+      <div className="flex flex-col md:flex-row items-start gap-4 w-full">
+        <div className="w-full lg:w-[60%]">
+          <InvestmentChart data={dailyProfits} timezone={user?.timezone}/>
+        </div>
+
+        <div className="w-full lg:w-[40%]">
+          <InvestmentPieChart data={transactions} />
+        </div>
+      </div>
+
+      {/* Bottom Section */}
+      <div className="flex flex-col md:flex-row items-start gap-4 w-full">
+        {/* Market Insights Card */}
+        <Card className="w-full lg:w-[60%]">
+          <CardHeader>
+            <CardTitle>Market Insights</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <MarketInsights data={marketNews} />
+          </CardContent>
+        </Card>
+
+        {/* Investment Breakdown Card */}
+        <Card className="w-full lg:w-[40%]">
+          <CardHeader>
+            <CardTitle>Investment Breakdown</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-8">
+              {/* Process and display active investments */}
+              {investments?.investments
+                .filter(
+                  (investment: any) => investment.fields.status === "Active"
+                )
+                .map((investment: any) => {
+                  // Calculate total profit earned so far for this investment
+                  const totalProfitEarned = dailyProfits?.dailyProfits
+                    .filter(
+                      (profit: any) => profit.investment_id === investment.id
+                    )
+                    .reduce(
+                      (sum: number, profit: any) => sum + profit.profit,
+                      0
+                    );
+
+                  // Calculate current profit ROI as a percentage
+                  const expectedTotalProfit =
+                    investment.fields.amount * investment.fields.roi;
+                  const currentProfitROI = expectedTotalProfit
+                    ? ((totalProfitEarned / expectedTotalProfit) * 100).toFixed(
+                        2
+                      )
+                    : 0;
+
+                  return (
+                    <div key={investment.id} className="flex items-center">
+                      <div className="flex-1 space-y-1">
+                        <p className="text-sm font-medium leading-none">
+                          {investment.fields.name}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          ${investment.fields.amount.toLocaleString()}
+                        </p>
+                      </div>
+                      <div className="ml-auto flex items-center gap-4 font-medium text-green-500">
+                        {currentProfitROI}% <TrendingUp className="h-4 w-4" />
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}

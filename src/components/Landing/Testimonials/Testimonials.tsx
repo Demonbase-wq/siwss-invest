@@ -10,8 +10,8 @@ const Testimonials = () => {
     <div className="bg-primary pt-[110px] pr-0 pb-[50px]">
       <div className="mycontainer">
         <div className="px-4">
-          <h2 className="text-center text-2xl md:text-4xl font-bold text-[#fff] mb-12">
-            What Our Users Are Saying
+          <h2 className="text-center text-[21px] md:text-4xl font-bold text-[#fff] mb-12">
+          What Our Investors Are Saying
           </h2>
 
           <Swiper
@@ -27,13 +27,11 @@ const Testimonials = () => {
               <div className="bg-[#150550] p-8 rounded-lg">
                 <FaQuoteLeft className="text-accent text-3xl mb-4" />
                 <p className="mb-4">
-                  “I&apos;ve been trading with this platform for months, and I
-                  couldn&apos;t be happier. The process is straightforward, the
-                  customer support is top-notch, and my investments are always
-                  secure. Highly recommend for anyone serious about trading!”
+                “SwissPipsAI has completely transformed the way I invest. The platform’s AI precision is unmatched, and I always achieve the promised ROI. Their support team is incredibly responsive, making the entire process stress-free.”
+
                 </p>
                 <h4 className="font-semibold text-[#fff]">John D.</h4>
-                <p className="text-sm">Professional Trader</p>
+                <p className="text-sm">Financial Consultant</p>
               </div>
             </SwiperSlide>
 
@@ -42,14 +40,11 @@ const Testimonials = () => {
               <div className="bg-[#150550] p-8 rounded-lg">
                 <FaQuoteLeft className="text-accent text-3xl mb-4" />
                 <p className="mb-4">
-                  “What I love most about this broker is the transparency. The
-                  platform is user-friendly, and the withdrawal process is
-                  lightning fast. It&apos;s clear they prioritize both security
-                  and ease of use, which gives me the confidence to invest
-                  more.”
+                “The transparency and reliability of SwissPipsAI are what stand out to me the most. The user-friendly interface, combined with instant withdrawals, gives me total confidence in my investments.”
+
                 </p>
                 <h4 className="font-semibold text-[#fff]">Sarah K.</h4>
-                <p className="text-sm">Entrepreneur & Investor</p>
+                <p className="text-sm">Entrepreneur</p>
               </div>
             </SwiperSlide>
 
@@ -58,13 +53,11 @@ const Testimonials = () => {
               <div className="bg-[#150550] p-8 rounded-lg">
                 <FaQuoteLeft className="text-accent text-3xl mb-4" />
                 <p className="mb-4">
-                  “I&apos;ve worked with multiple brokers, but none compare to the
-                  level of support and service I&apos;ve received here. They were
-                  always there to answer my questions and help me navigate
-                  tricky trades. This is my go-to platform from now on.”
+                “SwissPipsAI delivers on its promises! The AI algorithm ensures my investments grow exactly as expected, and their support team is always there to help. I highly recommend this platform to anyone serious about growing their wealth.”
+
                 </p>
                 <h4 className="font-semibold text-[#fff]">Michael P.</h4>
-                <p className="text-sm">Data Analyst</p>
+                <p className="text-sm">Software Engineer</p>
               </div>
             </SwiperSlide>
           </Swiper>

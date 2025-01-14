@@ -1,347 +1,334 @@
-'use client'
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import useSWR, { mutate } from 'swr';
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import axios from "axios";
+import useSWR, { mutate } from "swr";
+
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { toast } from "sonner";
+
+const formSchema = z.object({
+  first_name: z.string().optional(),
+  last_name: z.string().optional(),
+  dob: z.string().optional(),
+  phone: z.string().optional(),
+  email: z.string().email("Invalid email address").optional(),
+  country: z.string().optional(),
+  state: z.string().optional(),
+  address: z.string().optional(),
+});
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const Profile = () => {
-    const { data, error } = useSWR("/api/get-user", fetcher);
-    const [updateError, setUpdateError] = useState('');
-    const [success, setSuccess] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [modal, setModal] = useState(true);
-    const inputFileRef = useRef<HTMLInputElement>(null);
+export default function ProfileForm() {
+  const { data } = useSWR("/api/get-user", fetcher);
+  const [loading, setLoading] = useState(true);
+  const inputFileRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
-        if (data) {
-            setModal(false)
-        }
-    }, [data]);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      first_name: "",
+      last_name: "",
+      dob: "",
+      phone: "",
+      email: "",
+      country: "",
+      state: "",
+      address: "",
+    },
+  });
 
-    const [userDetails, setUserDetails] = useState({
-        first_name: '',
-        last_name: '',
-        dob: '',
-        img: '',
-        phone: '',
-        email: '',
-        country: '',
-        state: '',
-        address: '',
-        timestamp: Date.now(), // Add a timestamp field
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        first_name: data.first_name || "",
+        last_name: data.last_name || "",
+        dob: data.dob || "",
+        phone: data.phone || "",
+        email: data.email || "",
+        country: data.country || "",
+        state: data.state || "",
+        address: data.address || "",
+      });
+      setLoading(false)
+    }
+  }, [data, form]);
+
+  const handleImageUpload = async (): Promise<string | null> => {
+    if (!inputFileRef.current?.files) {
+      throw new Error("No file selected");
+    }
+
+    const file = inputFileRef.current.files[0];
+
+    const response = await fetch(`/api/upload-image?filename=${file.name}`, {
+      method: "POST",
+      body: file,
     });
 
-    useEffect(() => {
-        if (data) {
-            setUserDetails({
-                first_name: data?.first_name || '',
-                last_name: data?.last_name || '',
-                dob: data?.dob || '',
-                phone: data?.phone || '',
-                email: data?.email || '',
-                country: data?.country || '',
-                state: data?.state || '',
-                address: data?.address || '',
-                img: data?.img || '',
-                timestamp: Date.now(), // Update the timestamp
-            });
+    const newBlob = await response.json();
+    return newBlob?.url ?? null;
+  };
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const toastId = toast.loading("Updating profile...");
+      let newImageUrl: string | null = null;
+
+      if (inputFileRef.current?.files?.length) {
+        newImageUrl = await handleImageUpload();
+
+        if (newImageUrl && data?.img) {
+          const res = await fetch(`/api/delete-image?filename=${data.img}`, {
+            method: "DELETE",
+          });
+
+          if (!res.ok) {
+            toast.dismiss(toastId);
+            toast.error("Failed to delete old image. Please try again.");
+            return;
+          }
         }
-    }, [data]);
+      }
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setUserDetails((prevDetails) => ({
-            ...prevDetails,
-            [name]: value,
-        }));
-    };
-
-    const handleImageUpload = async (): Promise<string | null> => {
-        if (!inputFileRef.current?.files) {
-            throw new Error("No file selected");
+      // Only include changed fields in the update
+      const changedFields = Object.entries(values).reduce((acc, [key, value]) => {
+        if (value !== data[key]) {
+          acc[key] = value;
         }
+        return acc;
+      }, {} as Record<string, any>);
 
-        const file = inputFileRef.current.files[0];
+      if (newImageUrl) {
+        changedFields.img = newImageUrl;
+      }
 
-        const response = await fetch(
-            `/api/upload-image?filename=${file.name}`,
-            {
-                method: 'POST',
-                body: file,
-            }
-        );
+      // Only send the update if there are changed fields
+      if (Object.keys(changedFields).length > 0) {
+        const updatedDetails = {
+          ...changedFields,
+          timestamp: Date.now(),
+        };
 
-        const newBlob = await response.json();
-        return newBlob?.url ?? null;
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        try {
-            setLoading(true);
-            let newImageUrl: string | null = null;
-
-            if (inputFileRef.current?.files?.length) {
-                newImageUrl = await handleImageUpload();
-
-                if (newImageUrl) {
-                    const res = await fetch(`/api/delete-image?filename=${userDetails.img}`, {
-                        method: 'DELETE',
-                    });
-
-                    if (!res.ok) {
-                        setUpdateError('Failed to delete old image. Please try again.');
-                        setLoading(false);
-                        return;
-                    }
-                }
-            }
-
-            const updatedDetails = {
-                ...userDetails,
-                img: newImageUrl ?? userDetails.img,
-                timestamp: Date.now(),
-            };
-
-            setUserDetails(updatedDetails);
-
-            const response = await axios.post('/api/update-user', updatedDetails);
-            if (response.data.error) {
-                setUpdateError(response.data.error);
-            } else {
-                setSuccess('Account updated successfully');
-                setLoading(false);
-                setUserDetails((prevDetails) => ({
-                    ...prevDetails,
-                    timestamp: Date.now(),
-                }));
-                mutate("/api/get-user");
-            }
-        } catch (error) {
-            console.log(error);
-            setUpdateError('An error occurred while updating the profile.');
-            setLoading(false);
+        const response = await axios.post("/api/update-user", updatedDetails);
+        const message = response.data.message;
+        const error = response.data.error;
+        if (message) {
+          toast.dismiss(toastId);
+          toast.success(message);
+          mutate("/api/get-user"); // Refresh the user data
         }
-    };
+        if (error) {
+          toast.dismiss(toastId);
+          toast.error(error);
+        }
+      } else {
+        toast.dismiss(toastId);
+        toast.info("No changes to update");
+      }
+    } catch (error) {
+      toast.error("Failed to update profile. Please try again.");
+    }
+  };
 
+  if (loading || !data) {
     return (
-        <div className='md:pt-6 py-4'>
-            <div className="mycontainer md:hidden">
-                <div className="px-4">
-                    <div>
-                        <dialog id="loading-modal" className={`modal bg-[#004080] ${modal ? 'opacity-100' : ''}`}>
-                            <div className='flex items-center justify-center gap-3'>
-                                <span className="loading loading-ring loading-lg bg-white"></span>
-                            </div>
-                        </dialog>
-                        <div className='bg-white rounded-[8px] p-4 flex flex-col gap-5'>
-                            <div>
-                                <h4 className='text-primary font-bold text-[14px]'>Account Information</h4>
-                                <p className='text-gray-400 font-medium text-[12px]'>Change your account setting</p>
-                            </div>
-
-                            <div>
-                                <h4 className='font-bold text-[14px]'>Customer Info:</h4>
-                            </div>
-
-                            <div className='flex flex-col gap-4'>
-                                <div className='w-[120px] h-[120px] rounded-full'>
-                                    <img src={`${userDetails.img}?timestamp=${userDetails.timestamp}`} alt="img" className='w-full h-full object-cover rounded-full' />
-                                </div>
-
-                                <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>First Name</label>
-                                        <div>
-                                            <input type="text" name='first_name' className='bg-[#e2ebf7] w-full p-1 rounded-[4px] pl-3 text-[14px] focus:outline-none' value={userDetails.first_name} onChange={handleInputChange} />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Last Name</label>
-                                        <div>
-                                            <input type="text" name='last_name' value={userDetails.last_name} onChange={handleInputChange} className='bg-[#e2ebf7] w-full p-1 rounded-[4px] pl-3 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div >
-
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Profile Picture</label>
-                                        <div>
-                                            <input type="file" ref={inputFileRef} className='bg-[#e2ebf7] w-full p-1 rounded-[4px] pl-3 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Date of Birth</label>
-                                        <div>
-                                            <input type="date" name='dob' value={userDetails.dob} onChange={handleInputChange} className='bg-[#e2ebf7] w-full p-1 rounded-[4px] px-2 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <h4 className='font-bold text-[14px]'>Contact Info:</h4>
-                                    </div>
-
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Contact Phone</label>
-                                        <div>
-                                            <input type="text" name='phone' value={userDetails.phone} onChange={handleInputChange} className='bg-[#e2ebf7] w-full p-1 rounded-[4px] pl-3 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Email Address</label>
-                                        <div>
-                                            <input type="email" name='email' value={userDetails.email} onChange={handleInputChange} className='bg-[#e2ebf7] w-full p-1 rounded-[4px] pl-3 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Country</label>
-                                        <div>
-                                            <input type="text" name='country' value={userDetails.country} onChange={handleInputChange} className='bg-[#e2ebf7] w-full p-1 rounded-[4px] pl-3 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>State</label>
-                                        <div>
-                                            <input type="text" name='state' value={userDetails.state} onChange={handleInputChange} className='bg-[#e2ebf7] w-full p-1 rounded-[4px] pl-3 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Address</label>
-                                        <div>
-                                            <input type="text" name='address' value={userDetails.address} onChange={handleInputChange} className='bg-[#e2ebf7] w-full p-1 rounded-[4px] text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-
-                                    <div className='flex gap-4 mt-3'>
-                                        <button type='submit' className='bg-secondary py-1 text-[14px] px-3 rounded-[5px] text-white bottom-0 outline-none flex items-center justify-center w-[90px]'>
-                                            {loading ? <span className="loading loading-spinner loading-sm bg-white"></span>
-                                                : "Update"}
-                                        </button>
-
-                                        <button className='bg-accent w-[90px] py-1 text-[14px] px-3 rounded-[5px] text-white  bottom-0 outline-none'>
-                                            Cancel
-                                        </button>
-                                    </div>
-
-                                    <div>
-                                        {updateError && <p className="text-red-500">{updateError}</p>}
-                                        {success && <p className="text-green-500">{success}</p>}
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="hidden md:block">
-                <div className="px-4">
-                    <div>
-                        <dialog id="loading-modal" className={`modal bg-[#004080] ${modal ? 'opacity-100' : ''}`}>
-                            <div className='flex items-center justify-center gap-3'>
-                                <span className="loading loading-ring loading-lg bg-white"></span>
-                            </div>
-                        </dialog>
-                        <div className='bg-white rounded-[8px] p-4 flex flex-col gap-5'>
-                            <div>
-                                <h4 className='text-primary font-bold text-[14px]'>Account Information</h4>
-                                <p className='text-gray-400 font-medium text-[12px]'>Change your account setting</p>
-                            </div>
-
-                            <div>
-                                <h4 className='font-bold text-[14px]'>Customer Info:</h4>
-                            </div>
-
-                            <div className='flex flex-col gap-4'>
-                                <div className='w-[120px] h-[120px] rounded-full'>
-                                    <img src={`${userDetails.img}?timestamp=${userDetails.timestamp}`} alt="" className='w-full h-full object-cover rounded-full' />
-                                </div>
-
-                                <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>First Name</label>
-                                        <div>
-                                            <input type="text" name='first_name' className='bg-[#e2ebf7] p-1 rounded-[4px] pl-3 w-[60%] text-[14px] focus:outline-none' value={userDetails.first_name} onChange={handleInputChange} />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Last Name</label>
-                                        <div>
-                                            <input type="text" name='last_name' value={userDetails.last_name} onChange={handleInputChange} className='bg-[#e2ebf7]  p-1 w-[60%] rounded-[4px] pl-3 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div >
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Profile Picture</label>
-                                        <div>
-                                            <input type="file" ref={inputFileRef} className='bg-[#e2ebf7] w-[60%] p-1 rounded-[4px] pl-3 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Date of Birth</label>
-                                        <div>
-                                            <input type="date" name='dob' value={userDetails.dob} onChange={handleInputChange} className='bg-[#e2ebf7] w-[60%] p-1 rounded-[4px] px-2 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <h4 className='font-bold text-[14px]'>Contact Info:</h4>
-                                    </div>
-
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Contact Phone</label>
-                                        <div>
-                                            <input type="text" name='phone' value={userDetails.phone} onChange={handleInputChange} className='bg-[#e2ebf7] w-[60%] p-1 rounded-[4px] pl-3 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Email Address</label>
-                                        <div>
-                                            <input type="email" name='email' value={userDetails.email} onChange={handleInputChange} className='bg-[#e2ebf7] w-[60%] p-1 rounded-[4px] pl-3 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Country</label>
-                                        <div>
-                                            <input type="text" name='country' value={userDetails.country} onChange={handleInputChange} className='bg-[#e2ebf7] w-[60%] p-1 rounded-[4px] pl-3 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>State</label>
-                                        <div>
-                                            <input type="text" name='state' value={userDetails.state} onChange={handleInputChange} className='bg-[#e2ebf7] w-[60%] p-1 rounded-[4px] pl-3 text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <label htmlFor="" className='text-[13px] font-medium'>Address</label>
-                                        <div>
-                                            <input type="text" name='address' value={userDetails.address} onChange={handleInputChange} className='bg-[#e2ebf7] w-[70%] p-1 rounded-[4px] text-[14px] focus:outline-none' />
-                                        </div>
-                                    </div>
-
-                                    <div className='flex gap-4 mt-3'>
-                                        <button type='submit' className='bg-secondary py-1 text-[14px] px-3 rounded-[5px] text-white bottom-0 outline-none w-[90px] flex items-center justify-center'>
-                                            {loading ? <span className="loading loading-spinner loading-sm bg-white"></span>
-                                                : "Update"}
-                                        </button>
-
-                                        <button className='bg-accent py-1 w-[90px] text-[14px] px-3 rounded-[5px] text-white  bottom-0 outline-none'>
-                                            Cancel
-                                        </button>
-                                    </div>
-
-                                    <div>
-                                        {updateError && <p className="text-red-500">{updateError}</p>}
-                                        {success && <p className="text-green-500">{success}</p>}
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <dialog
+        id="loading-modal"
+        className={`modal bg-primary ${loading ? "opacity-100" : ""}`}
+      >
+        <div className="flex items-center justify-center gap-3">
+          <span className="loading loading-dots loading-lg bg-white"></span>
         </div>
-    )
+      </dialog>
+    );
+  }
+
+  return (
+    <Card className="w-full max-w-2xl">
+      <CardHeader>
+        <CardTitle>Edit Profile</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <div className="flex items-center space-x-4">
+              <Avatar className="w-24 h-24">
+                <AvatarImage
+                  src={data.img}
+                  alt="Profile picture"
+                />
+                <AvatarFallback>
+                  {data.first_name?.[0]}
+                  {data.last_name?.[0]}
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                <FormLabel htmlFor="picture">Profile Picture</FormLabel>
+                <Input
+                  id="picture"
+                  type="file"
+                  ref={inputFileRef}
+                  className="w-full max-w-xs"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="first_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>First Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="John" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="last_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Doe" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <FormField
+              control={form.control}
+              name="dob"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Date of Birth</FormLabel>
+                  <FormControl>
+                    <Input type="date" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="tel"
+                      placeholder="+1 (555) 000-0000"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="john.doe@example.com"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="country"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Country</FormLabel>
+                  <FormControl>
+                    <Input placeholder="United States" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="state"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>State</FormLabel>
+                  <FormControl>
+                    <Input placeholder="California" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Address</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="123 Main St, Anytown, CA 12345"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div className="flex justify-end space-x-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => form.reset()}
+              >
+                Cancel
+              </Button>
+              <Button type="submit" className="bg-accent">
+               Update Profile
+              </Button>
+            </div>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
+  );
 }
 
-export default Profile;

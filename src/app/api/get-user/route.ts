@@ -10,6 +10,9 @@ export async function GET(req: NextRequest) {
         return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // console.log("Session Token:", req.cookies); // Logs the sessionToken from cookies
+
+
     try {
         const user = await users.find(session.user.id as string)
 

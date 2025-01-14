@@ -1,19 +1,27 @@
-import Main from '@/components/userDashboard/Dashboard/Main'
-import React from 'react'
-import { auth } from '../../../auth'
-import Pending from '@/components/userDashboard/Dashboard/Pending'
+import React from "react";
+import DashboardPage from "@/components/userDashboard/Dashboard/Main";
+import { auth } from "../../../auth";
+import Pending from "@/components/userDashboard/Dashboard/Pending";
+import Decline from "@/components/userDashboard/Dashboard/Decline";
 
 const page = async () => {
-  const session = await auth()
+  const session = await auth();
 
   return (
     <div>
-      {session?.user.isApproved === 'NO' ? <div className=' pt-16 md:pt-0 '><Pending /></div> : <div className=' pt-16 md:pt-0'>
-        <Main />
-      </div>}
-
+      {session?.user.kyc === "Pending" ? (
+        <div>
+          <Pending />
+        </div>
+      ) : session?.user.kyc === "Declined" ? (<div>
+        <Decline />
+      </div>) :(
+        <div>
+          <DashboardPage />
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

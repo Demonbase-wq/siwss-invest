@@ -13,7 +13,6 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Statement: React.FC = () => {
     const { data } = useSWR("/api/transactions", fetcher);
-    const router = useRouter();
     const searchParams = useSearchParams();
     const id = searchParams.get('id');
     const [loading, setLoading] = useState(true)
@@ -49,14 +48,14 @@ const Statement: React.FC = () => {
             <div className='mycontainer'>
                 <div className='px-4'>
                     <div>
-                        <dialog id="loading-modal" className={`modal bg-[#004080] ${loading ? 'opacity-100' : ''}`}>
+                        <dialog id="loading-modal" className={`modal bg-primary ${loading ? 'opacity-100' : ''}`}>
                             <div className='flex items-center justify-center gap-3'>
-                                <span className="loading loading-ring loading-lg bg-white"></span>
+                                <span className="loading loading-dots loading-lg bg-white"></span>
                             </div>
                         </dialog>
                         <div className='flex gap-5 flex-col md:flex-row'>
                             {/* left */}
-                            <div id='print-section' className='bg-white rounded-lg md:flex-[3]'>
+                            <div id='print-section' className='bg-card rounded-lg md:flex-[3]'>
                                 {/* top */}
                                 <div className='flex flex-col gap-5 border-b-[1px] border-gray-300 p-4'>
                                     {/* top t */}
@@ -64,10 +63,9 @@ const Statement: React.FC = () => {
                                         <div className='flex items-center gap-2'>
                                             {/* logo div */}
                                             <div>
-                                                <img src="/crest.png" alt="" className='w-[50px]' />
+                                                <img src="/nav-logo.png" alt="" className='w-[170px]' />
                                             </div>
-                                            {/* logo div */}
-                                            <h3>Crest Bank</h3>
+                                            
                                         </div>
 
                                         <div>
@@ -80,7 +78,7 @@ const Statement: React.FC = () => {
                                     {/* top b */}
                                     <div>
                                         <p className='text-[14px]'>3 Abbey Road, San Francisco CA 94102</p>
-                                        <p className='text-[14px]'>support@crestbank.com</p>
+                                        <p className='text-[14px]'>support@cmtradingpro.com</p>
                                         <p className='text-[14px]'>+1987655678</p>
                                     </div>
                                     {/* top b */}
@@ -103,8 +101,8 @@ const Statement: React.FC = () => {
                                             <p className='text-[12px] flex-1 md:text-[15px]'>{transaction?.fields.type}</p>
                                         </div>
                                         <div className='flex items-center gap-3'>
-                                            <p className='text-[12px] flex-1 md:text-[15px]'>Payment Account:</p>
-                                            <p className='text-[12px] flex-1 md:text-[15px]'>{transaction?.fields.payment_account}</p>
+                                            <p className='text-[12px] flex-1 md:text-[15px]'>Wallet Address:</p>
+                                            <p className='text-[12px] flex-1 md:text-[15px]'>{transaction?.fields.wallet_address}</p>
                                         </div>
                                         <div className='flex items-center gap-3'>
                                             <p className='text-[12px] flex-1 md:text-[15px]'>Transaction Status:</p>
@@ -120,7 +118,7 @@ const Statement: React.FC = () => {
 
                                 {/* bottom */}
                                 <div className='p-4'>
-                                    <p className='text-[12px] md:text-[13px] text-[#888ea8] font-medium'><strong>NOTE: </strong> If you have any questions or would like more information, please call our 24-hour Contact Centre on 1987655678 or send an email to support@valorstrive.com</p>
+                                    <p className='text-[12px] md:text-[13px] text-[#888ea8] font-medium'><strong>NOTE: </strong> If you have any questions or would like more information, please call our 24-hour Contact Centre on 1987655678 or send an email to support@cmtradingpro.com</p>
                                 </div>
                                 {/* bottom */}
                             </div>

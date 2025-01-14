@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     const { first_name, last_name, img, dob, username, phone, email, country, state, address } = body;
-    console.log(img)
+    // console.log(img)
 
     try {
 
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
         const record = await users.find(session.user.id as string)
 
         if (!record) {
-            return Response.json({ message: 'User not found.' }, { status: 404 });
+            return Response.json({ error: 'User not found.' }, { status: 404 });
         }
 
         const user = record.fields;
@@ -49,6 +49,6 @@ export async function POST(request: Request) {
         return Response.json({ message: 'Profile updated' }, { status: 200 });
 
     } catch (error) {
-        return Response.json({ error: error });
+        return Response.json({ error: error }, {status: 200});
     }
 }

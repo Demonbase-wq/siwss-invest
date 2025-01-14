@@ -17,7 +17,7 @@ const ContactTwo = () => {
 
                                     <div>
                                         <h5 className='text-primary font-bold'>Email Us</h5>
-                                        <p className='text-primary font-medium'>support@crestbank.com</p>
+                                        <p className='text-primary font-medium'>support@swisspipsai.com</p>
                                     </div>
                                 </div>
                                 <div className='flex items-center gap-4'>
@@ -25,7 +25,7 @@ const ContactTwo = () => {
 
                                     <div>
                                         <h5 className='text-primary font-bold'>Call Us</h5>
-                                        <p className='text-primary font-medium'>support@crestbank.com</p>
+                                        <p className='text-primary font-medium'>+1(516)252-6667</p>
                                     </div>
                                 </div>
                                 <div className='flex items-center gap-4'>
@@ -33,7 +33,7 @@ const ContactTwo = () => {
 
                                     <div >
                                         <h5 className='text-primary font-bold'>Visit Us</h5>
-                                        <p className='text-primary font-medium'>support@crestbank.com</p>
+                                        <p className='text-primary font-medium'>Garden City, NY</p>
                                     </div>
                                 </div>
                             </div>

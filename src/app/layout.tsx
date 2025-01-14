@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Cookie from "@/components/Landing/Cookie/Cookie";
-
+import Providers from "./Provider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,10 +22,14 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;300;400;600;700&display=swap"
         />
+        <script src="https://cryptorank.io/widget/marquee.js"></script>
       </head>
       <body className="text-[#ddd]">
-        <Cookie />
-        {children}
+        <Providers>
+          <Cookie />
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );

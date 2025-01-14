@@ -12,30 +12,27 @@ const AboutOne = () => {
           <div className="lg:flex-1 flex flex-col gap-14">
             <div className="flex flex-col gap-5 lg:items-start">
               <p className="text-accent font-semibold text-[17px] sm:text-[20px] lg:text-[24px]">
-                A Few Words About Crest Bank
+                A Few Words About SwissPipsAI
               </p>
               <h2 className="text-primary text-[30px] hero-text font-bold lg:text-[50px] lg:leading-[4.2rem]">
                 Who we are.
               </h2>
               <p className="text-primary lg:text-left lg:text-[0.95rem] leading-7 font-medium">
-                At CmTradingPro, we pride ourselves on being a dynamic
-                force in the trading world, constantly adapting to the evolving
-                market to provide unparalleled services to our clients. Much
-                like a skilled trader navigating the highs and lows of the
-                market, we work tirelessly to give you the best trading
-                experience possible. Our platform is designed to empower
-                you whether you&apos;re a seasoned investor or just starting your
-                trading journey. With easy access to global markets, powerful
-                tools, and real-time insights, you&apos;re always in control. Our
-                commitment to security is at the core of everything we do. We
-                use advanced encryption technology to protect your investments
-                and personal information, ensuring your peace of mind with every
-                transaction. With CmTradingpro, you can trade with
-                confidence, knowing that your funds and data are in safe hands.
-                Join us today and discover a new level of trading excellence.
-                Whether you&apos;re looking to diversify your portfolio or explore
-                new investment opportunities, we&apos;re here to guide you every step
-                of the way.
+                At SwissPipsAI, we are redefining the investment landscape by
+                leveraging advanced AI technology to deliver precise and
+                reliable results for our users. Our platform is designed to
+                simplify the investment process while ensuring transparency,
+                security, and profitability. Whether you're an experienced
+                investor or just beginning your journey, SwissPipsAI provides
+                the tools and insights you need to make informed decisions and
+                achieve your financial goals. Security is at the heart of
+                everything we do. We use cutting-edge encryption technologies to
+                protect your investments and personal data, giving you peace of
+                mind with every transaction. With a global reach and a
+                commitment to excellence, SwissPipsAI empowers users to grow
+                their wealth seamlessly. Join us today to experience a smarter,
+                more efficient way to invest, and let us guide you toward
+                achieving the exact ROI you expect.
               </p>
             </div>
 
@@ -48,7 +45,7 @@ const AboutOne = () => {
                 <div className="flex sm:flex-[3] flex-[2] lg:flex-[2] flex-col gap-1">
                   <Counter end={45} suffix="k" />
 
-                  <h4 className="text-primary font-medium">Total User</h4>
+                  <h4 className="text-primary font-medium">Total Investors</h4>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -59,7 +56,7 @@ const AboutOne = () => {
                 <div className="flex sm:flex-[3] flex-[2] lg:flex-[2] flex-col gap-1">
                   <Counter end={90} suffix="+" />
 
-                  <h4 className="text-primary font-medium">Countries</h4>
+                  <h4 className="text-primary font-medium">Countries Served</h4>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -70,7 +67,7 @@ const AboutOne = () => {
                 <div className="flex sm:flex-[3] flex-[2] lg:flex-[2] flex-col gap-1">
                   <Counter end={95} suffix="%" />
 
-                  <h4 className="text-primary font-medium">Satisfaction</h4>
+                  <h4 className="text-primary font-medium">Customer Satisfaction</h4>
                 </div>
               </div>
             </div>

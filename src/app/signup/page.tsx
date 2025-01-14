@@ -5,8 +5,9 @@ import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { GiCancel } from "react-icons/gi";
 import { GrStatusGood } from "react-icons/gr";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { toast } from "sonner";
 
 interface FormData {
   first_name: string;
@@ -21,11 +22,19 @@ interface FormData {
   state: string;
   address: string;
   img: string;
+  referralCode: string;
+  timezone: string; // Add timezone field
 }
 
 const SignUp: React.FC = () => {
-  const { register, handleSubmit, watch, setValue, reset } =
-    useForm<FormData>();
+  const searchParams = useSearchParams();
+  const ref = searchParams.get("ref");
+  const { register, handleSubmit, watch, setValue, reset } = useForm<FormData>({
+    defaultValues: {
+      referralCode: ref || "", // Set referral code from URL as the default
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Capture timezone during form initialization
+    },
+  });
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [countries, setCountries] = useState<{ name: string; iso2: string }[]>(
     []
@@ -92,64 +101,37 @@ const SignUp: React.FC = () => {
 
     const file = inputFileRef.current.files[0];
 
-    const response = await fetch(
-      `https://cmtradingpro.vercel.app/api/upload-image?filename=${file.name}`,
-      {
-        method: "POST",
-        body: file,
-      }
-    );
+    const response = await fetch(`/api/upload-image?filename=${file.name}`, {
+      method: "POST",
+      body: file,
+    });
 
     const newBlob = await response.json();
     return newBlob?.url ?? null;
   };
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    setLoading(true);
     if (data.pincode.length < 6) {
-      setError("Pincode must be 6 digits or more");
-      setLoading(false);
-      const modal = document.getElementById(
-        "signup-modal"
-      ) as HTMLDialogElement | null;
+      toast.error("Pincode must be 6 digits or more");
+      return;
+    }
 
-      modal?.showModal();
-      setTimeout(() => {
-        modal?.close();
-        setError("");
-      }, 2500);
+    if (data.password.length < 8) {
+      toast.error("Your password must be 8 or more characters");
       return;
     }
 
     if (data.password !== data.confirmPassword) {
-      setError("Passwords do not match");
-      setLoading(false);
-      const modal = document.getElementById(
-        "signup-modal"
-      ) as HTMLDialogElement | null;
-      modal?.showModal();
-      setTimeout(() => {
-        modal?.close();
-        setError("");
-      }, 2500);
+      toast.error("Passwords do not match");
       return;
     }
 
+    const toastId = toast.loading("Signing you up, please wait...");
     try {
       const imgURL = await handleImageUpload();
       if (!imgURL) {
-        setError("Image upload failed");
-        setLoading(false);
-        const modal = document.getElementById(
-          "my_modal_1"
-        ) as HTMLDialogElement | null;
-        if (modal) {
-          modal.showModal();
-        }
-        setTimeout(() => {
-          modal?.close();
-          setError("");
-        }, 2500);
+        toast.dismiss(toastId);
+        toast.error("Image upload failed");
         return;
       }
 
@@ -160,26 +142,32 @@ const SignUp: React.FC = () => {
 
       const { confirmPassword, ...newData } = data;
 
-      const response = await axios.post(
-        "https://.vercel.app/api/signup",
-        newData
-      );
+      const response = await axios.post("/api/signup", newData);
 
       if (response.data.success) {
+        toast.dismiss(toastId);
+        toast.success("Sign up successful, please check your email.");
         reset();
-        setLoading(false);
         setStep(2);
       }
+      if (response?.data.catchError) {
+        toast.dismiss(toastId);
+        toast.error("Error signing up");
+        return;
+      }
     } catch (error) {
-      console.error("Error during sign up:", error);
+      toast.dismiss(toastId);
+      toast.error("Error Signing Up");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative bg-cover bg-center"
-    style={{ backgroundImage: "url(/bg4.jpg)" }}>
-         {/* Background Overlay */}
-         <div className="absolute inset-0 bg-[#181254] bg-opacity-60 z-0"></div>
+    <div
+      className="min-h-screen flex items-center justify-center relative bg-cover bg-center"
+      style={{ backgroundImage: "url(/bg4.jpg)" }}
+    >
+      {/* Background Overlay */}
+      <div className="absolute inset-0 bg-[#181254] bg-opacity-60 z-0"></div>
 
       <div className="bg-[#161150] p-8 rounded shadow-md w-full lg:max-w-[650px] z-10">
         <dialog id="signup-modal" className="modal">
@@ -200,10 +188,10 @@ const SignUp: React.FC = () => {
         </dialog>
         <dialog
           id="loading-modal"
-          className={`modal bg-[#004080] ${loading ? "opacity-100" : ""}`}
+          className={`modal bg-primary ${loading ? "opacity-100" : ""}`}
         >
           <div className="flex items-center justify-center gap-3">
-            <span className="loading loading-ring loading-lg bg-white"></span>
+            <span className="loading loading-dots loading-lg bg-white"></span>
           </div>
         </dialog>
         {step === 1 && (
@@ -212,7 +200,7 @@ const SignUp: React.FC = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                 <div className="flex-1">
-                  <label className="block mb-1 text-[#666666]">First Name</label>
+                  <label className="block mb-1">First Name</label>
                   <input
                     type="text"
                     {...register("first_name", { required: true })}
@@ -224,7 +212,7 @@ const SignUp: React.FC = () => {
                   <input
                     type="text"
                     {...register("last_name", { required: true })}
-                    className="w-full bg-[#e2ebf7] p-2 border rounded"
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   />
                 </div>
               </div>
@@ -234,7 +222,7 @@ const SignUp: React.FC = () => {
                   <input
                     type="tel"
                     {...register("phone", { required: true })}
-                    className="w-full bg-[#e2ebf7] p-2 border rounded"
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   />
                 </div>
                 <div className="flex-1">
@@ -242,7 +230,7 @@ const SignUp: React.FC = () => {
                   <input
                     type="email"
                     {...register("email", { required: true })}
-                    className="w-full bg-[#e2ebf7] p-2 border rounded"
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   />
                 </div>
               </div>
@@ -252,7 +240,7 @@ const SignUp: React.FC = () => {
                   <input
                     type="text"
                     {...register("pincode", { required: true, maxLength: 6 })}
-                    className="w-full bg-[#e2ebf7] p-2 border rounded"
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   />
                 </div>
                 <div className="flex-1">
@@ -260,7 +248,7 @@ const SignUp: React.FC = () => {
                   <input
                     type="password"
                     {...register("password", { required: true })}
-                    className="w-full bg-[#e2ebf7] p-2 border rounded"
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   />
                 </div>
               </div>
@@ -270,7 +258,7 @@ const SignUp: React.FC = () => {
                   <input
                     type="password"
                     {...register("confirmPassword", { required: true })}
-                    className="w-full bg-[#e2ebf7] p-2 border rounded"
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   />
                 </div>
                 <div className="flex-1">
@@ -278,7 +266,7 @@ const SignUp: React.FC = () => {
                   <input
                     type="text"
                     {...register("address", { required: true })}
-                    className="w-full bg-[#e2ebf7] p-2 border rounded"
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   />
                 </div>
               </div>
@@ -288,7 +276,7 @@ const SignUp: React.FC = () => {
                   <input
                     type="date"
                     {...register("dob", { required: true })}
-                    className="w-full bg-[#e2ebf7] p-2 border rounded"
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   />
                 </div>
                 <div className="flex-1">
@@ -296,7 +284,7 @@ const SignUp: React.FC = () => {
                   <select
                     {...register("country", { required: true })}
                     onChange={handleCountryChange}
-                    className="w-full bg-[#e2ebf7] p-2 border rounded"
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   >
                     <option value="">Select Country</option>
                     {countries.map((country) => (
@@ -312,7 +300,7 @@ const SignUp: React.FC = () => {
                   <label className="block mb-1">State</label>
                   <select
                     {...register("state", { required: true })}
-                    className="w-full bg-[#e2ebf7] p-2 border rounded"
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   >
                     <option value="">Select State</option>
                     {states.map((state) => (
@@ -323,29 +311,36 @@ const SignUp: React.FC = () => {
                   </select>
                 </div>
                 <div className="flex-1">
-                  <label className="block mb-1">User Image</label>
+                  <label className="block mb-1">Image</label>
                   <input
                     name="file"
                     ref={inputFileRef}
                     type="file"
                     required
-                    className="w-full bg-[#e2ebf7] p-2 border rounded"
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   />
                 </div>
               </div>
+              <div>
+                <label className="block mb-1">Referral Code (optional)</label>
+                <input
+                  type="text"
+                  {...register("referralCode")} // Automatically tracks the value
+                  placeholder="Enter referral code (if any)"
+                  className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
+                />
+              </div>
               <div className="flex items-center justify-end gap-5">
-                  <div className="text-sm">
-                    <p>
-                      Already have an account?
-                    </p>
-                  </div>
-
-                  <div className="text-sm">
-                    <Link href="/login" className="">
-                      Login
-                    </Link>
-                  </div>
+                <div className="text-sm">
+                  <p>Already have an account?</p>
                 </div>
+
+                <div className="text-sm">
+                  <Link href="/login" className="">
+                    Login
+                  </Link>
+                </div>
+              </div>
               <button
                 type="submit"
                 className="w-full bg-accent text-white p-2 rounded"
@@ -369,54 +364,26 @@ export default SignUp;
 
 const VerifyPin: React.FC = () => {
   const { register, handleSubmit } = useForm<{ pin: string }>();
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const onSubmit: SubmitHandler<{ pin: string }> = async (data) => {
-    setLoading(true);
+    const toastId = toast.loading("Verifying");
     try {
       const response = await axios.post("/api/verify-pin", data);
       console.log(response.status);
       if (response.status === 200) {
-        setLoading(false);
-        setSuccess("Pin verified! Redirecting to login...");
-        const modal = document.getElementById(
-          "signup-verify-modal"
-        ) as HTMLDialogElement | null;
-        modal?.showModal();
-        setTimeout(() => {
-          modal?.close();
-          router.push("/login");
-        }, 2500);
+        toast.dismiss(toastId);
+        toast.success("Pin verified! Redirecting to login...");
+
+        router.push("/login");
       } else {
-        setLoading(false);
-        setError("Invalid pin. Please try again.");
-        const modal = document.getElementById(
-          "signup-verify-modal"
-        ) as HTMLDialogElement | null;
-
-        modal?.showModal();
-
-        setTimeout(() => {
-          modal?.close();
-          setError("");
-        }, 2500);
+        toast.dismiss(toastId);
+        toast.error("Invalid pin. Please try again.");
       }
     } catch (error) {
       console.error("Error verifying pin:", error);
-      setError("An error occurred. Please try again.");
-      const modal = document.getElementById(
-        "signup-verify-modal"
-      ) as HTMLDialogElement | null;
-
-      modal?.showModal();
-
-      setTimeout(() => {
-        modal?.close();
-        setError("");
-      }, 2500);
+      toast.dismiss(toastId);
+      toast.error("Something went wrong, Please try again.");
     }
   };
 
@@ -429,36 +396,16 @@ const VerifyPin: React.FC = () => {
           <input
             type="text"
             {...register("pin", { required: true })}
-            className="w-full p-2 border bg-[#e2ebf7] rounded"
+            className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded"
+          className="w-full bg-accent text-white p-2 rounded"
         >
-          {loading ? (
-            <span className="loading loading-spinner loading-sm bg-white"></span>
-          ) : (
-            "Verify"
-          )}
+          Verify
         </button>
       </form>
-      <dialog id="signup-verify-modal" className="modal">
-        <div className="modal-box">
-          {error && (
-            <div className="flex items-center justify-center gap-3">
-              <GiCancel size={40} color="#ef4444" />
-              <p className="text-red-500">{error}</p>
-            </div>
-          )}
-          {success && (
-            <div className="flex items-center justify-center gap-3">
-              <GrStatusGood size={40} color="#22c55e" />
-              <p className="text-green-500">{success}</p>
-            </div>
-          )}
-        </div>
-      </dialog>
     </div>
   );
 };

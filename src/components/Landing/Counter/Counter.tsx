@@ -12,7 +12,7 @@ const Counter = () => {
             </div>
 
             <div className="w-[70%]">
-              <h2 className="text-white font-bold text-[40px] lg:text-[42px] leading-[46px]">
+              <h2 className="text-white font-bold text-[21px] lg:text-[42px] leading-[46px]">
                 <CountUp end={22382} start={0} suffix="+" />
               </h2>
               <h4 className="text-white font-medium text-[22px] lg:text-[24px] leading-[32px]">
@@ -26,7 +26,7 @@ const Counter = () => {
             </div>
 
             <div className="w-[70%]">
-              <h2 className="text-white font-bold text-[40px] lg:text-[42px] leading-[46px]">
+              <h2 className="text-white font-bold text-[21px] lg:text-[42px] leading-[46px]">
                 <CountUp end={500} start={0} suffix="k" prefix="$" />
               </h2>
               <h4 className="text-white font-medium text-[22px] lg:text-[24px] leading-[32px]">
@@ -40,7 +40,7 @@ const Counter = () => {
             </div>
 
             <div className="w-[70%]">
-              <h2 className="text-white font-bold text-[40px] lg:text-[42px] leading-[46px]">
+              <h2 className="text-white font-bold text-[21px] lg:text-[42px] leading-[46px]">
                 <CountUp end={80} start={0} suffix="+" />
               </h2>
               <h4 className="text-white font-medium text-[22px] lg:text-[24px] leading-[32px]">

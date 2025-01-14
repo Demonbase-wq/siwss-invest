@@ -6,11 +6,11 @@ const Choose = () => {
       <div className="mycontainer">
         <div className="px-4 flex flex-col gap-10">
           <div className="flex flex-col gap-4">
-            <h2 className="text-center text-white font-bold text-[30px] leading-[40px] lg:text-[46px] lg:leading-[54px]">
-              Why Choose Us
+            <h2 className="text-center text-white font-bold text-[25px] leading-[40px] lg:text-[46px] lg:leading-[54px]">
+            Why SwissPipsAI
             </h2>
             <p className="text-white text-center w-auto lg:w-[480px] my-0 mx-auto">
-              Discover the Key Benefits that Set Us Apart in the Industry.
+            Discover how SwissPipsAI revolutionizes investments with cutting-edge AI, unmatched reliability, and secure transactions.
             </p>
           </div>
 
@@ -33,9 +33,8 @@ const Choose = () => {
 
                 <div>
                   <p className="text-[#ddd] text-[16px] leading-[26px]">
-                    Ensuring top-level security for all transactions is our
-                    priority. We implement cutting-edge measures to keep your
-                    information safe.
+                  Your investment’s safety is our top priority. SwissPipsAI employs advanced encryption and state-of-the-art protocols to secure your funds and data.
+
                   </p>
                 </div>
               </div>
@@ -56,9 +55,8 @@ const Choose = () => {
 
                 <div>
                   <p className="text-[#ddd] text-[16px] leading-[26px]">
-                    With a focus on safeguarding your investments, we ensure
-                    every transaction is protected by the highest standards of
-                    security.
+                  Our AI-driven platform ensures that your investments are safeguarded and yield the promised returns at the end of each period.
+
                   </p>
                 </div>
               </div>
@@ -79,9 +77,8 @@ const Choose = () => {
 
                 <div>
                   <p className="text-[#ddd] text-[16px] leading-[26px]">
-                    As a fully registered and regulated company, we adhere to
-                    strict industry standards, providing you with confidence in
-                    our operations.
+                  SwissPipsAI is a fully licensed and regulated company, adhering to global financial and ethical standards for peace of mind.
+
                   </p>
                 </div>
               </div>
@@ -105,9 +102,8 @@ const Choose = () => {
 
                 <div>
                   <p className="text-[#ddd] text-[16px] leading-[26px]">
-                    Experience fast and seamless withdrawals, allowing you to
-                    access your funds instantly without any delays or
-                    unnecessary hurdles.
+                  Enjoy hassle-free, instant access to your funds anytime you need them, with no delays or unnecessary procedures.
+
                   </p>
                 </div>
               </div>
@@ -128,9 +124,8 @@ const Choose = () => {
 
                 <div>
                   <p className="text-[#ddd] text-[16px] leading-[26px]">
-                    Our platform is equipped with SSL encryption to ensure all
-                    your personal data and transactions are fully secure and
-                    protected.
+                  We utilize SSL encryption technology to protect your transactions and ensure your sensitive data is safe at all times.
+
                   </p>
                 </div>
               </div>
@@ -151,9 +146,8 @@ const Choose = () => {
 
                 <div>
                   <p className="text-[#ddd] text-[16px] leading-[26px]">
-                    Access our expert support team anytime. We're available
-                    around the clock to resolve any issues, ensuring you’re
-                    never alone.
+                  Our dedicated support team is available around the clock to assist you with any questions or concerns you may have.
+
                   </p>
                 </div>
               </div>

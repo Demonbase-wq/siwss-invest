@@ -6,7 +6,7 @@ const Plan = () => {
       <div className="mycontainer">
         <div className="px-4 flex flex-col gap-10">
           <div className="">
-            <h2 className="text-center text-white font-bold text-[30px] leading-[40px] lg:text-[46px] lg:leading-[54px]">
+            <h2 className="text-center text-white font-bold text-[25px] leading-[40px] lg:text-[46px] lg:leading-[54px]">
               Investment Plan
             </h2>
           </div>
@@ -16,21 +16,18 @@ const Plan = () => {
               <h3 className="text-white text-[28px] lg:text-[32px] leading-[40px] font-bold">
                 Silver Plan
               </h3>
-              <div className="flex items-center gap-[10px]">
-                <span className="text-4xl font-extrabold text-[#FC0077] leading-10">
-                  5%
-                </span>
-                <span className="text-[17px] text-[#e3e1e7]">weekly</span>
-              </div>
               <ol className="list-none m-0 p-0 text-center">
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
-                  Minimum investment: $100
+                  Minimum investment: $500
                 </li>
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
-                  Maximum investment: $5,000
+                  Maximum investment: $1,900
                 </li>
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
-                  Average monthly: 20%-30%
+                  Roi: 30%
+                </li>
+                <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
+                  Duration: 6 weeks
                 </li>
               </ol>
               <a
@@ -44,21 +41,18 @@ const Plan = () => {
               <h3 className="text-white text-[28px] lg:text-[32px] leading-[40px] font-bold">
                 Gold Plan
               </h3>
-              <div className="flex items-center gap-[10px]">
-                <span className="text-4xl font-extrabold text-[#FC0077] leading-10">
-                  7%
-                </span>
-                <span className="text-[17px] text-[#e3e1e7]">weekly</span>
-              </div>
               <ol className="list-none m-0 p-0 text-center">
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
-                  Minimum investment: $1000
+                  Minimum investment: $1,900
                 </li>
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
-                  Maximum investment: $10000
+                  Maximum investment: $25,000
                 </li>
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
-                  Average monthly: 35%-40%
+                  Roi: 30%
+                </li>
+                <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
+                  Duration: 6 weeks
                 </li>
               </ol>
               <a
@@ -72,21 +66,18 @@ const Plan = () => {
               <h3 className="text-white text-[28px] lg:text-[32px] leading-[40px] font-bold">
                 Platinum Plan
               </h3>
-              <div className="flex items-center gap-[10px]">
-                <span className="text-4xl font-extrabold text-[#FC0077] leading-10">
-                  10%
-                </span>
-                <span className="text-[17px] text-[#e3e1e7]">weekly</span>
-              </div>
               <ol className="list-none m-0 p-0 text-center">
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
-                  Minimum investment: $5000
+                  Minimum investment: $25,000
                 </li>
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
-                  Maximum investment: $25000
+                  Maximum investment: ∞
                 </li>
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
-                  Average monthly: 50%-60%
+                  Roi: 20%
+                </li>
+                <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
+                  Duration: 4 weeks
                 </li>
               </ol>
               <a

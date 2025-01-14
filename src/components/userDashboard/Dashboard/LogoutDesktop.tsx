@@ -1,5 +1,4 @@
 import React from 'react'
-import { IoMdLogOut } from 'react-icons/io';
 
 
 const LogoutDesktop = () => {
@@ -35,9 +34,7 @@ const LogoutDesktop = () => {
                     <p>Signing you out</p>
                 </div>
             </dialog>
-            <button onClick={logFunc} className='flex items-center gap-3 p-2 rounded-[5px] w-full bg-[#00000074] text-white'>
-                <IoMdLogOut className='cursor-pointer' color='white' />
-
+            <button onClick={logFunc}>
                 <p>Logout</p>
             </button>
         </div>

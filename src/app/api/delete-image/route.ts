@@ -35,9 +35,4 @@ export async function DELETE(request: Request): Promise<NextResponse> {
     }
 }
 
-// The next lines are required for Pages API Routes only
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
-// };
+

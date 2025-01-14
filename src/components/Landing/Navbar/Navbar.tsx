@@ -154,34 +154,26 @@ const Navbar = () => {
           <ul className="flex flex-col gap-6 p-6 text-white">
             <li>
               <Link
-                href="#"
-                className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
-              >
-                Features
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
-              >
-                Pricing
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
-              >
-                Contact
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
+                href="/about"
                 className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
               >
                 About
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/faq"
+                className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
+              >
+                Faq
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
+              >
+                Contact
               </Link>
             </li>
           </ul>

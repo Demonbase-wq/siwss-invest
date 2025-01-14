@@ -8,19 +8,49 @@ const base = Airtable.base(process.env.AIRTABLE_BASE_ID!);
 
 export const users = base('Users');
 export const transactions = base('Transactions');
-export const loan = base('Loans');
 export const ticket = base('Tickets');
-export const savings = base('Savings');
+export const investmentsTable = base("Investments");
+export const dailyProfits = base("Daily Profits");
 export const kyc = base('Kyc');
-export const check = base('Check');
-export const crypto = base('Crypto');
-export const wire = base('Wire');
-export const local = base('Local');
-export const other = base('Other');
+export const referrals = base('Referrals');
+export const deposits = base('Deposits');
+export const withdrawals = base('Withdrawals');
+
 
 export const getTransactions = async (id: string) => {
     const records = await base('Transactions').select({
       filterByFormula: `{user_id} = '${id}'`,
+    }).all();
+    return records.map(record => ({
+      id: record.id,
+      fields: record.fields,
+    }));
+};
+
+export const getReferrals = async (id: string) => {
+    const records = await referrals.select({
+      filterByFormula: `{referrer_id} = '${id}'`,
+    }).all();
+    return records.map(record => ({
+      id: record.id,
+      fields: record.fields,
+    }));
+};
+
+
+export const getInvestments = async (id: string) => {
+    const records = await investmentsTable.select({
+      filterByFormula: `AND({user_id} = '${id}', {status} = 'Active')`,
+    }).all();
+    return records.map(record => ({
+      id: record.id,
+      fields: record.fields,
+    }));
+};
+
+export const getDailyProfits = async (id: string) => {
+    const records = await dailyProfits.select({
+      filterByFormula: `{investment_id} = '${id}'`,
     }).all();
     return records.map(record => ({
       id: record.id,
@@ -38,25 +68,6 @@ export const getTickets = async (id: string) => {
     }));
 };
 
-export const getLoans = async (id: string) => {
-    const records = await loan.select({
-      filterByFormula: `{user_id} = '${id}'`,
-    }).all();
-    return records.map(record => ({
-      id: record.id,
-      fields: record.fields,
-    }));
-};
-
-export const getSavings = async (id: string, type: string) => {
-    const records = await base('Transactions').select({
-      filterByFormula: `AND({user_id} = '${id}', {type} = '${type}')`,
-    }).all();
-    return records.map(record => ({
-      id: record.id,
-      fields: record.fields,
-    }));
-};
 
 export async function getUser(email: string) {
   try {

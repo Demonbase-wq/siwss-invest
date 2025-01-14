@@ -6,6 +6,7 @@ import { loginAction } from "./loginAction";
 import { GiCancel } from "react-icons/gi";
 import { GrStatusGood } from "react-icons/gr";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -13,110 +14,72 @@ const LoginPage: React.FC = () => {
   const [step, setStep] = useState(1);
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
   const router = useRouter();
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  console.log(timezone);
 
   const handleSignIn = async (e: React.FormEvent) => {
-    const modal = document.getElementById(
-      "login-modal"
-    ) as HTMLDialogElement | null;
-    setLoading(true);
     e.preventDefault();
+    const toastId = toast.loading('Logging in, please wait...')
+
     try {
-      await loginAction(email, code);
-      setSuccess(
-        "Login succesfull!! you will be redirected to the dashboard page shortly"
-      );
-      setLoading(false);
-      modal?.showModal();
-      setTimeout(() => {
-        modal?.close();
-        setSuccess("");
-      }, 2500);
+      await loginAction(email, code, timezone);
+      toast.dismiss(toastId)
+      toast.success('Login succesfull!! you will be redirected to the dashboard page shortly')
       router.push("/dashboard");
     } catch (error) {
-      setError("Error logging in");
-      setLoading(false);
-      modal?.showModal();
-      setTimeout(() => {
-        modal?.close();
-        setError("");
-      }, 2500);
+      console.log(error);
+      toast.error('Error logging in')
     }
   };
 
+  // Email validation function
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return email.trim() !== "" && emailRegex.test(email);
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
-    const modal = document.getElementById(
-      "login-modal"
-    ) as HTMLDialogElement | null;
-    setLoading(true);
     e.preventDefault();
+
+    // Validate email before submitting
+    if (!validateEmail(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    const toastId = toast.loading('Logging in, please wait.....')
     try {
-      if (email === "dylanchoijune@gmail.com") {
-        setError(
-          "Your account has been blocked due to security reasons please contact customer support"
-        );
-        setLoading(false);
-        modal?.showModal();
-        setTimeout(() => {
-          modal?.close();
-          setError("");
-        }, 2500);
+      const response = await axios.post("/api/login", { email, password });
+      if (response?.data.catchError) {
+        toast.dismiss(toastId)
+        toast.error('Error logging in')
+        setPassword("");
         return;
       }
-      const response = await axios.post("/api/login", { email, password });
-      if (response?.data?.error) {
-        setError(response?.data?.error);
-        setLoading(false);
-        modal?.showModal();
-        setTimeout(() => {
-          modal?.close();
-          setError("");
-        }, 2500);
+      if (response?.data.error) {
+        toast.dismiss(toastId)
+        toast.error(response?.data?.error)
+        setPassword("");
+        return;
       }
-      setLoading(false);
+      toast.dismiss(toastId)
       setStep(2);
     } catch (error) {
-      setError("Error logging in");
-      setLoading(false);
-      modal?.showModal();
-      setTimeout(() => {
-        modal?.close();
-        setError("");
-      }, 2500);
+      console.log(error);
+      toast.dismiss(toastId)
+      toast.error('Error logging in')
     }
   };
 
   return (
-    <div className="min-h-screen relative bg-cover bg-center flex items-center justify-center" style={{ backgroundImage: "url(/bg4.jpg)" }}>
-                 <div className="absolute inset-0 bg-[#181254] bg-opacity-60 z-0"></div>
+    <div
+      className="min-h-screen relative bg-cover bg-center flex items-center justify-center"
+      style={{ backgroundImage: "url(/bg4.jpg)" }}
+    >
+      <div className="absolute inset-0 bg-[#181254] bg-opacity-60 z-0"></div>
 
       <div className="bg-white shadow-lg rounded-lg flex flex-col md:flex-row w-full max-w-4xl z-10">
-        <dialog
-          id="loading-modal"
-          className={`modal bg-[#004080] ${loading ? "opacity-100" : ""}`}
-        >
-          <div className="flex items-center justify-center gap-3">
-            <span className="loading loading-ring loading-lg bg-white"></span>
-          </div>
-        </dialog>
-        <dialog id="login-modal" className="modal">
-          <div className="modal-box bg-white">
-            {error && (
-              <div className="flex items-center justify-center gap-3">
-                <GiCancel size={40} color="#ef4444" />
-                <p className="text-red-500">{error}</p>
-              </div>
-            )}
-            {success && (
-              <div className="flex items-center justify-center gap-3">
-                <GrStatusGood size={40} color="#22c55e" />
-                <p className="text-green-500">{success}</p>
-              </div>
-            )}
-          </div>
-        </dialog>
+        
         <div className="bg-[#161150] text-white p-8 md:w-1/2 flex flex-col justify-center">
           <div className="">
             <Link href="/">
@@ -177,7 +140,10 @@ const LoginPage: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="text-sm">
-                    <Link href="#" className="text-[#7e8299] text-[12px]">
+                    <Link
+                      href="/forgot-password"
+                      className="text-[#7e8299] text-[12px]"
+                    >
                       Forgot your password?
                     </Link>
                   </div>

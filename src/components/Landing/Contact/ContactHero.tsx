@@ -6,7 +6,7 @@ const ContactHero = () => {
             <div className="mycontainer">
                 <div className='px-4 flex-col flex items-center justify-center'>
                     <div className='flex flex-col gap-5 items-center'>
-                        <h2 className='text-white text-[30px] hero-text font-bold lg:text-[60px] lg:leading-[4.2rem]'>Contact CmTradingPro
+                        <h2 className='text-white text-[30px] hero-text font-bold lg:text-[60px] lg:leading-[4.2rem]'>Contact SwissPipsAi
                         </h2>
 
                         <div className='flex items-center gap-2 text-center'>
