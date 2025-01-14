@@ -48,6 +48,7 @@ const LoginPage: React.FC = () => {
       return;
     }
     const toastId = toast.loading('Logging in, please wait.....')
+    console.log(process.env.AIRTABLE_API_KEY)
     try {
       const response = await axios.post(`/api/login`, { email, password }, {
         headers: {
