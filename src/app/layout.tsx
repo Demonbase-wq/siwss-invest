@@ -1,8 +1,16 @@
+import { Nunito } from "next/font/google";
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Cookie from "@/components/Landing/Cookie/Cookie";
 import Providers from "./Provider";
 import { Toaster } from "sonner";
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "600", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,21 +23,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        {/* Add Google Fonts link for Poppins */}
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;300;400;600;700&display=swap"
-        />
-        <script src="https://cryptorank.io/widget/marquee.js"></script>
-      </head>
+    <html lang="en" className={nunito.className}>
       <body className="text-[#ddd]">
         <Providers>
           <Cookie />
           {children}
           <Toaster />
         </Providers>
+        <Script
+          src="https://cryptorank.io/widget/marquee.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
