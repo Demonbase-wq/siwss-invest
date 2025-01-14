@@ -18,6 +18,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { formatNumber } from "@/lib/util";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -67,8 +68,8 @@ const AdminWithdrawals: React.FC = () => {
       field: "amount",
       headerName: "Amount",
       cellRenderer: (params: any) => (
-        <span className="text-green-500 font-semibold">
-          ${params.value.toLocaleString()}
+        <span className="text-red-500 font-semibold">
+          -${formatNumber(params.value)}
         </span>
       ),
     },

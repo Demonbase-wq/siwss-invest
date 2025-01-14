@@ -90,8 +90,8 @@ const LoginPage: React.FC = () => {
               />
             </Link>
           </div>
-          <h1 className="text-3xl font-bold mt-4">Welcome to CmTradingPro!</h1>
-          <p className="mt-2 font-light">The world&apos;s #1 broker!!</p>
+          <h1 className="text-3xl font-bold mt-4">Welcome to SwissPipsAi</h1>
+          <p className="mt-2 font-light">The world&apos;s #1 Investment Ai</p>
         </div>
         <div className="md:w-1/2">
           {step === 1 ? (

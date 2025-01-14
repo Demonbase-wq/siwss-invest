@@ -102,12 +102,6 @@ export function NavUser({
                   Kyc
                 </DropdownMenuItem>
               </Link>
-              <Link href="/dashboard/notifications">
-                <DropdownMenuItem>
-                  <Bell />
-                  Notifications
-                </DropdownMenuItem>
-              </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>

@@ -27,6 +27,16 @@ export const getTransactions = async (id: string) => {
     }));
 };
 
+export const getReferral = async (id: string) => {
+    const records = await base('Transactions').select({
+      filterByFormula: `{referrer_id} = '${id}'`,
+    }).all();
+    return records.map(record => ({
+      id: record.id,
+      fields: record.fields,
+    }));
+};
+
 export const getReferrals = async (id: string) => {
     const records = await referrals.select({
       filterByFormula: `{referrer_id} = '${id}'`,

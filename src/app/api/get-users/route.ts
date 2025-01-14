@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { deposits } from "@/lib/airtable";
+import { users } from "@/lib/airtable";
 
 export async function GET() {
   try {
-    const records = await deposits.select().all();
+    const records = await users.select().all();
     const formattedRecords = records
       .filter((record) => Object.keys(record.fields).length > 0) // Filter out empty records
       .map((record) => ({
@@ -11,7 +11,7 @@ export async function GET() {
         ...record.fields,
       }));
 
-    return NextResponse.json({ deposits: formattedRecords }, { status: 200 });
+    return NextResponse.json({ users: formattedRecords }, { status: 200 });
   } catch (error) {
     console.error("Error fetching deposits:", error);
     return NextResponse.json(
