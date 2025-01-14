@@ -3,7 +3,7 @@ import axios from "axios";
 const FINNHUB_API_URL = "https://finnhub.io/api/v1";
 
 export const fetchMarketNews = async (category: string = "general") => {
-  const apiKey = process.env.NEXT_PUBLIC_FINNHUB_API_KEY;
+  const apiKey = process.env.FINNHUB_API_KEY;
   if (!apiKey) throw new Error("Finnhub API key is not set!");
 
   try {
