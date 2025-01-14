@@ -89,7 +89,7 @@ const config = {
       authorize: async (credentials) => {
         try {
           if (credentials.route === "/admin") {
-            const response = await fetch(`https://swisspipsai.com/api/admin-login`, {
+            const response = await fetch(`https://www.swisspipsai.com/api/admin-login`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const config = {
             const user = json.user;
             return user;
           } else {
-            const response = await fetch(`https://swisspipsai.com/api/verify`, {
+            const response = await fetch(`https://www.swisspipsai.com/api/verify`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
