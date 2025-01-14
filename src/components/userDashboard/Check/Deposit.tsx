@@ -33,29 +33,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { BNBIcon, BTCIcon, ETHIcon, USDTIcon } from "@/lib/util";
+import { BTCIcon, USDTIcon } from "@/lib/util";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  currency: z.enum(["BTC", "BNB", "USDT", "ETH"]),
+  currency: z.enum(["BTC", "USDT"]),
   amount: z.string().min(1, "Amount is required"),
   walletAddress: z.string().min(1, "Wallet address is required"),
   transactionHash: z.string().min(1, "Transaction hash is required"),
 });
 
 const walletAddresses = {
-  BTC: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
-  BNB: "bnb1grpf0955h0ykzq3ar5nmum7y6gdfl6lxfn46h2",
-  USDT: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
-  ETH: "0x71C7656EC7ab88b098defB751B7401B5f6d8976F",
+  BTC: "bc1q3fav2vcee5cjv88xnjllwkulx4x0zcj0gyalvm",
+  USDT: "0x1fe419143B8156DfA18779D9d6Ca4678CDBF69e3",
 };
 
 const currencyIcons = {
   BTC: BTCIcon,
-  BNB: BNBIcon,
   USDT: USDTIcon,
-  ETH: ETHIcon,
 };
 
 export default function DepositForm() {
