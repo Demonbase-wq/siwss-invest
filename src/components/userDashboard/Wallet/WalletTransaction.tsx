@@ -28,12 +28,11 @@ const WalletTransaction: React.FC = () => {
 
   useEffect(() => {
     if (data) {
-      const transactions = data.transactions.map((transaction: any) => ({
+      const transactions = data?.transactions.map((transaction: any) => ({
         ...transaction.fields, // Spread the fields object
         id: transaction.id, // Add the top-level id
       }));
-      setRowData(transactions);
-      console.log(rowData);
+      if (transactions) setRowData(transactions);
       setLoading(false);
     }
   }, [data, rowData]);
@@ -124,6 +123,19 @@ const WalletTransaction: React.FC = () => {
   const handleViewReceipt = (id: string) => {
     router.push(`/dashboard/history/statement?id=${id}`);
   };
+
+  if (loading || !data){
+    return (
+      <dialog
+        id="loading-modal"
+        className={`modal bg-primary ${loading ? "opacity-100" : ""}`}
+      >
+        <div className="flex items-center justify-center gap-3">
+          <span className="loading loading-dots loading-lg bg-white"></span>
+        </div>
+      </dialog>
+    );
+  }
 
   return (
     <Card className="p-6">
