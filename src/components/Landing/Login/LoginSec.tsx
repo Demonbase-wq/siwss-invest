@@ -49,7 +49,7 @@ const LoginPage: React.FC = () => {
     }
     const toastId = toast.loading('Logging in, please wait.....')
     try {
-      const response = await axios.post(`https://swisspipsai.com/api/login`, { email, password });
+      const response = await axios.post(`https://www.swisspipsai.com/api/login`, { email, password });
       if (response?.data.catchError) {
         toast.dismiss(toastId)
         toast.error('Error logging in')
