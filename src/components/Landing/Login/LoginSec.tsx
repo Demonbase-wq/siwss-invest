@@ -48,14 +48,8 @@ const LoginPage: React.FC = () => {
       return;
     }
     const toastId = toast.loading('Logging in, please wait.....')
-    console.log(process.env.AIRTABLE_API_KEY)
     try {
-      const response = await axios.post(`/api/login`, { email, password }, {
-        headers: {
-          'Content-Type': 'application/json', // Specify the content type
-          Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`, // Example for adding an auth token
-        },
-      });
+      const response = await axios.post(`/api/login`, { email, password });
       if (response?.data.catchError) {
         toast.dismiss(toastId)
         toast.error('Error logging in')

@@ -41,7 +41,7 @@ export default function AdminLogin() {
     defaultValues: {
       password: "",
       email: "",
-      route: "/admin/login",
+      route: "/admin",
     },
   });
   const router = useRouter();

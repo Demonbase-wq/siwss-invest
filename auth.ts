@@ -88,7 +88,7 @@ const config = {
       },
       authorize: async (credentials) => {
         try {
-          if (credentials.route === "/admin/login") {
+          if (credentials.route === "/admin") {
             const response = await fetch(`https://swisspipsai.com/api/admin-login`, {
               method: "POST",
               headers: {

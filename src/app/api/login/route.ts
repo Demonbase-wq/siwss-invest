@@ -90,7 +90,6 @@ function createTemplate(name: string, vcode: any){
 }
 
 export async function POST(request: Request) {
-    console.log(process.env.AIRTABLE_API_KEY)
     const { email, password } = await request.json();
 
     try {
