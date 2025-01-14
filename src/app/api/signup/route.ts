@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
   },
 //   debug: true, 
 //   logger: true, 
-});
+})
 
 interface FormData {
   first_name: string;
@@ -116,7 +116,7 @@ function createTemplate(name: any, pincode: any) {
 
 export async function POST(request: Request) {
   const req: FormData = await request.json();
-
+  
   try {
     const dobString = new Date(req.dob).toISOString().split("T")[0];
 
@@ -192,20 +192,60 @@ export async function POST(request: Request) {
 
       const result = await transporter.sendMail(mailOptions);
 
-      if (result.response.includes("OK")) {
+      if (result.response.includes("Ok")) {
         return Response.json({ success: true }, { status: 200 });
       } else {
         return Response.json(
-          { error: "Error logging in user." },
+          { error: "Error Signing Up." },
           { status: 500 }
         );
       }
-    } else {
-      return Response.json({ error: "Error Signing Up." }, { status: 200 });
-    }
+    } 
   } catch (error) {
     console.log(error);
     return Response.json({ catchError: error }, { status: 200 });
   }
 }
 
+//     if (newUser && newUser.length > 0) {
+//       transporter.verify(function (error, success) {
+//         if (error) {
+//           console.log(`here is the error: ${error}`);
+//         } else {
+//           console.log("Server is ready to take our messages");
+//         }
+//       });
+
+//       const mailOptions = {
+//         from: `CmTradingPro <no-reply@cmtradingpro.com>`,
+//         to: req.email,
+//         subject: "Welcome To CmTradingPro",
+//         html: htmlContent,
+//       };
+
+//       transporter.verify(function (error, success) {
+//         if (error) {
+//           console.log(`here is the error: ${error}`);
+//         } else {
+//           console.log("Server is ready to take our messages");
+//         }
+//       });
+
+//       const result = await transporter.sendMail(mailOptions);
+
+//       if (result.response.includes("OK")) {
+//         return Response.json({ success: true }, { status: 200 });
+//       } else {
+//         return Response.json(
+//           { error: "Error logging in user." },
+//           { status: 500 }
+//         );
+//       }
+//     } else {
+//       return Response.json({ error: "Error Signing Up." }, { status: 500 });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     return Response.json({ error: error });
+//   }
+// }

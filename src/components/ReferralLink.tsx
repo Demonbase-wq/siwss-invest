@@ -35,7 +35,7 @@ export default function ReferralLink() {
       );
     }
 
-  const referralLink = `http://localhost:3000/signup?ref=${data?.referral_code}`;
+  const referralLink = `https://www.swisspipsai.com/signup?ref=${data?.referral_code}`;
 
   const copyToClipboard = async () => {
     try {

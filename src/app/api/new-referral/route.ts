@@ -146,7 +146,7 @@ export async function POST(request: Request) {
 
     const result = await transporter.sendMail(mailOptions);
 
-    if (result.response.includes("OK")) {
+    if (result.response.includes("Ok")) {
       return Response.json(
         { message: "Invite sent successfully!" },
         { status: 200 }
@@ -160,7 +160,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Error sending invite:", error);
     return Response.json(
-      { error: "An error occured, please try again" },
+      { error: "Internal Server Error" },
       { status: 200 }
     );
   }

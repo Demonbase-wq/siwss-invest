@@ -113,7 +113,7 @@ const SignUp: React.FC = () => {
 
     const file = inputFileRef.current.files[0];
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/upload-image?filename=${file.name}`, {
+    const response = await fetch(`/api/upload-image?filename=${file.name}`, {
       method: "POST",
       body: file,
     });
