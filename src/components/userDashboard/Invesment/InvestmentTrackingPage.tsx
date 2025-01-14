@@ -36,12 +36,20 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export default function InvestmentTrackingPage() {
   const { data, mutate } = useSWR("/api/get-investments", fetcher);
   const { data: userData } = useSWR("/api/get-user", fetcher);
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  const [id, setId] = useState<string | null>(null);
+
+  // Extract token from URL on the client
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const idFromUrl = urlParams.get("id");
+    if (idFromUrl) setId(idFromUrl);
+  }, [id]);
+
   const { data: dailyProfitsResponse } = useSWR(
     `/api/getdailyprofits?id=${id}`,
     fetcher
   );
+  
   const [loading, setLoading] = useState(true);
   const [investment, setInvestment] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -130,7 +138,9 @@ export default function InvestmentTrackingPage() {
   const startDate = DateTime.fromISO(investment.fields.start_date).setZone(
     timezone
   );
-  const endDate = DateTime.fromISO(investment.fields.end_date).setZone(timezone);
+  const endDate = DateTime.fromISO(investment.fields.end_date).setZone(
+    timezone
+  );
 
   const formattedStartDate = startDate.toLocaleString(DateTime.DATE_MED);
   const formattedEndDate = endDate.toLocaleString(DateTime.DATE_MED);
@@ -138,10 +148,7 @@ export default function InvestmentTrackingPage() {
   const now = DateTime.now().setZone(timezone);
 
   const totalDuration = endDate.diff(startDate, "days").days;
-  const elapsed = Math.max(
-    0,
-    now.diff(startDate, "days").days
-  );
+  const elapsed = Math.max(0, now.diff(startDate, "days").days);
   const progress = Math.min(100, (elapsed / totalDuration) * 100);
 
   const daysLeft = Math.max(0, Math.floor(totalDuration - elapsed));

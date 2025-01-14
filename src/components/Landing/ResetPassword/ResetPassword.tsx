@@ -44,7 +44,7 @@ export default function ResetPasswordForm() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const tokenFromUrl = urlParams.get("token");
-    setToken(tokenFromUrl);
+    if(tokenFromUrl) setToken(tokenFromUrl);
   }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({

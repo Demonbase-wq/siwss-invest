@@ -13,10 +13,16 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Statement: React.FC = () => {
     const { data } = useSWR("/api/transactions", fetcher);
-    const searchParams = useSearchParams();
-    const id = searchParams.get('id');
     const [loading, setLoading] = useState(true)
     const [transaction, setTransaction] = useState<any>(null);
+    const [id, setId] = useState<string | null>(null);
+
+    // Extract token from URL on the client
+    useEffect(() => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const idFromUrl = urlParams.get("id");
+      if(idFromUrl) setId(idFromUrl);
+    }, [id]);
 
     useEffect(() => {
         if (id && data) {

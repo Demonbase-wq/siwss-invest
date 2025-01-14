@@ -10,8 +10,8 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  debug: true, // Enable debug output
-  logger: true, // Log to console
+  // debug: true, 
+  // logger: true, 
 });
 
 function createTemplate(
@@ -183,7 +183,7 @@ export async function POST(request: Request) {
 
     const result = await transporter.sendMail(mailOptions);
 
-    console.log(result.response);
+    // console.log(result.response);
 
     if (result.response.includes("Ok")) {
       return Response.json(

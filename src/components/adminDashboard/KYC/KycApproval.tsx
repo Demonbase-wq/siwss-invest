@@ -70,7 +70,7 @@ const KycApprovals: React.FC = () => {
         return (
           <span
             className={`px-2 rounded font-semibold ${
-                status === "Approved"
+                status === "Verified"
                 ? "bg-green-100 text-green-800" 
                 : status === "Declined" ? "bg-red-100 text-red-800"
                 : "bg-yellow-100 text-yellow-800"
