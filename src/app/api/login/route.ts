@@ -90,109 +90,59 @@ function createTemplate(name: string, vcode: any){
 }
 
 export async function POST(request: Request) {
+    console.log(process.env.AIRTABLE_API_KEY)
     const { email, password } = await request.json();
 
-    // try {
-    //     const records = await users.select({
-    //         filterByFormula: `{email} = '${email}'`,
-    //     }).firstPage();
-
-    //     if (records.length === 0) {
-    //         return Response.json({ error: 'User not found.' }, { status: 404 });
-    //     }
-
-    //     const user = records[0];
-    //     const hashedPassword = user.fields.password as string;
-
-    //     const isMatch = await bcrypt.compare(password, hashedPassword);
-
-
-    //     if (!isMatch) {
-    //         return Response.json({ error: 'Invalid password.' }, { status: 200 });
-    //     }
-
-
-    //     const verificationCode = Math.floor(100000 + Math.random() * 900000);
-    //     await users.update(user.id, { verificationCode });
-    //     const name = `${user.fields.first_name} ${user.fields.last_name}`
-
-    //     const mailOptions = {
-    //         from: '"Swiss Pips AI" <noreply@swisspipsai.com>',
-    //         to: email,
-    //         subject: "Email Verification",
-    //         html: createTemplate(name, verificationCode),
-    //     }
-
-    //     transporter.verify(function (error, success) {
-    //         if (error) {
-    //             console.log(`here is the error: ${error}`);
-    //         } else {
-    //             console.log("Server is ready to take our messages");
-    //         }
-    //     });
-
-    //     const result = await transporter.sendMail(mailOptions);
-
-    //     // console.log(result.response)
-
-    //     if (result.response.includes("Ok")) {
-    //         return Response.json({ message: "Verification code sent to email." }, { status: 200 });
-    //     } else {
-    //         return Response.json({ error: "Error logging in." }, { status: 200 });
-    //     }
-    // } catch (error) {
-    //     console.log(error)
-    //     return Response.json({ catchError: error }, { status: 200 });
-    // }
     try {
-        console.log("Start login process");
-    
         const records = await users.select({
             filterByFormula: `{email} = '${email}'`,
         }).firstPage();
-        console.log("Airtable Records:", records);
-    
+
         if (records.length === 0) {
-            console.log("User not found");
             return Response.json({ error: 'User not found.' }, { status: 404 });
         }
-    
+
         const user = records[0];
         const hashedPassword = user.fields.password as string;
-        console.log("Hashed Password:", hashedPassword);
-    
+
         const isMatch = await bcrypt.compare(password, hashedPassword);
-        console.log("Password Match:", isMatch);
-    
+
+
         if (!isMatch) {
             return Response.json({ error: 'Invalid password.' }, { status: 200 });
         }
-    
+
+
         const verificationCode = Math.floor(100000 + Math.random() * 900000);
-        console.log("Verification Code:", verificationCode);
-    
         await users.update(user.id, { verificationCode });
-        console.log("User updated with verification code");
-    
+        const name = `${user.fields.first_name} ${user.fields.last_name}`
+
         const mailOptions = {
             from: '"Swiss Pips AI" <noreply@swisspipsai.com>',
             to: email,
             subject: "Email Verification",
-            html: createTemplate(`${user.fields.first_name} ${user.fields.last_name}`, verificationCode),
-        };
-    
-        console.log("Sending Email with Mail Options:", mailOptions);
+            html: createTemplate(name, verificationCode),
+        }
+
+        transporter.verify(function (error, success) {
+            if (error) {
+                console.log(`here is the error: ${error}`);
+            } else {
+                console.log("Server is ready to take our messages");
+            }
+        });
+
         const result = await transporter.sendMail(mailOptions);
-        console.log("Email Sent Result:", result);
-    
+
+        // console.log(result.response)
+
         if (result.response.includes("Ok")) {
             return Response.json({ message: "Verification code sent to email." }, { status: 200 });
         } else {
             return Response.json({ error: "Error logging in." }, { status: 200 });
         }
     } catch (error) {
-        console.error("Error in login process:", error);
+        console.log(error)
         return Response.json({ catchError: error }, { status: 200 });
     }
-    
 }
