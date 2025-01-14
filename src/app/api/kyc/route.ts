@@ -86,7 +86,7 @@ function createTemplate(name: any) {
             <a href="https://swisspipsai.com/dashboard" class="button">Check KYC Status</a>
         </div>
         <div class="footer">
-            <p>&copy; 2023 [Your Company Name]. All rights reserved.</p>
+            <p>&copy; 2025 SwissPipsAi. All rights reserved.</p>
         </div>
     </div>
 </body>
@@ -197,7 +197,7 @@ export async function POST(req: NextRequest) {
     console.error("Error saving KYC data:", error);
     return Response.json(
       {
-        error: "Something went wrong, please try again...",
+        error: "Internal Server Error",
       },
       { status: 200 }
     );
