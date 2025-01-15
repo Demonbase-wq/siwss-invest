@@ -3,8 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { GiCancel } from "react-icons/gi";
-import { GrStatusGood } from "react-icons/gr";
+import { toast } from "sonner";
 
 const Settings = () => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -16,30 +15,21 @@ const Settings = () => {
   const [verifyNewPasswordVisible, setVerifyNewPasswordVisible] =
     useState(false);
   const [step, setStep] = useState(1);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
 
   const handlePasswordChangeRequest = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-    setSuccess("");
 
     if (newPassword !== verifyNewPassword) {
-      setError("New passwords do not match");
-      setLoading(false);
-      const modal = document.getElementById(
-        "my_modal_1"
-      ) as HTMLDialogElement | null;
-      if (modal) {
-        modal.showModal();
-      }
-      setTimeout(() => {
-        modal?.close();
-      }, 2500);
+      toast.error("New passwords do not match");
       return;
     }
+
+    if (newPassword.length < 8) {
+      toast.error("Your new password must be 8 or more characters");
+      return
+    }
+
+    const toastId = toast.loading("Requesting password change...");
 
     try {
       const response = await axios.post("/api/request-password-change", {
@@ -47,104 +37,58 @@ const Settings = () => {
         newPassword,
       });
 
-      if (response.data.error) {
-        setError(response.data.error);
-        setLoading(false);
-        const modal = document.getElementById(
-          "my_modal_1"
-        ) as HTMLDialogElement | null;
-        if (modal) {
-          modal.showModal();
-        }
-        setTimeout(() => {
-          modal?.close();
-        }, 2500);
-      } else {
-        setSuccess("Verification code sent to your email");
-        setLoading(false);
-        const modal = document.getElementById(
-          "my_modal_1"
-        ) as HTMLDialogElement | null;
-        if (modal) {
-          modal.showModal();
-        }
-        setTimeout(() => {
-          modal?.close();
-          setStep(2);
-        }, 2500);
+      const message = response?.data.message;
+      const error = response?.data.error;
+
+      if (message) {
+        toast.dismiss(toastId);
+        toast.success(message);
+        setStep(2);
+      }
+
+      if (error) {
+        toast.dismiss(toastId);
+        toast.error(error);
       }
     } catch (error) {
-      setError("An error occurred while updating the password");
-      setLoading(false);
-      const modal = document.getElementById(
-        "my_modal_1"
-      ) as HTMLDialogElement | null;
-      if (modal) {
-        modal.showModal();
-      }
-      setTimeout(() => {
-        modal?.close();
-        setCurrentPassword("");
-        setNewPassword("");
-        setVerifyNewPassword("");
-      }, 2500);
+      toast.dismiss(toastId);
+      toast.error("An error occurred while updating the password");
+      setCurrentPassword("");
+      setNewPassword("");
+      setVerifyNewPassword("");
     }
   };
 
   const handleVerifyCode = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-    setSuccess("");
 
+    const toastId = toast.loading("Verifying code and changing password...");
     try {
       const response = await axios.post("/api/verify-password-change", {
         verificationCode,
         newPassword,
       });
 
-      if (response.data.error) {
-        setError(response.data.error);
-        setLoading(false);
-        const modal = document.getElementById(
-          "my_modal_1"
-        ) as HTMLDialogElement | null;
-        if (modal) {
-          modal.showModal();
-        }
-        setTimeout(() => {
-          modal?.close();
-        }, 2500);
-      } else {
-        setSuccess("Password updated successfully");
+      const message = response?.data.message;
+      const error = response?.data.error;
+
+      if (message) {
+        toast.dismiss(toastId);
+        toast.success(message);
         setStep(1);
         setCurrentPassword("");
         setNewPassword("");
         setVerifyNewPassword("");
         setVerificationCode("");
-        setLoading(false);
-        const modal = document.getElementById(
-          "my_modal_1"
-        ) as HTMLDialogElement | null;
-        if (modal) {
-          modal.showModal();
-        }
-        setTimeout(() => {
-          modal?.close();
-        }, 2500);
+      }
+
+      if (error) {
+        toast.dismiss(toastId);
+        toast.error(error);
       }
     } catch (error) {
-      setError("An error occurred while verifying the code");
-      setLoading(false);
-      const modal = document.getElementById(
-        "my_modal_1"
-      ) as HTMLDialogElement | null;
-      if (modal) {
-        modal.showModal();
-      }
-      setTimeout(() => {
-        modal?.close();
-      }, 2500);
+      toast.dismiss(toastId);
+      toast.error("An error occurred while updating the password");
       setCurrentPassword("");
       setNewPassword("");
       setVerifyNewPassword("");
@@ -263,34 +207,13 @@ const Settings = () => {
                         type="submit"
                         className="bg-secondary py-1 text-[14px] px-3 rounded-[5px] text-white flex items-center justify-center w-[90px] bottom-0 outline-none"
                       >
-                        {loading ? (
-                          <span className="loading loading-spinner loading-sm bg-white"></span>
-                        ) : (
-                          "Update"
-                        )}
+                        Update
                       </button>
 
                       <button className="bg-accent w-[90px] py-1 text-[14px] px-3 rounded-[5px] text-white  bottom-0 outline-none">
                         Cancel
                       </button>
                     </div>
-
-                    <dialog id="my_modal_1" className="modal">
-                      <div className="modal-box">
-                        {error && (
-                          <div className="flex items-center justify-center gap-3">
-                            <GiCancel size={40} color="#ef4444" />
-                            <p className="text-red-500">{error}</p>
-                          </div>
-                        )}
-                        {success && (
-                          <div className="flex items-center justify-center gap-3">
-                            <GrStatusGood size={40} color="#22c55e" />
-                            <p className="text-green-500">{success}</p>
-                          </div>
-                        )}
-                      </div>
-                    </dialog>
                   </form>
                 )}
                 {step === 2 && (
@@ -308,7 +231,7 @@ const Settings = () => {
                           value={verificationCode}
                           onChange={(e) => setVerificationCode(e.target.value)}
                           required
-                          className="w-full md:w-[60%] p-2 bg-[#e2ebf7] focus:outline-none rounded-[5px] text-[14px]"
+                          className="w-full md:w-[60%] p-2 text-gray-800 bg-[#e2ebf7] focus:outline-none rounded-[5px] text-[14px]"
                         />
                       </div>
                     </div>

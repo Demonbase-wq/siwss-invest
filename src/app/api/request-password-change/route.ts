@@ -98,18 +98,14 @@ export async function POST(request: Request) {
   const { currentPassword } = await request.json();
 
   try {
-    const records = await users
-      .select({
-        filterByFormula: `{id} = '${session.user.id}'`,
-      })
-      .firstPage();
+    const records = await users.find(session.user.id as string)
 
-    if (records.length === 0) {
+    if (!records) {
       return Response.json({ message: "User not found." }, { status: 404 });
     }
 
-    const user = records[0];
-    const hashedPassword = user.fields.password as string;
+    const user = records;
+    const hashedPassword = user?.fields.password as string;
 
     const isMatch = await bcrypt.compare(currentPassword, hashedPassword);
 
@@ -121,18 +117,19 @@ export async function POST(request: Request) {
 
     await users.update([
       {
-        id: records[0].id,
+        id: user?.id,
         fields: { verificationCode },
       },
     ]);
-    const name = `${user?.fields.frist_name} ${user?.fields.last_name}`;
+
+    const name = `${user?.fields.first_name} ${user?.fields.last_name}`;
 
     // Send verification code to user's email
     const mailOptions = {
       from: '"Swiss Pips AI" <noreply@swisspipsai.com>',
       to: user?.fields.email as string,
       subject: "Your Verification Code",
-      text: createTemplate(name, verificationCode),
+      html: createTemplate(name, verificationCode),
     };
 
     transporter.verify(function (error, success) {
@@ -145,19 +142,19 @@ export async function POST(request: Request) {
 
     const result = await transporter.sendMail(mailOptions);
 
-    if (result.response.includes("OK")) {
+    if (result.response.includes("Ok")) {
       return Response.json(
         { message: "Verification code sent to email." },
         { status: 200 }
       );
     } else {
       return Response.json(
-        { error: "Error logging in user." },
-        { status: 500 }
+        { error: "Something went wrong, please try again." },
+        { status: 200 }
       );
     }
   } catch (error) {
     console.log(error);
-    return Response.json({ error: "Internal Server Error" }, { status: 500 });
+    return Response.json({ error: "Internal Server Error" }, { status: 200 });
   }
 }

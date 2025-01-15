@@ -127,7 +127,7 @@ export async function POST(req: Request) {
     });
 
     // Send reset email
-    const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password?token=${resetToken}`;
+    const resetUrl = `https://www.swisspipsai.com/reset-password?token=${resetToken}`;
     const name = `${user.fields.first_name} ${user.fields.last_name}`
 
     const mailOptions = {
@@ -147,7 +147,7 @@ export async function POST(req: Request) {
 
     const result = await transporter.sendMail(mailOptions);
 
-    if (result.response.includes("OK")) {
+    if (result.response.includes("Ok")) {
       return NextResponse.json(
         { message: "Reset link sent successfully" },
         { status: 200 }
