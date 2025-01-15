@@ -69,7 +69,7 @@ const Statement: React.FC = () => {
                                         <div className='flex items-center gap-2'>
                                             {/* logo div */}
                                             <div>
-                                                <img src="/nav-logo.png" alt="" className='w-[170px]' />
+                                                <img src="/logo.png" alt="" className='w-[300px]' />
                                             </div>
                                             
                                         </div>

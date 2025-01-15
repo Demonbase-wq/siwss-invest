@@ -84,7 +84,7 @@ const LoginPage: React.FC = () => {
           <div className="">
             <Link href="/">
               <img
-                src="/nav-logo.png"
+                src="/logo.png"
                 alt="logo"
                 className="h-full w-full object-cover"
               />

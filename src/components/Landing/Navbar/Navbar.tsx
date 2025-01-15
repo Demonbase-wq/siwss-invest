@@ -36,12 +36,12 @@ const Navbar = () => {
       <div className="navCon">
         <div className="navbar">
           <div className="navbar-start">
-            <div className="h-[50px]">
+            <div className="">
               <Link href="/">
                 <img
-                  src="/nav-logo.png"
+                  src="/logo.png"
                   alt="logo"
-                  className="h-full w-full object-cover"
+                  className="w-[200px]"
                 />
               </Link>
             </div>
@@ -143,9 +143,9 @@ const Navbar = () => {
             <div>
               <Link href="/">
                 <img
-                  src="/nav-logo.png"
+                  src="/logo.png"
                   alt="logo"
-                  className="h-full w-full object-cover"
+                  className=""
                 />
               </Link>
             </div>
