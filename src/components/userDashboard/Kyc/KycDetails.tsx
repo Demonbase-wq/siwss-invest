@@ -183,9 +183,9 @@ const KYC: React.FC = () => {
                     <div className="flex text-sm text-gray-600">
                       <label
                         htmlFor="idFront"
-                        className="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary-dark focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary"
+                        className="relative cursor-pointer m-5 bg-white rounded-md font-medium text-primary hover:text-primary-dark focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary"
                       >
-                        <span>
+                        <span className="border border-primary p-2 rounded-[12px]">
                           {fileState.idFront ? "Change file" : "Upload a file"}
                         </span>
                         <input
@@ -223,9 +223,9 @@ const KYC: React.FC = () => {
                     <div className="flex text-sm text-gray-600">
                       <label
                         htmlFor="idBack"
-                        className="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary-dark focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary"
+                        className="relative cursor-pointer m-5 bg-white rounded-md font-medium text-primary hover:text-primary-dark focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary"
                       >
-                        <span>
+                        <span className="border border-primary p-2 rounded-[12px]">
                           {fileState.idBack ? "Change file" : "Upload a file"}
                         </span>
                         <input
@@ -263,9 +263,9 @@ const KYC: React.FC = () => {
                     <div className="flex text-sm text-gray-600">
                       <label
                         htmlFor="passportPhoto"
-                        className="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary-dark focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary"
+                        className="relative cursor-pointer m-5 bg-white rounded-md font-medium text-primary hover:text-primary-dark focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary"
                       >
-                        <span>
+                        <span className="border border-primary p-2 rounded-[12px]">
                           {fileState.passportPhoto
                             ? "Change file"
                             : "Upload a file"}

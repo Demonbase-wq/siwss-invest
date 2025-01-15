@@ -32,16 +32,21 @@ export default function InvestMain() {
         </div>
       </dialog>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Active Investments</h1>
+        <h1 className="text-[20px] md:text-3xl font-bold">Active Investments</h1>
         <Button asChild>
           <Link href="/dashboard/investments/new">New Investment</Link>
         </Button>
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {investments.map((investment: any) => (
-          <InvestmentCard key={investment.id} investment={investment} userTimezone={userData?.timezone}/>
-        ))}
-      </div>
+      {investments.length > 0 ? (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {investments.map((investment: any) => (
+                <InvestmentCard key={investment.id} investment={investment} userTimezone={userData?.timezone}/>
+              ))}
+            </div>
+      ) : (<div>
+        <h1 className="text-center text-[20px] md:text-[22px] mt-[50px] md:mt-[90px]">You have no active investments.</h1>
+          </div>
+        )}
     </div>
   );
 }
