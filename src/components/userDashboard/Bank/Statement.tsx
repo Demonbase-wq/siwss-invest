@@ -83,9 +83,9 @@ const Statement: React.FC = () => {
 
                                     {/* top b */}
                                     <div>
-                                        <p className='text-[14px]'>3 Abbey Road, San Francisco CA 94102</p>
-                                        <p className='text-[14px]'>support@cmtradingpro.com</p>
-                                        <p className='text-[14px]'>+1987655678</p>
+                                        <p className='text-[14px]'>Garden City, NY</p>
+                                        <p className='text-[14px]'>support@swisspipsai.com</p>
+                                        <p className='text-[14px]'>+1(516)252-6667</p>
                                     </div>
                                     {/* top b */}
                                 </div>
@@ -124,7 +124,7 @@ const Statement: React.FC = () => {
 
                                 {/* bottom */}
                                 <div className='p-4'>
-                                    <p className='text-[12px] md:text-[13px] text-[#888ea8] font-medium'><strong>NOTE: </strong> If you have any questions or would like more information, please call our 24-hour Contact Centre on 1987655678 or send an email to support@cmtradingpro.com</p>
+                                    <p className='text-[12px] md:text-[13px] text-[#888ea8] font-medium'><strong>NOTE: </strong> If you have any questions or would like more information, please call our 24-hour Contact Centre on +1(516)252-6667 or send an email to support@swisspipsai.com</p>
                                 </div>
                                 {/* bottom */}
                             </div>

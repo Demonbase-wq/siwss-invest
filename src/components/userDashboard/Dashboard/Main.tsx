@@ -165,7 +165,7 @@ export default function DashboardPage() {
                 </Link>
               </div>
               <div>
-                <Link href='/dashboard/investments/new'>
+                <Link href="/dashboard/investments/new">
                   <Button variant="secondary" className="w-full">
                     <TrendingUp className="mr-2 h-4 w-4" /> Invest Now
                   </Button>
@@ -236,9 +236,11 @@ export default function DashboardPage() {
                 ${formatNumber(user?.referral_earnings)}
               </div>
             </div>
-            <Button variant="outline" className="w-full">
-              <Users className="mr-2 h-4 w-4" /> Refer Friends
-            </Button>
+            <Link href="/dashboard/refer&earn">
+              <Button variant="outline" className="w-full">
+                <Users className="mr-2 h-4 w-4" /> Refer Friends
+              </Button>
+            </Link>
           </CardContent>
         </Card>
       </div>

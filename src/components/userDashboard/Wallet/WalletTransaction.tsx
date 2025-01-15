@@ -98,7 +98,7 @@ const WalletTransaction: React.FC = () => {
         return (
           <button
             className="bg-blue-700 block text-white px-3 m-1 rounded"
-            onClick={() => handleViewReceipt(params.id)}
+            onClick={() => handleViewReceipt(params.data.id)}
           >
             View Receipt
           </button>
