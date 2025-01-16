@@ -38,7 +38,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  currency: z.enum(["BTC", "USDT"]),
+  currency: z.enum(["BTC", "USDT-TRC20", "USDT-BEP20"]),
   amount: z.string().min(1, "Amount is required"),
   walletAddress: z.string().min(1, "Wallet address is required"),
   transactionHash: z.string().min(1, "Transaction hash is required"),
@@ -46,18 +46,25 @@ const formSchema = z.object({
 
 const walletAddresses = {
   BTC: "bc1q3fav2vcee5cjv88xnjllwkulx4x0zcj0gyalvm",
-  USDT: "0x1fe419143B8156DfA18779D9d6Ca4678CDBF69e3",
+  "USDT-TRC20": "TCURbjvG2Rfa1x69tznS2ZcnDKJvjavggZ",
+  "USDT-BEP20": "0x1fe419143B8156DfA18779D9d6Ca4678CDBF69e3",
 };
 
 const currencyIcons = {
   BTC: BTCIcon,
-  USDT: USDTIcon,
+  "USDT-TRC20": USDTIcon,
+  "USDT-BEP20": USDTIcon,
+};
+
+const networkLabels = {
+  BTC: "",
+  "USDT-TRC20": "TRC20",
+  "USDT-BEP20": "BEP20",
 };
 
 export default function DepositForm() {
   const [selectedCurrency, setSelectedCurrency] =
     useState<keyof typeof walletAddresses>("BTC");
-//   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -147,7 +154,22 @@ export default function DepositForm() {
                           <SelectItem key={currency} value={currency}>
                             <div className="flex items-center">
                               <Icon />
-                              <span className="ml-2">{currency}</span>
+                              <span className="ml-2">
+                                {currency.split("-")[0]}
+                                {networkLabels[
+                                  currency as keyof typeof networkLabels
+                                ] && (
+                                  <span className="ml-1 text-xs text-muted-foreground">
+                                    (
+                                    {
+                                      networkLabels[
+                                        currency as keyof typeof networkLabels
+                                      ]
+                                    }
+                                    )
+                                  </span>
+                                )}
+                              </span>
                             </div>
                           </SelectItem>
                         );
@@ -163,7 +185,14 @@ export default function DepositForm() {
               <div className="flex items-center space-x-4">
                 <CurrencyIcon />
                 <div className="flex-grow">
-                  <p className="text-sm font-medium">Deposit Address</p>
+                  <p className="text-sm font-medium">
+                    Deposit Address
+                    {networkLabels[selectedCurrency] && (
+                      <span className="ml-1 text-xs text-muted-foreground">
+                        ({networkLabels[selectedCurrency]})
+                      </span>
+                    )}
+                  </p>
                   <p className="text-xs text-muted-foreground break-all">
                     {walletAddresses[selectedCurrency]}
                   </p>
@@ -197,7 +226,7 @@ export default function DepositForm() {
                     <Input placeholder="Enter deposit amount" {...field} />
                   </FormControl>
                   <FormDescription>
-                    Enter the amount you've deposited in {selectedCurrency}.
+                    Enter the USD ($) equivalent of the {selectedCurrency.split("-")[0]} amount you've deposited.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -241,7 +270,10 @@ export default function DepositForm() {
         </Form>
       </CardContent>
       <CardFooter>
-        <Button className="bg-accent hover:bg-accent" onClick={form.handleSubmit(onSubmit)}>
+        <Button
+          className="bg-accent hover:bg-accent"
+          onClick={form.handleSubmit(onSubmit)}
+        >
           I Have Paid
         </Button>
       </CardFooter>
