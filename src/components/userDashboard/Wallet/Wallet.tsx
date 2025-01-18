@@ -12,12 +12,9 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import InvestmentChart from "@/components/investment-chart";
-import MarketInsights from "@/components/market-insights";
 import { formatNumber } from "@/lib/util";
 import InvestmentPieChart from "@/components/InvestmentPieChart";
 import React from "react";
@@ -25,12 +22,7 @@ import WalletTransaction from "./WalletTransaction";
 import Link from "next/link";
 import { useTranslation } from "@/translations/provider";
 
-interface KPI {
-  label: string;
-  value: number;
-  change: number;
-  trend: "up" | "down";
-}
+
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -41,6 +33,8 @@ export default function WalletPage() {
   const { data: dailyProfits } = useSWR(`/api/userdailyprofits`, fetcher);
   const { data: marketNews } = useSWR(`/api/market-news`, fetcher);
   const [loading, setLoading] = React.useState(true);
+  const { translations } = useTranslation();
+
 
   React.useEffect(() => {
     if (investments && transactions && user && dailyProfits && marketNews) {
@@ -118,7 +112,6 @@ export default function WalletPage() {
     ? ((yesterdayProfits / totalExpectedProfit) * 100).toFixed(2)
     : 0;
 
-  const { translations } = useTranslation();
 
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">

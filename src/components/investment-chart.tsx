@@ -66,16 +66,13 @@ export default function InvestmentChart({
   timezone?: string;
 }) {
   const chartData = processChartData(data.dailyProfits, timezone);
-        const { translations } = useTranslation();
-  
+  const { translations } = useTranslation();
 
   return (
     <Card className="flex-grow">
       <CardHeader>
         <CardTitle>{translations?.dashboardMain?.text14}</CardTitle>
-        <CardDescription>
-        {translations?.dashboardMain?.text15}
-        </CardDescription>
+        <CardDescription>{translations?.dashboardMain?.text15}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -126,7 +123,7 @@ export default function InvestmentChart({
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="leading-none text-muted-foreground">
-        {translations?.dashboardMain?.text16}
+          {translations?.dashboardMain?.text16}
         </div>
       </CardFooter>
     </Card>

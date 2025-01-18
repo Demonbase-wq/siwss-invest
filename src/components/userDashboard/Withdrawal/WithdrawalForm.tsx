@@ -45,8 +45,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export default function WithdrawalForm() {
   const { data } = useSWR("/api/get-user", fetcher);
   const [loading, setLoading] = useState(true);
-    const { translations } = useTranslation();
-  
+  const { translations } = useTranslation();
 
   React.useEffect(() => {
     if (data) {
@@ -65,7 +64,6 @@ export default function WithdrawalForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-
     const withdrawalAmount = parseFloat(values.amount);
     if (withdrawalAmount > data?.balance) {
       toast.error("Insufficient balance");
@@ -121,7 +119,8 @@ export default function WithdrawalForm() {
                   <Input placeholder="0.00" {...field} />
                 </FormControl>
                 <FormDescription>
-                {translations?.dashboardWithdraw?.text4} ({translations?.dashboardWithdraw?.text5}: $
+                  {translations?.dashboardWithdraw?.text4} (
+                  {translations?.dashboardWithdraw?.text5}: $
                   {formatNumber(data?.balance)})
                 </FormDescription>
                 <FormMessage />
@@ -176,14 +175,18 @@ export default function WithdrawalForm() {
                   <Input placeholder="Enter the network" {...field} />
                 </FormControl>
                 <FormDescription>
-                {translations?.dashboardWithdraw?.text9}
+                  {translations?.dashboardWithdraw?.text9}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full bg-accent" disabled={form.formState.isSubmitting}>
-          {translations?.dashboardWithdraw?.text10}
+          <Button
+            type="submit"
+            className="w-full bg-accent"
+            disabled={form.formState.isSubmitting}
+          >
+            {translations?.dashboardWithdraw?.text10}
           </Button>
         </form>
       </Form>

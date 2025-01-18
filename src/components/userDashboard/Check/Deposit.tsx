@@ -120,165 +120,183 @@ export default function DepositForm() {
   const { translations } = useTranslation();
 
   return (
-    <Card className="w-full max-w-2xl">
-      <CardHeader>
-        <CardTitle>{translations?.dashboardDeposit?.text2}</CardTitle>
-        <CardDescription>
-        {translations?.dashboardDeposit?.text3}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="currency"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{translations?.dashboardDeposit?.text4}</FormLabel>
-                  <Select
-                    onValueChange={(value: keyof typeof walletAddresses) => {
-                      field.onChange(value);
-                      setSelectedCurrency(value);
-                    }}
-                    defaultValue={field.value}
+    <div>
+      <h1 className="text-4xl font-bold mb-6">
+        {translations?.dashboardDeposit?.text1}
+      </h1>
+
+      <Card className="w-full max-w-2xl">
+        <CardHeader>
+          <CardTitle>{translations?.dashboardDeposit?.text2}</CardTitle>
+          <CardDescription>
+            {translations?.dashboardDeposit?.text3}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="currency"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {translations?.dashboardDeposit?.text4}
+                    </FormLabel>
+                    <Select
+                      onValueChange={(value: keyof typeof walletAddresses) => {
+                        field.onChange(value);
+                        setSelectedCurrency(value);
+                      }}
+                      defaultValue={field.value}
+                    >
+                      <FormControl className="p-6">
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a currency" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="bg-primary">
+                        {Object.keys(walletAddresses).map((currency) => {
+                          const Icon =
+                            currencyIcons[
+                              currency as keyof typeof currencyIcons
+                            ];
+                          return (
+                            <SelectItem key={currency} value={currency}>
+                              <div className="flex items-center">
+                                <Icon />
+                                <span className="ml-2">
+                                  {currency.split("-")[0]}
+                                  {networkLabels[
+                                    currency as keyof typeof networkLabels
+                                  ] && (
+                                    <span className="ml-1 text-xs text-muted-foreground">
+                                      (
+                                      {
+                                        networkLabels[
+                                          currency as keyof typeof networkLabels
+                                        ]
+                                      }
+                                      )
+                                    </span>
+                                  )}
+                                </span>
+                              </div>
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="p-4 bg-random rounded-lg space-y-4">
+                <div className="flex items-center space-x-4">
+                  <CurrencyIcon />
+                  <div className="flex-grow">
+                    <p className="text-sm font-medium">
+                      {translations?.dashboardDeposit?.text5}
+                      {networkLabels[selectedCurrency] && (
+                        <span className="ml-1 text-xs text-muted-foreground">
+                          ({networkLabels[selectedCurrency]})
+                        </span>
+                      )}
+                    </p>
+                    <p className="text-xs text-muted-foreground break-all">
+                      {walletAddresses[selectedCurrency]}
+                    </p>
+                  </div>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="icon"
+                    onClick={() =>
+                      copyToClipboard(walletAddresses[selectedCurrency])
+                    }
                   >
-                    <FormControl className="p-6">
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a currency" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent className="bg-primary">
-                      {Object.keys(walletAddresses).map((currency) => {
-                        const Icon =
-                          currencyIcons[currency as keyof typeof currencyIcons];
-                        return (
-                          <SelectItem key={currency} value={currency}>
-                            <div className="flex items-center">
-                              <Icon />
-                              <span className="ml-2">
-                                {currency.split("-")[0]}
-                                {networkLabels[
-                                  currency as keyof typeof networkLabels
-                                ] && (
-                                  <span className="ml-1 text-xs text-muted-foreground">
-                                    (
-                                    {
-                                      networkLabels[
-                                        currency as keyof typeof networkLabels
-                                      ]
-                                    }
-                                    )
-                                  </span>
-                                )}
-                              </span>
-                            </div>
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="p-4 bg-random rounded-lg space-y-4">
-              <div className="flex items-center space-x-4">
-                <CurrencyIcon />
-                <div className="flex-grow">
-                  <p className="text-sm font-medium">
-                  {translations?.dashboardDeposit?.text5}
-                    {networkLabels[selectedCurrency] && (
-                      <span className="ml-1 text-xs text-muted-foreground">
-                        ({networkLabels[selectedCurrency]})
-                      </span>
-                    )}
-                  </p>
-                  <p className="text-xs text-muted-foreground break-all">
-                    {walletAddresses[selectedCurrency]}
-                  </p>
+                    <Copy className="h-4 w-4" />
+                  </Button>
                 </div>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="icon"
-                  onClick={() =>
-                    copyToClipboard(walletAddresses[selectedCurrency])
-                  }
-                >
-                  <Copy className="h-4 w-4" />
-                </Button>
+                <div className="flex justify-center">
+                  <QRCodeSVG
+                    value={walletAddresses[selectedCurrency]}
+                    size={200}
+                  />
+                </div>
               </div>
-              <div className="flex justify-center">
-                <QRCodeSVG
-                  value={walletAddresses[selectedCurrency]}
-                  size={200}
-                />
-              </div>
-            </div>
 
-            <FormField
-              control={form.control}
-              name="amount"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{translations?.dashboardDeposit?.text6}</FormLabel>
-                  <FormControl className="p-6">
-                    <Input placeholder="Enter deposit amount" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                  {translations?.dashboardDeposit?.text7} {selectedCurrency.split("-")[0]} {translations?.dashboardDeposit?.text8}
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="amount"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {translations?.dashboardDeposit?.text6}
+                    </FormLabel>
+                    <FormControl className="p-6">
+                      <Input placeholder="Enter deposit amount" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      {translations?.dashboardDeposit?.text7}{" "}
+                      {selectedCurrency.split("-")[0]}{" "}
+                      {translations?.dashboardDeposit?.text8}
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="walletAddress"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{translations?.dashboardDeposit?.text9}</FormLabel>
-                  <FormControl className="p-6">
-                    <Input {...field} readOnly />
-                  </FormControl>
-                  <FormDescription>
-                  {translations?.dashboardDeposit?.text10}
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="walletAddress"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {translations?.dashboardDeposit?.text9}
+                    </FormLabel>
+                    <FormControl className="p-6">
+                      <Input {...field} readOnly />
+                    </FormControl>
+                    <FormDescription>
+                      {translations?.dashboardDeposit?.text10}
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="transactionHash"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{translations?.dashboardDeposit?.text11}</FormLabel>
-                  <FormControl className="p-6">
-                    <Input placeholder="Enter transaction hash" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                  {translations?.dashboardDeposit?.text12}
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </form>
-        </Form>
-      </CardContent>
-      <CardFooter>
-        <Button
-          className="bg-accent hover:bg-accent"
-          onClick={form.handleSubmit(onSubmit)}
-        >
-          {translations?.dashboardDeposit?.text13}
-        </Button>
-      </CardFooter>
-    </Card>
+              <FormField
+                control={form.control}
+                name="transactionHash"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {translations?.dashboardDeposit?.text11}
+                    </FormLabel>
+                    <FormControl className="p-6">
+                      <Input placeholder="Enter transaction hash" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      {translations?.dashboardDeposit?.text12}
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </form>
+          </Form>
+        </CardContent>
+        <CardFooter>
+          <Button
+            className="bg-accent hover:bg-accent"
+            onClick={form.handleSubmit(onSubmit)}
+          >
+            {translations?.dashboardDeposit?.text13}
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }

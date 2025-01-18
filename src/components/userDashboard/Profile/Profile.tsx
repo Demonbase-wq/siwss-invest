@@ -67,7 +67,7 @@ export default function ProfileForm() {
         state: data.state || "",
         address: data.address || "",
       });
-      setLoading(false)
+      setLoading(false);
     }
   }, [data, form]);
 
@@ -109,12 +109,15 @@ export default function ProfileForm() {
       }
 
       // Only include changed fields in the update
-      const changedFields = Object.entries(values).reduce((acc, [key, value]) => {
-        if (value !== data[key]) {
-          acc[key] = value;
-        }
-        return acc;
-      }, {} as Record<string, any>);
+      const changedFields = Object.entries(values).reduce(
+        (acc, [key, value]) => {
+          if (value !== data[key]) {
+            acc[key] = value;
+          }
+          return acc;
+        },
+        {} as Record<string, any>
+      );
 
       if (newImageUrl) {
         changedFields.img = newImageUrl;
@@ -162,175 +165,194 @@ export default function ProfileForm() {
   }
 
   return (
-    <Card className="w-full max-w-2xl">
-      <CardHeader>
-        <CardTitle>{translations?.dashboardAccount?.text2}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="flex items-center space-x-4">
-              <Avatar className="w-24 h-24">
-                <AvatarImage
-                  src={data.img}
-                  alt="Profile picture"
+    <div>
+      <h1 className="text-3xl font-bold mb-6">
+        {translations?.dashboardAccount?.text1}
+      </h1>
+      <Card className="w-full max-w-2xl">
+        <CardHeader>
+          <CardTitle>{translations?.dashboardAccount?.text2}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <div className="flex items-center space-x-4">
+                <Avatar className="w-24 h-24">
+                  <AvatarImage src={data.img} alt="Profile picture" />
+                  <AvatarFallback>
+                    {data.first_name?.[0]}
+                    {data.last_name?.[0]}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <FormLabel htmlFor="picture">
+                    {translations?.dashboardAccount?.text3}
+                  </FormLabel>
+                  <Input
+                    id="picture"
+                    type="file"
+                    ref={inputFileRef}
+                    className="w-full max-w-xs"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="first_name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        {translations?.dashboardAccount?.text4}
+                      </FormLabel>
+                      <FormControl>
+                        <Input placeholder="John" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-                <AvatarFallback>
-                  {data.first_name?.[0]}
-                  {data.last_name?.[0]}
-                </AvatarFallback>
-              </Avatar>
-              <div>
-                <FormLabel htmlFor="picture">{translations?.dashboardAccount?.text3}</FormLabel>
-                <Input
-                  id="picture"
-                  type="file"
-                  ref={inputFileRef}
-                  className="w-full max-w-xs"
+                <FormField
+                  control={form.control}
+                  name="last_name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        {translations?.dashboardAccount?.text5}
+                      </FormLabel>
+                      <FormControl>
+                        <Input placeholder="Doe" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
               </div>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
-                name="first_name"
+                name="dob"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{translations?.dashboardAccount?.text4}</FormLabel>
+                    <FormLabel>
+                      {translations?.dashboardAccount?.text6}
+                    </FormLabel>
                     <FormControl>
-                      <Input placeholder="John" {...field} />
+                      <Input type="date" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
-                name="last_name"
+                name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{translations?.dashboardAccount?.text5}</FormLabel>
+                    <FormLabel>
+                      {translations?.dashboardAccount?.text7}
+                    </FormLabel>
                     <FormControl>
-                      <Input placeholder="Doe" {...field} />
+                      <Input
+                        type="tel"
+                        placeholder="+1 (555) 000-0000"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-            </div>
 
-            <FormField
-              control={form.control}
-              name="dob"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{translations?.dashboardAccount?.text6}</FormLabel>
-                  <FormControl>
-                    <Input type="date" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {translations?.dashboardAccount?.text8}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        placeholder="john.doe@example.com"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{translations?.dashboardAccount?.text7}</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="tel"
-                      placeholder="+1 (555) 000-0000"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="country"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {translations?.dashboardAccount?.text9}
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder="United States" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{translations?.dashboardAccount?.text8}</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="john.doe@example.com"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="state"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {translations?.dashboardAccount?.text10}
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder="California" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="country"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{translations?.dashboardAccount?.text9}</FormLabel>
-                  <FormControl>
-                    <Input placeholder="United States" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {translations?.dashboardAccount?.text11}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="123 Main St, Anytown, CA 12345"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="state"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{translations?.dashboardAccount?.text10}</FormLabel>
-                  <FormControl>
-                    <Input placeholder="California" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{translations?.dashboardAccount?.text11}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="123 Main St, Anytown, CA 12345"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="flex justify-end space-x-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => form.reset()}
-              >
-                {translations?.dashboardAccount?.text12}
-              </Button>
-              <Button type="submit" className="bg-accent">
-              {translations?.dashboardAccount?.text13}
-              </Button>
-            </div>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+              <div className="flex justify-end space-x-4">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => form.reset()}
+                >
+                  {translations?.dashboardAccount?.text12}
+                </Button>
+                <Button type="submit" className="bg-accent">
+                  {translations?.dashboardAccount?.text13}
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
-

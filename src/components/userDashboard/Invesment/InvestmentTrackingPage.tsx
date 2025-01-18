@@ -38,6 +38,7 @@ export default function InvestmentTrackingPage() {
   const { data, mutate } = useSWR("/api/get-investments", fetcher);
   const { data: userData } = useSWR("/api/get-user", fetcher);
   const [id, setId] = useState<string | null>(null);
+  const { translations } = useTranslation();
 
   // Extract token from URL on the client
   useEffect(() => {
@@ -166,7 +167,7 @@ export default function InvestmentTrackingPage() {
     100
   ).toFixed(2);
 
-  const { translations } = useTranslation();
+  
 
   return (
     <div className="container mx-auto px-4 py-8">

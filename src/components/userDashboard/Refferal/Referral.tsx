@@ -10,6 +10,7 @@ import { useTranslation } from "@/translations/provider"
 
 export default function ReferralPage() {
 const { translations } = useTranslation();
+
   return (
     <div className="container px-4 lg:pl-12 lg:px-0 py-6 space-y-8">
       <div className="flex flex-col gap-4">

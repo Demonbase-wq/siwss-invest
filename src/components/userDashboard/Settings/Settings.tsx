@@ -15,6 +15,8 @@ const Settings = () => {
   const [newPasswordVisible, setNewPasswordVisible] = useState(false);
   const [verifyNewPasswordVisible, setVerifyNewPasswordVisible] =
     useState(false);
+  const { translations } = useTranslation();
+
   const [step, setStep] = useState(1);
 
   const handlePasswordChangeRequest = async (e: React.FormEvent) => {
@@ -27,7 +29,7 @@ const Settings = () => {
 
     if (newPassword.length < 8) {
       toast.error("Your new password must be 8 or more characters");
-      return
+      return;
     }
 
     const toastId = toast.loading("Requesting password change...");
@@ -97,8 +99,6 @@ const Settings = () => {
     }
   };
 
-  const { translations } = useTranslation();
-
   return (
     <div className="md:pt-6 py-4">
       <div className="mycontainer">
@@ -110,12 +110,12 @@ const Settings = () => {
                   {translations?.dashboardSettings?.text1}
                 </h4>
                 <p className="text-gray-400 text-[12px]">
-                {translations?.dashboardSettings?.text2}
+                  {translations?.dashboardSettings?.text2}
                 </p>
               </div>
 
               <div className="p-4 text-[14px] rounded-[8px] bg-red-200 text-red-500">
-              {translations?.dashboardSettings?.text3}
+                {translations?.dashboardSettings?.text3}
               </div>
 
               <div>
@@ -126,7 +126,7 @@ const Settings = () => {
                   >
                     <div className="relative flex flex-col gap-3">
                       <label className="text-gray-400 text-[14px]">
-                      {translations?.dashboardSettings?.text4}
+                        {translations?.dashboardSettings?.text4}
                       </label>
                       <div>
                         <input
@@ -152,7 +152,7 @@ const Settings = () => {
                     </div>
                     <div className="relative flex flex-col gap-3">
                       <label className="text-gray-400 text-[14px]">
-                      {translations?.dashboardSettings?.text5}
+                        {translations?.dashboardSettings?.text5}
                       </label>
                       <div>
                         <input
@@ -177,7 +177,7 @@ const Settings = () => {
                     </div>
                     <div className="relative flex flex-col gap-3">
                       <label className="text-gray-400 text-[14px]">
-                      {translations?.dashboardSettings?.text6}
+                        {translations?.dashboardSettings?.text6}
                       </label>
                       <div>
                         <input
@@ -211,7 +211,7 @@ const Settings = () => {
                       </button>
 
                       <button className="bg-accent w-[90px] py-1 text-[14px] px-3 rounded-[5px] text-white  bottom-0 outline-none">
-                      {translations?.dashboardSettings?.text8}
+                        {translations?.dashboardSettings?.text8}
                       </button>
                     </div>
                   </form>
@@ -223,7 +223,7 @@ const Settings = () => {
                   >
                     <div className="relative flex flex-col gap-3">
                       <label className="text-gray-400 text-[14px]">
-                      {translations?.dashboardSettings?.text9}
+                        {translations?.dashboardSettings?.text9}
                       </label>
                       <div>
                         <input
@@ -245,7 +245,7 @@ const Settings = () => {
                       </button>
 
                       <button className="bg-accent w-[90px] py-1 text-[14px] px-3 rounded-[5px] text-white  bottom-0 outline-none">
-                      {translations?.dashboardSettings?.text8}
+                        {translations?.dashboardSettings?.text8}
                       </button>
                     </div>
                   </form>

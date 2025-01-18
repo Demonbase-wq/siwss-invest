@@ -25,6 +25,8 @@ interface FileState {
 const KYC: React.FC = () => {
   const { register, handleSubmit, setValue, reset, watch } =
     useForm<KYCFormData>();
+  const { translations } = useTranslation();
+
   const [fileState, setFileState] = useState<FileState>({
     idFront: null,
     idBack: null,
@@ -115,22 +117,22 @@ const KYC: React.FC = () => {
     return `${nameWithoutExtension.substring(0, maxLength - 3)}...${extension}`;
   };
 
-  const { translations } = useTranslation();
-
   return (
     <div className="min-h-screen flex items-start justify-center px-4 sm:px-6 lg:px-8">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl overflow-hidden mt-[47px] border-none">
         <div className="bg-primary text-white py-6 px-8 border-none">
-          <h2 className="text-3xl font-bold">{translations?.dashboardKyc?.text1}</h2>
+          <h2 className="text-3xl font-bold">
+            {translations?.dashboardKyc?.text1}
+          </h2>
           <p className="mt-2 text-primary-100">
-          {translations?.dashboardKyc?.text2}
+            {translations?.dashboardKyc?.text2}
           </p>
         </div>
         <div className="p-8">
           <div className="mb-6">
             <div className="flex justify-between mb-2">
               <span className="text-sm font-medium text-gray-600">
-              {translations?.dashboardKyc?.text3}
+                {translations?.dashboardKyc?.text3}
               </span>
               <span className="text-sm font-medium text-gray-600">
                 {Math.round(progressPercentage)}%
@@ -147,7 +149,7 @@ const KYC: React.FC = () => {
             <div className="grid grid-cols-1 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                {translations?.dashboardKyc?.text4}
+                  {translations?.dashboardKyc?.text4}
                 </label>
                 <input
                   {...register("nin", { required: true })}
@@ -158,7 +160,7 @@ const KYC: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                {translations?.dashboardKyc?.text5}
+                  {translations?.dashboardKyc?.text5}
                 </label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                   <div className="space-y-1 text-center">
@@ -198,7 +200,7 @@ const KYC: React.FC = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                {translations?.dashboardKyc?.text6}
+                  {translations?.dashboardKyc?.text6}
                 </label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                   <div className="space-y-1 text-center">
@@ -238,7 +240,7 @@ const KYC: React.FC = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                {translations?.dashboardKyc?.text7}
+                  {translations?.dashboardKyc?.text7}
                 </label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                   <div className="space-y-1 text-center">

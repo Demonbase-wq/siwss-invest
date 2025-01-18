@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   Card,
   CardContent,
@@ -38,8 +38,7 @@ export default function InvestmentCard({
   userTimezone,
 }: InvestmentCardProps) {
   const { fields } = investment;
-      const { translations } = useTranslation();
-  
+  const { translations } = useTranslation();
 
   // Fetch daily profits for the investment
   const { data: dailyProfitsResponse } = useSWR(
@@ -101,14 +100,18 @@ export default function InvestmentCard({
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex justify-between items-center">
-          <span className="text-sm text-muted-foreground">{translations?.dashboardInvestment?.text3}</span>
+          <span className="text-sm text-muted-foreground">
+            {translations?.dashboardInvestment?.text3}
+          </span>
           <span className="font-semibold">
             ${fields.amount.toLocaleString()}
           </span>
         </div>
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">{translations?.dashboardInvestment?.text4}</span>
+            <span className="text-sm text-muted-foreground">
+              {translations?.dashboardInvestment?.text4}
+            </span>
             <span className="text-sm font-medium">{progress.toFixed(0)}%</span>
           </div>
           <Progress value={progress} className="w-full bg-white" />
@@ -122,16 +125,14 @@ export default function InvestmentCard({
           </div>
           <div className="flex items-center text-green-500">
             <ArrowUpRight className="w-4 h-4 mr-1" />
-            <span className="font-semibold">
-              {percentageEarned}% 
-            </span>
+            <span className="font-semibold">{percentageEarned}%</span>
           </div>
         </div>
       </CardContent>
       <CardFooter>
         <Button asChild className="w-full bg-accent">
           <Link href={`/dashboard/investments/investment?id=${investment.id}`}>
-          {translations?.dashboardInvestment?.text5}
+            {translations?.dashboardInvestment?.text5}
           </Link>
         </Button>
       </CardFooter>
