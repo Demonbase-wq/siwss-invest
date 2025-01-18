@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import useSWR from "swr";
 import axios from "axios";
+import { useTranslation } from "@/translations/provider";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -14,6 +15,7 @@ export default function EmailInvite({ link }: any) {
   const [email, setEmail] = useState("");
   const { data } = useSWR("/api/get-user", fetcher);
   const [loading, setLoading] = React.useState(true);
+  const { translations } = useTranslation();
 
   React.useEffect(() => {
     if (data) {
@@ -78,7 +80,7 @@ export default function EmailInvite({ link }: any) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="email">Invite via Email</Label>
+        <Label htmlFor="email">{translations?.dashboardRefer?.text9}</Label>
         <div className="flex space-x-2">
           <Input
             id="email"
@@ -89,7 +91,7 @@ export default function EmailInvite({ link }: any) {
             required
           />
           <Button type="submit" className="bg-accent shrink-0">
-            Send
+          {translations?.dashboardRefer?.text10}
           </Button>
         </div>
       </div>

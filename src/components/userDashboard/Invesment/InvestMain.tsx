@@ -1,6 +1,7 @@
 'use client'
 import InvestmentCard from "@/components/investment-card";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/translations/provider";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
@@ -11,6 +12,8 @@ export default function InvestMain() {
   const { data } = useSWR("/api/get-investments", fetcher);
   const { data : userData } = useSWR("/api/get-user", fetcher);
   const [loading, setLoading] = useState(true);
+    const { translations } = useTranslation();
+  
 
   useEffect(() => {
     if (data && userData) {
@@ -32,9 +35,9 @@ export default function InvestMain() {
         </div>
       </dialog>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-[20px] md:text-3xl font-bold">Active Investments</h1>
+        <h1 className="text-[20px] md:text-3xl font-bold">{translations?.dashboardInvestment?.text1}</h1>
         <Button asChild>
-          <Link href="/dashboard/investments/new">New Investment</Link>
+          <Link href="/dashboard/investments/new">{translations?.dashboardInvestment?.text2}</Link>
         </Button>
       </div>
       {investments.length > 0 ? (

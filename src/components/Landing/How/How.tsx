@@ -1,18 +1,20 @@
+import { useTranslation } from "@/translations/provider";
 import React from "react";
 
 const How = () => {
+    const { translations } = useTranslation();
+  
   return (
-    <div className="bg-[#04062E] pt-[110px] pr-0 pb-[50px]" id="about">
+    <div className="bg-[#04062E] text-gray-300 pt-[110px] pr-0 pb-[50px]" id="about">
       <div className="mycontainer">
         <div className="px-4 flex flex-col gap-10">
           <div className="flex flex-col gap-4">
             <h2 className="text-center text-white font-bold text-[25px] leading-[40px] lg:text-[46px] lg:leading-[54px]">
-              How to Get Started
+              {translations?.how?.textOne}
             </h2>
 
             <p className="text-center w-auto lg:w-[480px] my-0 mx-auto">
-              Begin your journey with SwissPipsAI in three simple steps and
-              watch your investments grow with AI precision.
+            {translations?.how?.textTwo}
             </p>
           </div>
 
@@ -28,7 +30,7 @@ const How = () => {
               </div>
               <div>
                 <h4 className="inline-block text-[24px] mb-0 py-2.5 font-semibold">
-                  Get Access
+                {translations?.how?.textThree}
                 </h4>
               </div>
             </div>
@@ -43,7 +45,7 @@ const How = () => {
               </div>
               <div>
                 <h4 className="inline-block text-[24px] mb-0 py-2.5 font-semibold">
-                  Investment
+                {translations?.how?.textFour}
                 </h4>
               </div>
             </div>
@@ -58,7 +60,7 @@ const How = () => {
               </div>
               <div>
                 <h4 className="inline-block text-[24px] mb-0 py-2.5 font-semibold">
-                  Get Profit
+                {translations?.how?.textFive}
                 </h4>
               </div>
             </div>

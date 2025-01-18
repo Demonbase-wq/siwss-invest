@@ -30,6 +30,7 @@ import {
 import LogoutDesktop from "./userDashboard/Dashboard/LogoutDesktop";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { useTranslation } from "@/translations/provider";
 
 export function NavUser({
   user,
@@ -41,8 +42,9 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
-  const session = useSession()
+  const session = useSession();
   const kycVerfied = session.data?.user.kyc === "Verified";
+  const { translations } = useTranslation();
 
   return (
     <SidebarMenu>
@@ -87,16 +89,19 @@ export function NavUser({
               <Link href="/dashboard/profile">
                 <DropdownMenuItem>
                   <BadgeCheck />
-                  Account
+                  {translations?.dashboardSidebar?.text4}
                 </DropdownMenuItem>
               </Link>
               <Link href="/dashboard/settings">
                 <DropdownMenuItem>
                   <Settings />
-                  Settings
+                  {translations?.dashboardSidebar?.text11}
                 </DropdownMenuItem>
               </Link>
-              <Link href="/dashboard/kyc-details" className={`${kycVerfied ? "hidden" : ""}`}>
+              <Link
+                href="/dashboard/kyc-details"
+                className={`${kycVerfied ? "hidden" : ""}`}
+              >
                 <DropdownMenuItem>
                   <Cog />
                   Kyc

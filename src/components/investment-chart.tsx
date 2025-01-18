@@ -17,6 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useTranslation } from "@/translations/provider";
 
 // Helper function to process data
 const processChartData = (dailyProfits: any[], timezone: string) => {
@@ -65,13 +66,15 @@ export default function InvestmentChart({
   timezone?: string;
 }) {
   const chartData = processChartData(data.dailyProfits, timezone);
+        const { translations } = useTranslation();
+  
 
   return (
     <Card className="flex-grow">
       <CardHeader>
-        <CardTitle>Investment Daily Profits</CardTitle>
+        <CardTitle>{translations?.dashboardMain?.text14}</CardTitle>
         <CardDescription>
-          Daily total profits for all active investments
+        {translations?.dashboardMain?.text15}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -123,7 +126,7 @@ export default function InvestmentChart({
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="leading-none text-muted-foreground">
-          Showing total daily profits for all active investments.
+        {translations?.dashboardMain?.text16}
         </div>
       </CardFooter>
     </Card>

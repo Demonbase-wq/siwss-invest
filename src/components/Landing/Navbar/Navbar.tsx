@@ -1,11 +1,13 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
+import { useTranslation } from "@/translations/provider";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { LanguageSelector } from "../LanguageSelector/LanguageSelector";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const { translations } = useTranslation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -14,7 +16,6 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        // Change 100 to the scroll position you want
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -36,79 +37,75 @@ const Navbar = () => {
       <div className="navCon">
         <div className="navbar">
           <div className="navbar-start">
-            <div className="">
-              <Link href="/">
-                <img
-                  src="/logo.png"
-                  alt="logo"
-                  className="w-[200px]"
-                />
-              </Link>
-            </div>
+            <Link href="/">
+              <img src="/logo.png" alt="logo" className="w-[200px]" />
+            </Link>
           </div>
 
-          <div className="hidden lg:navbar-end lg:flex text-white">
-            <ul className=" flex items-center gap-5 uppercase">
+          <div className="hidden lg:navbar-center lg:flex text-white">
+            <ul className="flex items-center gap-5 uppercase">
               <li>
                 <Link
                   href="/"
-                  className="hover:text-accent font-semibold  transition-all ease-in-out duration-[0.2s]"
+                  className="hover:text-accent font-semibold transition-all ease-in-out duration-[0.2s]"
                 >
-                  Home
+                  {translations?.navbar?.home}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/about"
-                  className="hover:text-accent font-semibold   transition-all ease-in-out duration-[0.2s]"
+                  className="hover:text-accent font-semibold transition-all ease-in-out duration-[0.2s]"
                 >
-                  About
+                  {translations?.navbar?.about}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/faq"
-                  className="hover:text-accent font-semibold  transition-all ease-in-out duration-[0.2s]"
+                  className="hover:text-accent font-semibold transition-all ease-in-out duration-[0.2s]"
                 >
-                  FAQ
+                  {translations?.navbar?.faq}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/contact"
-                  className="hover:text-accent font-semibold  transition-all ease-in-out duration-[0.2s]"
+                  className="hover:text-accent font-semibold transition-all ease-in-out duration-[0.2s]"
                 >
-                  Contact Us
+                  {translations?.navbar?.contact_us}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/#investment"
-                  className="hover:text-accent font-semibold  transition-all ease-in-out duration-[0.2s]"
+                  className="hover:text-accent font-semibold transition-all ease-in-out duration-[0.2s]"
                 >
-                  Investment
+                  {translations?.navbar?.investment}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/login"
-                  className="hover:text-accent font-semibold  transition-all ease-in-out duration-[0.2s]"
+                  className="hover:text-accent font-semibold transition-all ease-in-out duration-[0.2s]"
                 >
-                  Login
+                  {translations?.navbar?.login}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/signup"
-                  className="hover:text-accent font-semibold  transition-all ease-in-out duration-[0.2s]"
+                  className="hover:text-accent font-semibold transition-all ease-in-out duration-[0.2s]"
                 >
-                  Sign Up
+                  {translations?.navbar?.sign_up}
                 </Link>
               </li>
             </ul>
           </div>
 
-         
+          <div className="hidden lg:navbar-end md:flex">
+            <LanguageSelector />
+          </div>
 
           <div className="navbar-end lg:hidden">
             <div
@@ -133,22 +130,15 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Slide-In Menu */}
         <div
           className={`fixed top-0 left-0 h-full w-[250px] bg-primary transform ${
             isOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform duration-300 ease-in-out z-50`}
         >
           <div className="p-6">
-            <div>
-              <Link href="/">
-                <img
-                  src="/logo.png"
-                  alt="logo"
-                  className=""
-                />
-              </Link>
-            </div>
+            <Link href="/">
+              <img src="/logo.png" alt="logo" />
+            </Link>
           </div>
 
           <ul className="flex flex-col gap-6 p-6 text-white">
@@ -157,7 +147,7 @@ const Navbar = () => {
                 href="/about"
                 className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
               >
-                About
+                {translations?.mobile_menu?.about}
               </Link>
             </li>
             <li>
@@ -165,7 +155,7 @@ const Navbar = () => {
                 href="/faq"
                 className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
               >
-                Faq
+                {translations?.mobile_menu?.faq}
               </Link>
             </li>
             <li>
@@ -173,7 +163,7 @@ const Navbar = () => {
                 href="/contact"
                 className="hover:text-[#28C76F] transition-colors duration-300 cursor-pointer"
               >
-                Contact
+                {translations?.mobile_menu?.contact}
               </Link>
             </li>
           </ul>
@@ -181,18 +171,20 @@ const Navbar = () => {
           <div className="p-6 flex flex-col gap-4 text-white">
             <Link href="/login">
               <button className="border-white border-[1px] h-[2.5rem] text-center rounded-[30px] w-[120px] text-white">
-                Login
+                {translations?.buttons?.login}
               </button>
             </Link>
             <Link href="/signup">
               <button className="border-white border-[1px] h-[2.5rem] text-center rounded-[30px] w-[120px] text-white">
-                Sign Up
+                {translations?.buttons?.sign_up}
               </button>
             </Link>
+            <div>
+              <LanguageSelector />
+            </div>
           </div>
         </div>
 
-        {/* Overlay for mobile menu */}
         {isOpen && (
           <div
             className="fixed inset-0 bg-black opacity-50 z-40"

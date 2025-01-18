@@ -1,0 +1,444 @@
+{
+  "navbar": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "faq": "FAQ",
+    "contact_us": "Kontaktieren Sie uns",
+    "investment": "Investition",
+    "login": "Anmelden",
+    "sign_up": "Registrieren"
+  },
+  "mobile_menu": {
+    "about": "Über uns",
+    "faq": "FAQ",
+    "contact": "Kontakt"
+  },
+  "buttons": {
+    "login": "Anmelden",
+    "sign_up": "Registrieren"
+  },
+  "hero": {
+    "subtitle": "Erleben Sie zuverlässige Investitionen mit KI-Präzision",
+    "title": "SwissPipsAI: Ihr vertrauenswürdiger Partner für intelligente Investitionen",
+    "cta": "Treten Sie SwissPipsAI noch heute bei."
+  },
+  "counter": {
+    "all_members": "Alle Mitglieder",
+    "total_deposits": "Gesamteinlagen",
+    "global_presence": "Globale Präsenz"
+  },
+  "trade": {
+    "title": "Investieren Sie mit Vertrauen!",
+    "description": "Mit SwissPipsAI werden Ihre Investitionen präzise verwaltet und bieten sichere und transparente Wachstumschancen. Nutzen Sie die Kraft unserer fortschrittlichen KI, um die Rendite zu erzielen, die Sie verdienen.",
+    "features": {
+      "instant_cashout": {
+        "title": "Sofortige Auszahlung",
+        "description": "Greifen Sie jederzeit auf Ihre Gewinne zu mit 24/7 sofortigen Auszahlungen."
+      },
+      "live_support": {
+        "title": "24/7 Live-Support",
+        "description": "Unser Expertenteam steht Ihnen bei jedem Schritt zur Seite."
+      },
+      "top_security": {
+        "title": "Erstklassige Sicherheit",
+        "description": "Seien Sie sicher, dass Ihre Investitionen mit erstklassigen Sicherheitsmaßnahmen geschützt sind."
+      }
+    }
+  },
+  "plan": {
+    "title": "Investitionsplan",
+    "silver_plan": {
+      "title": "Silberplan",
+      "details": {
+        "minimum_investment": "Mindestinvestition: $500",
+        "maximum_investment": "Maximalinvestition: $1900",
+        "roi": "Rendite: 30 %",
+        "duration": "Dauer: 6 Wochen"
+      },
+      "cta": "Jetzt investieren"
+    },
+    "gold_plan": {
+      "title": "Goldplan",
+      "details": {
+        "minimum_investment": "Mindestinvestition: $1900",
+        "maximum_investment": "Maximalinvestition: $25000",
+        "roi": "Rendite: 30 %",
+        "duration": "Dauer: 6 Wochen"
+      },
+      "cta": "Jetzt investieren"
+    },
+    "platinum_plan": {
+      "title": "Platinplan",
+      "details": {
+        "minimum_investment": "Mindestinvestition: $25000",
+        "maximum_investment": "Maximalinvestition: ∞",
+        "roi": "Rendite: 20 %",
+        "duration": "Dauer: 4 Wochen"
+      },
+      "cta": "Jetzt investieren"
+    }
+  },
+  "choose": {
+    "title": "Warum SwissPipsAI",
+    "description": "Entdecken Sie, wie SwissPipsAI Investitionen mit modernster KI, unvergleichlicher Zuverlässigkeit und sicheren Transaktionen revolutioniert.",
+    "featuresOne": [
+      {
+        "title": "Sicherheit",
+        "icon": "/lock.svg",
+        "description": "Die Sicherheit Ihrer Investitionen hat für uns oberste Priorität. SwissPipsAI verwendet fortschrittliche Verschlüsselung und modernste Protokolle, um Ihre Gelder und Daten zu schützen."
+      },
+      {
+        "title": "Sichere Investition",
+        "icon": "/safe-investment.svg",
+        "description": "Unsere KI-gesteuerte Plattform stellt sicher, dass Ihre Investitionen geschützt sind und am Ende jeder Periode die versprochenen Renditen liefern."
+      },
+      {
+        "title": "Registriertes Unternehmen",
+        "icon": "/edit.svg",
+        "description": "SwissPipsAI ist ein vollständig lizenziertes und reguliertes Unternehmen, das globale Finanz- und Ethikstandards einhält, um Ihnen Sicherheit zu bieten."
+      }
+    ],
+    "featuresTwo": [
+      {
+        "title": "Sofortige Auszahlung",
+        "icon": "/withdraw.svg",
+        "description": "Genießen Sie mühelosen, sofortigen Zugriff auf Ihre Gelder, wann immer Sie sie benötigen, ohne Verzögerungen oder unnötige Verfahren."
+      },
+      {
+        "title": "SSL-gesichert",
+        "icon": "/web-security.svg",
+        "description": "Wir nutzen SSL-Verschlüsselungstechnologie, um Ihre Transaktionen zu schützen und sicherzustellen, dass Ihre sensiblen Daten jederzeit sicher sind."
+      },
+      {
+        "title": "24/7-Support",
+        "icon": "/fix.svg",
+        "description": "Unser engagiertes Support-Team steht Ihnen rund um die Uhr zur Verfügung, um Ihnen bei Fragen oder Bedenken zu helfen."
+      }
+    ]
+  },
+  "how": {
+    "textOne": "So starten Sie",
+    "textTwo": "Beginnen Sie Ihre Reise mit SwissPipsAI in drei einfachen Schritten und sehen Sie, wie Ihre Investitionen mit KI-Präzision wachsen.",
+    "textThree": "Zugriff erhalten",
+    "textFour": "Investition",
+    "textFive": "Gewinne erzielen"
+  },
+  "testimonials": {
+    "textOne": "Was unsere Investoren sagen",
+    "textTwo": "„SwissPipsAI hat meine Art zu investieren völlig verändert. Die KI-Präzision der Plattform ist unübertroffen, und ich erreiche immer den versprochenen ROI. Ihr Support-Team ist unglaublich reaktionsschnell, was den gesamten Prozess stressfrei macht.“",
+    "textThree": "Finanzberater",
+    "textFour": "Die Transparenz und Zuverlässigkeit von SwissPipsAI beeindrucken mich am meisten. Die benutzerfreundliche Oberfläche in Kombination mit sofortigen Auszahlungen gibt mir volles Vertrauen in meine Investitionen.",
+    "textFive": "Unternehmer",
+    "textSix": "SwissPipsAI hält, was es verspricht! Der KI-Algorithmus stellt sicher, dass meine Investitionen genau wie erwartet wachsen, und ihr Support-Team ist immer da, um zu helfen. Ich kann diese Plattform jedem, der sein Vermögen ernsthaft vermehren möchte, wärmstens empfehlen.",
+    "textSeven": "Softwareentwickler"
+  },
+  "footerTop": {
+    "text1": "Über SwissPipsAI",
+    "text2": "SwissPipsAI ist eine hochmoderne KI-gestützte Investmentplattform, die entwickelt wurde, um Ihr Vermögen mit Präzision und Zuverlässigkeit zu steigern. Durch die Nutzung fortschrittlicher Algorithmen stellen wir sicher, dass Ihre Investitionen die versprochene Rendite erreichen und ein nahtloses und transparentes Erlebnis für jeden Anleger bieten.",
+    "text3": "Investitionsplan",
+    "text4": "Silberplan",
+    "text5": "Goldplan",
+    "text6": "Platinplan",
+    "text7": "Zahlungsmöglichkeiten",
+    "text8": "BTC",
+    "text9": "ETH",
+    "text10": "USDT",
+    "text11": "Konten",
+    "text12": "Registrieren",
+    "text13": "Anmelden",
+    "text14": "Datenschutz",
+    "text15": "FAQ"
+  },
+  "footerBottom": {
+    "text1": "Über",
+    "text2": "Allgemeine Geschäftsbedingungen",
+    "text3": "Datenschutz"
+  },
+  "aboutHero": {
+    "text1": "Über uns",
+    "text2": "Startseite",
+    "text3": "Über uns"
+  },
+  "aboutOne": {
+    "text1": "Ein paar Worte über SwissPipsAI",
+    "text2": "Wer wir sind.",
+    "text3": "Bei SwissPipsAI definieren wir den Investmentsektor neu, indem wir fortschrittliche KI-Technologie nutzen, um präzise und zuverlässige Ergebnisse für unsere Nutzer zu liefern. Unsere Plattform ist darauf ausgelegt, den Investitionsprozess zu vereinfachen und gleichzeitig Transparenz, Sicherheit und Rentabilität zu gewährleisten. Egal, ob Sie ein erfahrener Investor sind oder gerade erst anfangen, SwissPipsAI bietet Ihnen die Werkzeuge und Erkenntnisse, die Sie benötigen, um fundierte Entscheidungen zu treffen und Ihre finanziellen Ziele zu erreichen. Sicherheit steht im Mittelpunkt all unserer Aktivitäten. Wir verwenden modernste Verschlüsselungstechnologien, um Ihre Investitionen und persönlichen Daten zu schützen und Ihnen bei jeder Transaktion Sicherheit zu bieten. Mit globaler Reichweite und einem Engagement für Exzellenz ermöglicht SwissPipsAI den Nutzern, ihr Vermögen nahtlos zu steigern. Treten Sie noch heute bei, um eine intelligentere und effizientere Möglichkeit des Investierens zu erleben, und lassen Sie uns Sie zu dem ROI führen, den Sie erwarten.",
+    "text4": "Gesamtinvestoren",
+    "text5": "Länder bedient",
+    "text6": "Kundenzufriedenheit"
+  },
+  "aboutTwo": {
+    "text1": "Intelligente Investitionen mit KI-Präzision fördern",
+    "text2": "SwissPipsAI revolutioniert die Investmentwelt mit KI-gesteuerter Präzision und unvergleichlicher Zuverlässigkeit. Unsere Plattform wächst rasant weiter, da Investoren auf der ganzen Welt uns vertrauen, konstante Renditen und eine nahtlose Erfahrung zu liefern.",
+    "text3": "Verwaltete Gesamtinvestitionen",
+    "text4": "Jährliche Wachstumsrate"
+  },
+  "aboutThree": {
+    "text1": "Unsere Zahlen sprechen für sich",
+    "text2": "Investieren ohne Grenzen",
+    "text3": "SwissPipsAI wächst weiterhin rasant, da Investoren aus der ganzen Welt uns vertrauen, konstante Renditen zu liefern. Unser Engagement für Innovation und Transparenz hat uns die Loyalität von Tausenden zufriedenen Nutzern eingebracht.",
+    "text4": "Verifizierte Investorenbewertungen"
+  },
+  "faqHero": {
+    "text1": "Fragen & Antworten",
+    "text2": "Startseite",
+    "text3": "FAQ"
+  },
+  "faqOne": {
+    "text1": "Erste Schritte",
+    "text2": "Wie SwissPipsAI funktioniert",
+    "text3": "Investitionspläne",
+    "text4": "Kontoaktualisierung",
+    "text5": "Sicherheit",
+    "text6": "Erste Schritte",
+    "text7": "Welche Dienstleistungen bietet SwissPipsAI an?",
+    "text8": "SwissPipsAI bietet KI-gestützte Investitionslösungen, die darauf ausgelegt sind, den ROI für Benutzer zu maximieren. Unsere Plattform bietet maßgeschneiderte Investitionspläne, Echtzeit-Wachstumstracking und zuverlässige Sicherheit, um ein nahtloses Investitionserlebnis zu gewährleisten.",
+    "text9": "Wie SwissPipsAI funktioniert",
+    "text10": "Was macht SwissPipsAI besonders?",
+    "text11": "SwissPipsAI verwendet fortschrittliche KI-Algorithmen, um präzise und konsistente Renditen zu liefern. Unser transparenter Ansatz, die benutzerfreundliche Plattform und das Engagement für Sicherheit heben uns von herkömmlichen Investitionsplattformen ab.",
+    "text12": "Entdecken Sie unsere Investitionspläne",
+    "text13": "Welche Investitionspläne bietet SwissPipsAI an?",
+    "text14": "SwissPipsAI bietet flexible Investitionspläne, die auf Ihre finanziellen Ziele zugeschnitten sind. Egal, ob Sie kurzfristige Gewinne oder langfristiges Wachstum suchen, unsere Pläne bieten zuverlässigen ROI, der durch fortschrittliche KI-Algorithmen unterstützt wird. Wählen Sie einen der Pläne und beobachten Sie, wie Ihre Investition wächst.",
+    "text15": "Wie kann ich den besten Investitionsplan wählen?",
+    "text16": "Die Wahl des richtigen Investitionsplans hängt von Ihren finanziellen Zielen, Ihrer Risikotoleranz und dem gewünschten ROI ab. SwissPipsAI bietet detaillierte Einblicke in jeden Plan, um Ihnen bei fundierten Entscheidungen zu helfen.",
+    "text17": "Wie hoch ist der Mindestinvestitionsbetrag?",
+    "text18": "Unsere Investitionspläne sind so konzipiert, dass sie für jeden zugänglich sind, mit einem Mindestinvestitionsbetrag ab 500 $. Dies ermöglicht es Ihnen, Ihre Investitionsreise mit Zuversicht zu beginnen, unabhängig von Ihrem Budget.",
+    "text19": "Kontoaktualisierung",
+    "text20": "Wie kann ich meine persönlichen Informationen bearbeiten?",
+    "text21": "So aktualisieren Sie Ihre persönlichen Informationen auf SwissPipsAI:",
+    "text22": "Melden Sie sich in Ihrem Konto an:",
+    "text23": "Greifen Sie mit Ihrem Benutzernamen und Passwort auf Ihr SwissPipsAI-Konto zu.",
+    "text24": "Navigieren Sie zu den Profileinstellungen:",
+    "text25": "Sobald Sie angemeldet sind, gehen Sie zu den Kontoeinstellungen, indem Sie auf das Profilsymbol oder das Menü klicken.",
+    "text26": "Persönliche Informationen bearbeiten:",
+    "text27": "In den Profileinstellungen sehen Sie Optionen zum Aktualisieren Ihres Namens, Ihrer E-Mail-Adresse, Telefonnummer und anderer persönlicher Daten.",
+    "text28": "Überprüfen Sie Ihre Änderungen:",
+    "text29": "Überprüfen Sie alle Felder, um sicherzustellen, dass Ihre Informationen korrekt sind, bevor Sie sie speichern.",
+    "text30": "Speichern und Bestätigen:",
+    "text31": "Klicken Sie auf 'Änderungen speichern', um Ihre Informationen zu aktualisieren. Sie erhalten eine Bestätigung, dass Ihre Daten erfolgreich aktualisiert wurden.",
+    "text32": "Sicherheit",
+    "text33": "Wie schützt SwissPipsAI meine persönlichen und finanziellen Informationen?",
+    "text34": "SwissPipsAI verwendet branchenführende Sicherheitsmaßnahmen, einschließlich Verschlüsselung, Firewalls und SSL-Technologie (Secure Socket Layer), um Ihre persönlichen und finanziellen Informationen vor unbefugtem Zugriff zu schützen.",
+    "text35": "FAQ"
+  },
+  "contact": {
+    "text1": "Kontaktieren Sie SwissPipsAI",
+    "text2": "Kontaktieren Sie uns, egal um welches Problem es sich handelt.",
+    "text3": "Kontaktieren Sie uns",
+    "text4": "Ihr vollständiger Name",
+    "text5": "Ihre E-Mail",
+    "text6": "Ihr Betreff",
+    "text7": "Ihre Nachricht",
+    "text8": "Ich stimme zu, E-Mails, Newsletter und Werbenachrichten zu erhalten.",
+    "text9": "NACHRICHT SENDEN",
+    "text10": "Fragen?",
+    "text11": "Schreiben Sie uns eine E-Mail",
+    "text12": "Rufen Sie uns an",
+    "text13": "Besuchen Sie uns"
+  },
+  "login": {
+    "text1": "Willkommen bei SwissPipsAI",
+    "text2": "Die weltweit führende Investitions-KI",
+    "text3": "Einloggen",
+    "text4": "Geben Sie Ihre E-Mail-Adresse und Ihr Passwort ein",
+    "text5": "Passwort vergessen?",
+    "text6": "Neues Konto erstellen",
+    "text7": "Einloggen",
+    "text8": "Geben Sie den Code ein, der an Ihre E-Mail gesendet wurde",
+    "text9": "Überprüfen"
+  },
+  "signup": {
+    "text1": "Registrieren",
+    "text2": "Vorname",
+    "text3": "Nachname",
+    "text4": "Telefonnummer",
+    "text5": "E-Mail",
+    "text6": "6-stelliger PIN-Code",
+    "text7": "Passwort",
+    "text8": "Passwort bestätigen",
+    "text9": "Adresse",
+    "text10": "Geburtsdatum",
+    "text11": "Land",
+    "text12": "Bundesland",
+    "text13": "Bild",
+    "text14": "Empfehlungscode (optional)",
+    "text15": "Bereits ein Konto?",
+    "text16": "Anmelden",
+    "text17": "PIN-Code überprüfen",
+    "text18": "PIN eingeben",
+    "text19": "Überprüfen"
+  },
+  "dashboardSidebar": {
+    "text1": "Armaturenbrett",
+    "text2": "Marktplatz",
+    "text3": "Spot-Handel",
+    "text4": "Konto",
+    "text5": "Brieftasche",
+    "text6": "Investition",
+    "text7": "Einzahlung",
+    "text8": "Abheben",
+    "text9": "Verlauf",
+    "text10": "Empfehlen & Verdienen",
+    "text11": "Einstellungen",
+    "text12": "Abmelden"
+  },
+  "dashboardMain": {
+    "text1": "Dashboard",
+    "text2": "Aktuelles Guthaben",
+    "text3": "Vorheriger Tag",
+    "text4": "Geld hinzufügen",
+    "text5": "Abheben",
+    "text6": "Jetzt investieren",
+    "text7": "Portfolioübersicht",
+    "text8": "Portfolio-Wert",
+    "text9": "Nettogewinn",
+    "text10": "Leistungskennzahlen",
+    "text11": "ROI",
+    "text12": "Empfehlungsguthaben",
+    "text13": "Freunde empfehlen",
+    "text14": "Tägliche Investitionsgewinne",
+    "text15": "Tägliche Gesamterträge für alle aktiven Investitionen",
+    "text16": "Anzeige der täglichen Gesamterträge für alle aktiven Investitionen.",
+    "text17": "Einzahlungen vs. Abhebungen",
+    "text18": "Aggregierte Daten",
+    "text19": "Anzeige der gesamten Einzahlungen und Abhebungen",
+    "text20": "Markteinsichten",
+    "text21": "Aufschlüsselung der Investitionen"
+  },
+  "dashboardWallet": {
+    "text1": "Brieftasche",
+    "text2": "Vorheriger Tag",
+    "text3": "Einzahlen",
+    "text4": "Abheben",
+    "text5": "Portfolioübersicht",
+    "text6": "Portfolio-Wert",
+    "text7": "Nettogewinn",
+    "text8": "Leistungskennzahlen",
+    "text9": "ROI",
+    "text10": "Empfehlungsguthaben",
+    "text11": "Freunde empfehlen",
+    "text12": "Neueste Transaktionen",
+    "text13": "Einzahlungen vs. Abhebungen",
+    "text14": "Aggregierte Daten",
+    "text15": "Anzeige der gesamten Einzahlungen und Abhebungen"
+  },
+  "dashboardInvestment": {
+    "text1": "Aktive Investitionen",
+    "text2": "Neue Investition",
+    "text3": "Investierter Betrag",
+    "text4": "Fortschritt",
+    "text5": "Investition Verfolgen"
+  },
+  "dashboardInvestmentDetail": {
+    "text1": "Zurück zu den Investitionen",
+    "text2": "Investition Erhöhen",
+    "text3": "Investierter Betrag",
+    "text4": "Aktueller Gewinn",
+    "text5": "Startdatum",
+    "text6": "Enddatum",
+    "text7": "verbleibende Tage",
+    "text8": "Tägliche Gewinne",
+    "text9": "Investitionsleistung",
+    "text10": "Angezeigte Gewinne für die letzten",
+    "text11": "Tage",
+    "text12": "Bewegen Sie die Maus über das Diagramm, um die genauen Gewinne pro Tag anzuzeigen.",
+    "text13": "Betrag",
+    "text14": "Abziehen von",
+    "text15": "Guthaben",
+    "text16": "Guthaben Wählen"
+  },
+  "dashboardDeposit": {
+    "text1": "Gelder Einzahlen",
+    "text2": "Kryptowährung Einzahlen",
+    "text3": "Wählen Sie Ihre bevorzugte Währung und folgen Sie den Schritten, um eine Einzahlung zu tätigen.",
+    "text4": "Währung Auswählen",
+    "text5": "Einzahlungsadresse",
+    "text6": "Betrag",
+    "text7": "Geben Sie den USD ($) Gegenwert des",
+    "text8": "Betrags ein, den Sie eingezahlt haben.",
+    "text9": "Einzahlungs-Wallet-Adresse",
+    "text10": "Dies ist die Adresse, an die Sie Gelder senden.",
+    "text11": "Transaktions-ID",
+    "text12": "Die eindeutige Kennung Ihrer Transaktion.",
+    "text13": "Ich Habe Bezahlt"
+  },
+  "dashboardWithdraw": {
+    "text1": "Gelder Abheben",
+    "text2": "Kontostand",
+    "text3": "Betrag",
+    "text4": "Geben Sie den Betrag ein, den Sie abheben möchten",
+    "text5": "max",
+    "text6": "Wallet-Adresse",
+    "text7": "Abhebemethode",
+    "text8": "Netzwerk",
+    "text9": "Geben Sie das Netzwerk für Ihre Abhebung an (z. B. ERC20, TRC20)",
+    "text10": "Abhebungsantrag Einreichen"
+  },
+  "dashboardHistory": {
+    "text1": "Verlauf"
+  },
+  "dashboardRefer": {
+    "text1": "Empfehlungen",
+    "text2": "Laden Sie Freunde ein und verdienen Sie Belohnungen für erfolgreiche Empfehlungen.",
+    "text3": "Gesamteinnahmen",
+    "text4": "Gesamte Empfehlungen",
+    "text5": "verifiziert",
+    "text6": "ausstehend",
+    "text7": "Konversionsrate",
+    "text8": "Ihr Empfehlungslink",
+    "text9": "Per E-Mail einladen",
+    "text10": "Senden",
+    "text11": "Empfehlungen"
+  },
+  "dashboardAccount": {
+    "text1": "Kontoinformationen",
+    "text2": "Profil Bearbeiten",
+    "text3": "Profilbild",
+    "text4": "Vorname",
+    "text5": "Nachname",
+    "text6": "Geburtsdatum",
+    "text7": "Telefonnummer",
+    "text8": "E-Mail",
+    "text9": "Land",
+    "text10": "Bundesland",
+    "text11": "Adresse",
+    "text12": "Abbrechen",
+    "text13": "Profil Aktualisieren"
+  },
+  "dashboardSettings": {
+    "text1": "Passwort Ändern",
+    "text2": "ändern Sie Ihr Kontopasswort",
+    "text3": "Konfigurieren Sie Ihr Passwort so, dass es stark ist. Sie benötigen die Passwörter möglicherweise, um einige Transaktionen im System durchzuführen. Verdächtige Aktionen mit dem Passwort könnten Sie versehentlich aus dem System aussperren!",
+    "text4": "Aktuelles Passwort",
+    "text5": "Neues Passwort",
+    "text6": "Neues Passwort Bestätigen",
+    "text7": "Aktualisieren",
+    "text8": "Abbrechen",
+    "text9": "Verifizierungscode",
+    "text10": "Überprüfen"
+  },
+  "dashboardKyc": {
+    "text1": "KYC-Formular",
+    "text2": "Abschließen Ihres Verifizierungsprozesses",
+    "text3": "Fortschritt",
+    "text4": "Nationale Identifikationsnummer (SSN, NI, SIN, etc.)",
+    "text5": "Vorderseite des Ausweises",
+    "text6": "Rückseite des Ausweises",
+    "text7": "Passfoto",
+    "text8": "Nicht abgelaufene Dokumente",
+    "text9": "Dokument ist Sichtbar",
+    "text10": "Einreichen"
+  },
+  "forgotPassword": {
+    "text1": "Passwort Vergessen",
+    "text2": "Geben Sie Ihre E-Mail-Adresse ein, um einen Link zum Zurücksetzen des Passworts zu erhalten.",
+    "text3": "E-Mail",
+    "text4": "Link zum Zurücksetzen Senden"
+  },
+  "resetPassword": {
+    "text1": "Passwort Zurücksetzen",
+    "text2": "Geben Sie Ihr neues Passwort ein",
+    "text3": "Neues Passwort",
+    "text4": "Passwort Bestätigen"
+  }
+}

@@ -5,13 +5,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import axios from "axios";
-import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -26,14 +24,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { toast } from "sonner";
+import { useTranslation } from "@/translations/provider";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
 });
 
 export default function ForgotPasswordForm() {
-  const [isLoading, setIsLoading] = useState(false);
-
+    const { translations } = useTranslation();
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -70,9 +69,9 @@ export default function ForgotPasswordForm() {
 
       <Card className="w-full max-w-md z-10">
         <CardHeader>
-          <CardTitle>Forgot Password</CardTitle>
+          <CardTitle>{translations?.forgotPassword?.text1}</CardTitle>
           <CardDescription>
-            Enter your email to receive a password reset link.
+          {translations?.forgotPassword?.text2}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -83,7 +82,7 @@ export default function ForgotPasswordForm() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{translations?.forgotPassword?.text3}</FormLabel>
                     <FormControl>
                       <Input placeholder="Enter your email" {...field} />
                     </FormControl>
@@ -92,7 +91,7 @@ export default function ForgotPasswordForm() {
                 )}
               />
               <Button type="submit" className="w-full bg-accent">
-                Send Reset Link
+              {translations?.forgotPassword?.text4}
               </Button>
             </form>
           </Form>

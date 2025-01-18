@@ -128,6 +128,7 @@
 
 html,
 body {
+  color: white;
   background: #e2ebf7 !important;
 }
 
@@ -176,5 +177,31 @@ html{
 
 }
 
+/* French-specific adjustments */
+html.lang-fr .navbar {
+  font-size: 11px; /* Slightly smaller font for longer French text */
+}
 
+/* German-specific adjustments */
+html.lang-de .navbar{
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* Spanish-specific adjustments */
+html.lang-es .navbar{
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* Italian-specific adjustments */
+html.lang-it .navbar{
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+html.lang-en .navbar{
+  font-size: 11px;
+  line-height: 1.5;
+}
 

@@ -3,8 +3,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import axios from "axios";
 import { loginAction } from "./loginAction";
-import { GiCancel } from "react-icons/gi";
-import { GrStatusGood } from "react-icons/gr";
+import { useTranslation } from "@/translations/provider";
 import Link from "next/link";
 import { toast } from "sonner";
 
@@ -13,23 +12,24 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState("");
   const [step, setStep] = useState(1);
   const [code, setCode] = useState("");
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  console.log(timezone);
+  const { translations } = useTranslation();
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    const toastId = toast.loading('Logging in, please wait...')
+    const toastId = toast.loading("Logging in, please wait...");
 
     try {
       await loginAction(email, code, timezone);
-      toast.dismiss(toastId)
-      toast.success('Login succesfull!! you will be redirected to the dashboard page shortly')
+      toast.dismiss(toastId);
+      toast.success(
+        "Login succesfull!! you will be redirected to the dashboard page shortly"
+      );
       router.push("/dashboard");
     } catch (error) {
       console.log(error);
-      toast.error('Error logging in')
+      toast.error("Error logging in");
     }
   };
 
@@ -47,27 +47,27 @@ const LoginPage: React.FC = () => {
       toast.error("Please enter a valid email address.");
       return;
     }
-    const toastId = toast.loading('Logging in, please wait.....')
+    const toastId = toast.loading("Logging in, please wait.....");
     try {
       const response = await axios.post(`/api/login`, { email, password });
       if (response?.data.catchError) {
-        toast.dismiss(toastId)
-        toast.error('Error logging in')
+        toast.dismiss(toastId);
+        toast.error("Error logging in");
         setPassword("");
         return;
       }
       if (response?.data.error) {
-        toast.dismiss(toastId)
-        toast.error(response?.data?.error)
+        toast.dismiss(toastId);
+        toast.error(response?.data?.error);
         setPassword("");
         return;
       }
-      toast.dismiss(toastId)
+      toast.dismiss(toastId);
       setStep(2);
     } catch (error) {
       console.log(error);
-      toast.dismiss(toastId)
-      toast.error('Error logging in')
+      toast.dismiss(toastId);
+      toast.error("Error logging in");
     }
   };
 
@@ -79,7 +79,6 @@ const LoginPage: React.FC = () => {
       <div className="absolute inset-0 bg-[#181254] bg-opacity-60 z-0"></div>
 
       <div className="bg-white shadow-lg rounded-lg flex flex-col md:flex-row w-full max-w-4xl z-10">
-        
         <div className="bg-[#161150] text-white p-8 md:w-1/2 flex flex-col justify-center">
           <div className="">
             <Link href="/">
@@ -90,17 +89,19 @@ const LoginPage: React.FC = () => {
               />
             </Link>
           </div>
-          <h1 className="text-3xl font-bold mt-4">Welcome to SwissPipsAi</h1>
-          <p className="mt-2 font-light">The world&apos;s #1 Investment Ai</p>
+          <h1 className="text-3xl font-bold mt-4">
+            {translations?.login?.text1}
+          </h1>
+          <p className="mt-2 font-light">{translations?.login?.text2}</p>
         </div>
         <div className="md:w-1/2">
           {step === 1 ? (
             <div className="p-8 flex flex-col justify-center">
               <h2 className="text-3xl font-semibold text-center text-primary">
-                Sign In
+                {translations?.login?.text3}
               </h2>
               <p className="text-[#b5b5c3] text-center">
-                Enter your Email and password
+                {translations?.login?.text4}
               </p>
               <form className="mt-8 space-y-6" onSubmit={handleLogin}>
                 <input type="hidden" name="remember" value="true" />
@@ -144,13 +145,13 @@ const LoginPage: React.FC = () => {
                       href="/forgot-password"
                       className="text-[#7e8299] text-[12px]"
                     >
-                      Forgot your password?
+                      {translations?.login?.text5}
                     </Link>
                   </div>
 
                   <div>
                     <Link href="/signup" className="text-primary text-[12px]">
-                      Create new account
+                      {translations?.login?.text6}
                     </Link>
                   </div>
                 </div>
@@ -159,7 +160,7 @@ const LoginPage: React.FC = () => {
                     type="submit"
                     className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary  focus:outline-none"
                   >
-                    Sign In
+                    {translations?.login?.text7}
                   </button>
                 </div>
               </form>

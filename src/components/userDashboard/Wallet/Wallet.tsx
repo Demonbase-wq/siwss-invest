@@ -23,6 +23,7 @@ import InvestmentPieChart from "@/components/InvestmentPieChart";
 import React from "react";
 import WalletTransaction from "./WalletTransaction";
 import Link from "next/link";
+import { useTranslation } from "@/translations/provider";
 
 interface KPI {
   label: string;
@@ -117,9 +118,11 @@ export default function WalletPage() {
     ? ((yesterdayProfits / totalExpectedProfit) * 100).toFixed(2)
     : 0;
 
+  const { translations } = useTranslation();
+
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-      <h2 className="text-3xl font-bold tracking-tight mb-4">Wallet</h2>
+      <h2 className="text-3xl font-bold tracking-tight mb-4">{translations?.dashboardWallet?.text1}</h2>
 
       {/* KPIs Section */}
       <div className="flex flex-col md:flex-row items-start gap-4 w-full">
@@ -127,7 +130,7 @@ export default function WalletPage() {
         <Card className="w-full flex-1">
           <CardHeader>
             <CardTitle className="text-sm font-medium">
-              Current Balance
+            {translations?.dashboardMain?.text2}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -146,7 +149,7 @@ export default function WalletPage() {
                   <ArrowDownRight className="h-4 w-4 mr-1" />
                 )}
                 <span className="text-sm font-medium">
-                  ${yesterdayProfits.toLocaleString()} Yesterday
+                  ${yesterdayProfits.toLocaleString()} {translations?.dashboardWallet?.text2}
                 </span>
               </div>
             </div>
@@ -154,14 +157,14 @@ export default function WalletPage() {
               <div>
                 <Link href="/dashboard/deposit">
                   <Button variant="outline" className="w-full">
-                    <Plus className="mr-2 h-4 w-4" /> Deposit
+                    <Plus className="mr-2 h-4 w-4" /> {translations?.dashboardWallet?.text3}
                   </Button>
                 </Link>
               </div>
               <div>
                 <Link href="/dashboard/withdraw">
                   <Button variant="outline" className="w-full">
-                    <MinusCircle className="mr-2 h-4 w-4" /> Withdraw
+                    <MinusCircle className="mr-2 h-4 w-4" /> {translations?.dashboardWallet?.text4}
                   </Button>
                 </Link>
               </div>
@@ -173,13 +176,13 @@ export default function WalletPage() {
         <Card className="w-full flex-1">
           <CardHeader>
             <CardTitle className="text-sm font-medium">
-              Portfolio Overview
+            {translations?.dashboardWallet?.text5}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 flex flex-col gap-3">
             <div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Portfolio Value</span>
+                <span className="text-sm font-medium">{translations?.dashboardWallet?.text6}</span>
                 <ArrowUpRight className="h-4 w-4 text-green-500" />
               </div>
               <div className="text-2xl font-bold">
@@ -191,14 +194,14 @@ export default function WalletPage() {
             </div>
             <div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Net Profit</span>
+                <span className="text-sm font-medium">{translations?.dashboardWallet?.text7}</span>
                 <ArrowUpRight className="h-4 w-4 text-green-500" />
               </div>
               <div className="text-2xl font-bold">
                 ${totalEarned.toLocaleString()} ({netProfitPercentage}%)
               </div>
               <p className="text-xs text-green-500">
-                +{yesterdayProfitPercentage}% Yesterday
+                +{yesterdayProfitPercentage}% {translations?.dashboardWallet?.text2}
               </p>
             </div>
           </CardContent>
@@ -208,13 +211,13 @@ export default function WalletPage() {
         <Card className="w-full flex-1">
           <CardHeader>
             <CardTitle className="text-sm font-medium">
-              Performance Metrics
+            {translations?.dashboardWallet?.text8}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 flex flex-col gap-3">
             <div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">ROI</span>
+                <span className="text-sm font-medium">{translations?.dashboardWallet?.text9}</span>
                 <ArrowUpRight className="h-4 w-4 text-green-500" />
               </div>
               <div className="text-2xl font-bold flex items-center text-green-500 gap-5">
@@ -223,7 +226,7 @@ export default function WalletPage() {
             </div>
             <div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Referral Profit</span>
+                <span className="text-sm font-medium">{translations?.dashboardWallet?.text10}</span>
                 <Users className="h-4 w-4 text-blue-500" />
               </div>
               <div className="text-2xl font-bold">
@@ -232,7 +235,7 @@ export default function WalletPage() {
             </div>
             <Link href="/dashboard/refer&earn">
               <Button variant="outline" className="w-full">
-                <Users className="mr-2 h-4 w-4" /> Refer Friends
+                <Users className="mr-2 h-4 w-4" />{translations?.dashboardWallet?.text11}
               </Button>
             </Link>
           </CardContent>

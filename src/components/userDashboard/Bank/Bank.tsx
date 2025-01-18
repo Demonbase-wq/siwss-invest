@@ -14,6 +14,7 @@ import {
 import { AgGridReact } from "ag-grid-react";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslation } from "@/translations/provider";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -23,7 +24,7 @@ const BankStatement: React.FC = () => {
   const { data } = useSWR("/api/transactions", fetcher);
   const [loading, setLoading] = useState(true);
   const [rowData, setRowData] = useState([]);
-
+  const { translations } = useTranslation();
   const router = useRouter();
 
   useEffect(() => {
@@ -141,7 +142,7 @@ const BankStatement: React.FC = () => {
         <Suspense fallback={<Skeleton className="h-[400px]" />}>
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h4>History</h4>
+              <h4>{translations?.dashboardHistory?.text1}</h4>
             </div>
             <div className="rounded-md">
               <div style={{ width: "100%", height: "100%" }}>

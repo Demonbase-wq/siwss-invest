@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "sonner";
+import { useTranslation } from "@/translations/provider";
 
 const Settings = () => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -96,6 +97,8 @@ const Settings = () => {
     }
   };
 
+  const { translations } = useTranslation();
+
   return (
     <div className="md:pt-6 py-4">
       <div className="mycontainer">
@@ -104,18 +107,15 @@ const Settings = () => {
             <div className="flex flex-col gap-7 bg-texiary p-4 rounded-[8px]">
               <div>
                 <h4 className="font-bold text-white tex-[14px]">
-                  Change Password
+                  {translations?.dashboardSettings?.text1}
                 </h4>
                 <p className="text-gray-400 text-[12px]">
-                  change your account password
+                {translations?.dashboardSettings?.text2}
                 </p>
               </div>
 
               <div className="p-4 text-[14px] rounded-[8px] bg-red-200 text-red-500">
-                Configure your password to a strong one. you may need the
-                passwords to carry out some transactions on the system
-                suspicious actions with the password might inadvertently get you
-                locked out of the system!
+              {translations?.dashboardSettings?.text3}
               </div>
 
               <div>
@@ -126,7 +126,7 @@ const Settings = () => {
                   >
                     <div className="relative flex flex-col gap-3">
                       <label className="text-gray-400 text-[14px]">
-                        Current Password
+                      {translations?.dashboardSettings?.text4}
                       </label>
                       <div>
                         <input
@@ -152,7 +152,7 @@ const Settings = () => {
                     </div>
                     <div className="relative flex flex-col gap-3">
                       <label className="text-gray-400 text-[14px]">
-                        New Password
+                      {translations?.dashboardSettings?.text5}
                       </label>
                       <div>
                         <input
@@ -177,7 +177,7 @@ const Settings = () => {
                     </div>
                     <div className="relative flex flex-col gap-3">
                       <label className="text-gray-400 text-[14px]">
-                        Verify New Password
+                      {translations?.dashboardSettings?.text6}
                       </label>
                       <div>
                         <input
@@ -207,11 +207,11 @@ const Settings = () => {
                         type="submit"
                         className="bg-secondary py-1 text-[14px] px-3 rounded-[5px] text-white flex items-center justify-center w-[90px] bottom-0 outline-none"
                       >
-                        Update
+                        {translations?.dashboardSettings?.text7}
                       </button>
 
                       <button className="bg-accent w-[90px] py-1 text-[14px] px-3 rounded-[5px] text-white  bottom-0 outline-none">
-                        Cancel
+                      {translations?.dashboardSettings?.text8}
                       </button>
                     </div>
                   </form>
@@ -223,7 +223,7 @@ const Settings = () => {
                   >
                     <div className="relative flex flex-col gap-3">
                       <label className="text-gray-400 text-[14px]">
-                        Verification Code
+                      {translations?.dashboardSettings?.text9}
                       </label>
                       <div>
                         <input
@@ -241,11 +241,11 @@ const Settings = () => {
                         type="submit"
                         className="bg-secondary py-1 text-[14px] px-3 rounded-[5px] text-white flex items-center justify-center w-[90px] bottom-0 outline-none"
                       >
-                        Verify
+                        {translations?.dashboardSettings?.text10}
                       </button>
 
                       <button className="bg-accent w-[90px] py-1 text-[14px] px-3 rounded-[5px] text-white  bottom-0 outline-none">
-                        Cancel
+                      {translations?.dashboardSettings?.text8}
                       </button>
                     </div>
                   </form>

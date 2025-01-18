@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
+import { useTranslation } from "@/translations/provider";
 
 const formSchema = z.object({
   first_name: z.string().optional(),
@@ -38,6 +39,7 @@ export default function ProfileForm() {
   const { data } = useSWR("/api/get-user", fetcher);
   const [loading, setLoading] = useState(true);
   const inputFileRef = useRef<HTMLInputElement>(null);
+  const { translations } = useTranslation();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -162,7 +164,7 @@ export default function ProfileForm() {
   return (
     <Card className="w-full max-w-2xl">
       <CardHeader>
-        <CardTitle>Edit Profile</CardTitle>
+        <CardTitle>{translations?.dashboardAccount?.text2}</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -179,7 +181,7 @@ export default function ProfileForm() {
                 </AvatarFallback>
               </Avatar>
               <div>
-                <FormLabel htmlFor="picture">Profile Picture</FormLabel>
+                <FormLabel htmlFor="picture">{translations?.dashboardAccount?.text3}</FormLabel>
                 <Input
                   id="picture"
                   type="file"
@@ -195,7 +197,7 @@ export default function ProfileForm() {
                 name="first_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>First Name</FormLabel>
+                    <FormLabel>{translations?.dashboardAccount?.text4}</FormLabel>
                     <FormControl>
                       <Input placeholder="John" {...field} />
                     </FormControl>
@@ -208,7 +210,7 @@ export default function ProfileForm() {
                 name="last_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Last Name</FormLabel>
+                    <FormLabel>{translations?.dashboardAccount?.text5}</FormLabel>
                     <FormControl>
                       <Input placeholder="Doe" {...field} />
                     </FormControl>
@@ -223,7 +225,7 @@ export default function ProfileForm() {
               name="dob"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Date of Birth</FormLabel>
+                  <FormLabel>{translations?.dashboardAccount?.text6}</FormLabel>
                   <FormControl>
                     <Input type="date" {...field} />
                   </FormControl>
@@ -237,7 +239,7 @@ export default function ProfileForm() {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Phone Number</FormLabel>
+                  <FormLabel>{translations?.dashboardAccount?.text7}</FormLabel>
                   <FormControl>
                     <Input
                       type="tel"
@@ -255,7 +257,7 @@ export default function ProfileForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{translations?.dashboardAccount?.text8}</FormLabel>
                   <FormControl>
                     <Input
                       type="email"
@@ -273,7 +275,7 @@ export default function ProfileForm() {
               name="country"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Country</FormLabel>
+                  <FormLabel>{translations?.dashboardAccount?.text9}</FormLabel>
                   <FormControl>
                     <Input placeholder="United States" {...field} />
                   </FormControl>
@@ -287,7 +289,7 @@ export default function ProfileForm() {
               name="state"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>State</FormLabel>
+                  <FormLabel>{translations?.dashboardAccount?.text10}</FormLabel>
                   <FormControl>
                     <Input placeholder="California" {...field} />
                   </FormControl>
@@ -301,7 +303,7 @@ export default function ProfileForm() {
               name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Address</FormLabel>
+                  <FormLabel>{translations?.dashboardAccount?.text11}</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="123 Main St, Anytown, CA 12345"
@@ -319,10 +321,10 @@ export default function ProfileForm() {
                 variant="outline"
                 onClick={() => form.reset()}
               >
-                Cancel
+                {translations?.dashboardAccount?.text12}
               </Button>
               <Button type="submit" className="bg-accent">
-               Update Profile
+              {translations?.dashboardAccount?.text13}
               </Button>
             </div>
           </form>

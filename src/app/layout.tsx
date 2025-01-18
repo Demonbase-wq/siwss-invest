@@ -4,7 +4,10 @@ import Script from "next/script";
 import "./globals.css";
 import Cookie from "@/components/Landing/Cookie/Cookie";
 import Providers from "./Provider";
+import { TranslationProvider } from "@/translations/provider";
 import { Toaster } from "sonner";
+import HtmlWrapper from "./HtmlWrapper"; // Import the client component
+import { LanguageProvider } from "@/components/Landing/Context/LanguageContext";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -23,18 +26,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={nunito.className}>
-      <body className="text-[#ddd]">
-        <Providers>
-          <Cookie />
-          {children}
-          <Toaster />
-        </Providers>
-        <Script
-          src="https://cryptorank.io/widget/marquee.js"
-          strategy="lazyOnload"
-        />
-      </body>
-    </html>
+    <TranslationProvider>
+      <LanguageProvider>
+        <HtmlWrapper nunitoClass={nunito.className}>
+          <Providers>
+            <Cookie />
+            {children}
+            <Toaster />
+          </Providers>
+          <Script
+            src="https://cryptorank.io/widget/marquee.js"
+            strategy="lazyOnload"
+          />
+        </HtmlWrapper>
+      </LanguageProvider>
+    </TranslationProvider>
   );
 }

@@ -13,11 +13,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { useTranslation } from "@/translations/provider";
 
 export function NavMain({
   items,
@@ -33,12 +31,14 @@ export function NavMain({
     }[];
   }[];
 }) {
+    const { translations } = useTranslation();
+  
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
+      <SidebarGroupLabel>{translations?.dashboardSidebar?.text1}</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
-          <SidebarMenuItem key={item.title}>
+        {items.map((item, index) => (
+          <SidebarMenuItem key={index}>
             <Link href={item.url}>
               <SidebarMenuButton tooltip={item.title}>
                 {item.icon && <item.icon />}

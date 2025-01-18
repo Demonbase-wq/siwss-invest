@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import axios from "axios";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +25,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { toast } from "sonner";
+import { useTranslation } from "@/translations/provider";
 
 const formSchema = z
   .object({
@@ -39,12 +40,13 @@ const formSchema = z
 export default function ResetPasswordForm() {
   const router = useRouter();
   const [token, setToken] = useState<string | null>(null);
+  const { translations } = useTranslation();
 
   // Extract token from URL on the client
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const tokenFromUrl = urlParams.get("token");
-    if(tokenFromUrl) setToken(tokenFromUrl);
+    if (tokenFromUrl) setToken(tokenFromUrl);
   }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -92,8 +94,8 @@ export default function ResetPasswordForm() {
 
       <Card className="w-full max-w-md z-10">
         <CardHeader>
-          <CardTitle>Reset Password</CardTitle>
-          <CardDescription>Enter your new password</CardDescription>
+          <CardTitle>{translations?.resetPassword?.text1}</CardTitle>
+          <CardDescription>{translations?.resetPassword?.text2}</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -103,7 +105,7 @@ export default function ResetPasswordForm() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>New Password</FormLabel>
+                    <FormLabel>{translations?.resetPassword?.text3}</FormLabel>
                     <FormControl>
                       <Input
                         type="password"
@@ -120,7 +122,7 @@ export default function ResetPasswordForm() {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel>{translations?.resetPassword?.text4}</FormLabel>
                     <FormControl>
                       <Input
                         type="password"
@@ -133,7 +135,7 @@ export default function ResetPasswordForm() {
                 )}
               />
               <Button type="submit" className="w-full bg-accent">
-                Reset Password
+              {translations?.resetPassword?.text1}
               </Button>
             </form>
           </Form>

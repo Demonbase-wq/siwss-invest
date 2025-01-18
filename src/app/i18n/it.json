@@ -1,0 +1,444 @@
+{
+    "navbar": {
+        "home": "Home",
+        "about": "Chi siamo",
+        "faq": "FAQ",
+        "contact_us": "Contattaci",
+        "investment": "Investimento",
+        "login": "Accedi",
+        "sign_up": "Iscriviti"
+    },
+    "mobile_menu": {
+        "about": "Chi siamo",
+        "faq": "FAQ",
+        "contact": "Contatto"
+    },
+    "buttons": {
+        "login": "Accedi",
+        "sign_up": "Iscriviti"
+    },
+    "hero": {
+        "subtitle": "Scopri investimenti affidabili con la precisione dell'IA",
+        "title": "SwissPipsAI: Il tuo partner di fiducia per investimenti intelligenti",
+        "cta": "Unisciti a SwissPipsAI oggi stesso."
+    },
+    "counter": {
+        "all_members": "Tutti i membri",
+        "total_deposits": "Depositi totali",
+        "global_presence": "Presenza globale"
+    },
+    "trade": {
+        "title": "Investi con fiducia!",
+        "description": "Con SwissPipsAI, i tuoi investimenti sono gestiti con precisione, offrendo opportunità di crescita sicure e trasparenti. Sfrutta la potenza della nostra IA all'avanguardia per ottenere il ritorno sull'investimento che meriti.",
+        "features": {
+            "instant_cashout": {
+                "title": "Prelievo istantaneo",
+                "description": "Accedi ai tuoi profitti in qualsiasi momento con prelievi istantanei 24/7."
+            },
+            "live_support": {
+                "title": "Supporto live 24/7",
+                "description": "Il nostro team di esperti è qui per assisterti in ogni fase."
+            },
+            "top_security": {
+                "title": "Sicurezza ai massimi livelli",
+                "description": "Sii certo che i tuoi investimenti sono protetti con misure di sicurezza di prim'ordine."
+            }
+        }
+    },
+    "plan": {
+        "title": "Piano di investimento",
+        "silver_plan": {
+            "title": "Piano Argento",
+            "details": {
+                "minimum_investment": "Investimento minimo: $500",
+                "maximum_investment": "Investimento massimo: $1900",
+                "roi": "ROI: 30 %",
+                "duration": "Durata: 6 settimane"
+            },
+            "cta": "Inizia a investire"
+        },
+        "gold_plan": {
+            "title": "Piano Oro",
+            "details": {
+                "minimum_investment": "Investimento minimo: $1900",
+                "maximum_investment": "Investimento massimo: $25000",
+                "roi": "ROI: 30 %",
+                "duration": "Durata: 6 settimane"
+            },
+            "cta": "Inizia a investire"
+        },
+        "platinum_plan": {
+            "title": "Piano Platino",
+            "details": {
+                "minimum_investment": "Investimento minimo: $25000",
+                "maximum_investment": "Investimento massimo: ∞",
+                "roi": "ROI: 20 %",
+                "duration": "Durata: 4 settimane"
+            },
+            "cta": "Inizia a investire"
+        }
+    },
+    "choose": {
+        "title": "Perché SwissPipsAI",
+        "description": "Scopri come SwissPipsAI rivoluziona gli investimenti con intelligenza artificiale all'avanguardia, affidabilità senza pari e transazioni sicure.",
+        "featuresOne": [
+            {
+                "title": "Sicurezza",
+                "icon": "/lock.svg",
+                "description": "La sicurezza dei tuoi investimenti è la nostra massima priorità. SwissPipsAI utilizza crittografia avanzata e protocolli all'avanguardia per proteggere i tuoi fondi e dati."
+            },
+            {
+                "title": "Investimento sicuro",
+                "icon": "/safe-investment.svg",
+                "description": "La nostra piattaforma basata su IA garantisce che i tuoi investimenti siano protetti e generino i rendimenti promessi alla fine di ogni periodo."
+            },
+            {
+                "title": "Azienda registrata",
+                "icon": "/edit.svg",
+                "description": "SwissPipsAI è un'azienda pienamente autorizzata e regolamentata, che aderisce agli standard finanziari ed etici globali per la tua tranquillità."
+            }
+        ],
+        "featuresTwo": [
+            {
+                "title": "Ritiro immediato",
+                "icon": "/withdraw.svg",
+                "description": "Goditi l'accesso istantaneo e senza problemi ai tuoi fondi ogni volta che ne hai bisogno, senza ritardi o procedure inutili."
+            },
+            {
+                "title": "SSL Sicuro",
+                "icon": "/web-security.svg",
+                "description": "Utilizziamo la tecnologia di crittografia SSL per proteggere le tue transazioni e garantire che i tuoi dati sensibili siano sempre al sicuro."
+            },
+            {
+                "title": "Supporto 24/7",
+                "icon": "/fix.svg",
+                "description": "Il nostro team di supporto dedicato è disponibile 24 ore su 24, 7 giorni su 7, per aiutarti con qualsiasi domanda o problema."
+            }
+        ]
+    },
+    "how": {
+        "textOne": "Come iniziare",
+        "textTwo": "Inizia il tuo viaggio con SwissPipsAI in tre semplici passaggi e guarda i tuoi investimenti crescere con la precisione dell'IA.",
+        "textThree": "Ottieni l'accesso",
+        "textFour": "Investimento",
+        "textFive": "Ottieni profitto"
+    },
+    "testimonials": {
+        "textOne": "Cosa dicono i nostri investitori",
+        "textTwo": "« SwissPipsAI ha completamente trasformato il mio modo di investire. La precisione dell'IA della piattaforma è impareggiabile e raggiungo sempre il ROI promesso. Il loro team di supporto è incredibilmente reattivo, rendendo l'intero processo privo di stress. »",
+        "textThree": "Consulente finanziario",
+        "textFour": "Ciò che mi colpisce di più di SwissPipsAI è la trasparenza e l'affidabilità. L'interfaccia intuitiva, combinata con prelievi istantanei, mi dà piena fiducia nei miei investimenti.",
+        "textFive": "Imprenditore",
+        "textSix": "SwissPipsAI mantiene le sue promesse! L'algoritmo IA garantisce che i miei investimenti crescano esattamente come previsto e il loro team di supporto è sempre lì per aiutare. Consiglio vivamente questa piattaforma a chiunque sia seriamente intenzionato a far crescere la propria ricchezza.",
+        "textSeven": "Ingegnere del software"
+    },
+    "footerTop": {
+        "text1": "Informazioni su SwissPipsAI",
+        "text2": "SwissPipsAI è una piattaforma di investimento all'avanguardia basata sull'intelligenza artificiale progettata per aiutarti a far crescere il tuo patrimonio con precisione e affidabilità. Sfruttando algoritmi avanzati, garantiamo che i tuoi investimenti raggiungano il ROI promesso, offrendo un'esperienza trasparente e senza interruzioni per ogni investitore.",
+        "text3": "Piano di investimento",
+        "text4": "Piano Argento",
+        "text5": "Piano Oro",
+        "text6": "Piano Platino",
+        "text7": "Opzioni di pagamento",
+        "text8": "BTC",
+        "text9": "ETH",
+        "text10": "USDT",
+        "text11": "Account",
+        "text12": "Registrati",
+        "text13": "Accedi",
+        "text14": "Privacy",
+        "text15": "FAQ"
+    },
+    "footerBottom": {
+        "text1": "Informazioni",
+        "text2": "Termini e condizioni",
+        "text3": "Privacy"
+    },
+    "aboutHero": {
+        "text1": "Informazioni",
+        "text2": "Home",
+        "text3": "Chi siamo"
+    },
+    "aboutOne": {
+        "text1": "Qualche parola su SwissPipsAI",
+        "text2": "Chi siamo.",
+        "text3": "In SwissPipsAI stiamo ridefinendo il panorama degli investimenti sfruttando la tecnologia avanzata dell'IA per offrire risultati precisi e affidabili ai nostri utenti. La nostra piattaforma è progettata per semplificare il processo di investimento garantendo al contempo trasparenza, sicurezza e redditività. Che tu sia un investitore esperto o all'inizio del tuo percorso, SwissPipsAI fornisce gli strumenti e le intuizioni di cui hai bisogno per prendere decisioni informate e raggiungere i tuoi obiettivi finanziari. La sicurezza è al centro di tutto ciò che facciamo. Utilizziamo tecnologie di crittografia all'avanguardia per proteggere i tuoi investimenti e i tuoi dati personali, offrendoti tranquillità a ogni transazione. Con una portata globale e un impegno per l'eccellenza, SwissPipsAI consente agli utenti di far crescere la propria ricchezza senza problemi. Unisciti a noi oggi per scoprire un modo più intelligente ed efficiente di investire e lascia che ti guidiamo verso il ROI esatto che ti aspetti.",
+        "text4": "Investitori totali",
+        "text5": "Paesi serviti",
+        "text6": "Soddisfazione del cliente"
+    },
+    "aboutTwo": {
+        "text1": "Promuovere investimenti intelligenti con la precisione dell'IA",
+        "text2": "SwissPipsAI sta rivoluzionando il mondo degli investimenti con precisione basata sull'IA e affidabilità senza pari. La nostra piattaforma continua a crescere rapidamente, con investitori di tutto il mondo che si fidano di noi per offrire rendimenti costanti e un'esperienza senza interruzioni.",
+        "text3": "Investimenti totali gestiti",
+        "text4": "Tasso di crescita annuale"
+    },
+    "aboutThree": {
+        "text1": "I nostri numeri parlano da soli",
+        "text2": "Investire senza limiti",
+        "text3": "SwissPipsAI continua a crescere rapidamente, con investitori da tutto il mondo che si fidano di noi per offrire rendimenti costanti. Il nostro impegno per l'innovazione e la trasparenza ci ha fatto guadagnare la fedeltà di migliaia di utenti soddisfatti.",
+        "text4": "Recensioni verificate degli investitori"
+    },
+    "faqHero": {
+        "text1": "Domande e Risposte",
+        "text2": "Home",
+        "text3": "FAQ"
+    },
+    "faqOne": {
+        "text1": "Iniziare",
+        "text2": "Come funziona SwissPipsAI",
+        "text3": "Piani di investimento",
+        "text4": "Aggiornamento dell'account",
+        "text5": "Sicurezza",
+        "text6": "Primi Passi",
+        "text7": "Quali servizi offre SwissPipsAI?",
+        "text8": "SwissPipsAI offre soluzioni di investimento basate sull'intelligenza artificiale progettate per massimizzare il ROI per gli utenti. La nostra piattaforma fornisce piani di investimento personalizzati, monitoraggio in tempo reale della crescita e sicurezza affidabile per garantire un'esperienza di investimento senza problemi.",
+        "text9": "Come funziona SwissPipsAI",
+        "text10": "Cosa rende SwissPipsAI speciale?",
+        "text11": "SwissPipsAI utilizza algoritmi avanzati di intelligenza artificiale per fornire rendimenti precisi e costanti. Il nostro approccio trasparente, la piattaforma facile da usare e l'impegno per la sicurezza ci distinguono dalle piattaforme di investimento tradizionali.",
+        "text12": "Esplora i nostri piani di investimento",
+        "text13": "Quali piani di investimento offre SwissPipsAI?",
+        "text14": "SwissPipsAI offre piani di investimento flessibili adattati ai tuoi obiettivi finanziari. Che tu stia cercando guadagni a breve termine o una crescita a lungo termine, i nostri piani offrono un ROI affidabile supportato da algoritmi avanzati di intelligenza artificiale. Scegli uno dei piani e guarda crescere il tuo investimento.",
+        "text15": "Come posso scegliere il miglior piano di investimento?",
+        "text16": "La scelta del piano di investimento giusto dipende dai tuoi obiettivi finanziari, dalla tolleranza al rischio e dal ROI desiderato. SwissPipsAI fornisce approfondimenti dettagliati su ogni piano per aiutarti a prendere decisioni informate.",
+        "text17": "Qual è l'importo minimo di investimento?",
+        "text18": "I nostri piani di investimento sono progettati per essere accessibili a tutti, con un importo minimo di investimento a partire da $500. Questo ti consente di iniziare il tuo percorso di investimento con fiducia, indipendentemente dal tuo budget.",
+        "text19": "Aggiornamento dell'account",
+        "text20": "Come posso modificare le mie informazioni personali?",
+        "text21": "Per aggiornare le tue informazioni personali su SwissPipsAI, segui questi passaggi:",
+        "text22": "Accedi al tuo account:",
+        "text23": "Accedi al tuo account SwissPipsAI utilizzando il tuo nome utente e password.",
+        "text24": "Vai alle impostazioni del profilo:",
+        "text25": "Una volta effettuato l'accesso, vai alle impostazioni del tuo account facendo clic sull'icona del profilo o sul menu.",
+        "text26": "Modifica le informazioni personali:",
+        "text27": "Nelle impostazioni del profilo, vedrai le opzioni per aggiornare il tuo nome, email, numero di telefono e altri dettagli personali.",
+        "text28": "Verifica le modifiche:",
+        "text29": "Controlla tutti i campi per assicurarti che le tue informazioni siano accurate prima di salvarle.",
+        "text30": "Salva e conferma:",
+        "text31": "Fai clic su 'Salva modifiche' per aggiornare le tue informazioni. Riceverai una conferma che i tuoi dati sono stati aggiornati con successo.",
+        "text32": "Sicurezza",
+        "text33": "Come protegge SwissPipsAI le mie informazioni personali e finanziarie?",
+        "text34": "SwissPipsAI impiega misure di sicurezza leader nel settore, tra cui crittografia, firewall e tecnologia SSL (secure socket layer), per proteggere le tue informazioni personali e finanziarie da accessi non autorizzati.",
+        "text35": "FAQ"
+    },
+    "contact": {
+        "text1": "Contatta SwissPipsAI",
+        "text2": "Contattaci indipendentemente dal problema.",
+        "text3": "Contattaci",
+        "text4": "Il tuo Nome Completo",
+        "text5": "La tua Email",
+        "text6": "Il tuo Oggetto",
+        "text7": "Il tuo Messaggio",
+        "text8": "Accetto di ricevere email, newsletter e messaggi promozionali.",
+        "text9": "INVIA MESSAGGIO",
+        "text10": "Hai domande?",
+        "text11": "Inviaci un'email",
+        "text12": "Chiamaci",
+        "text13": "Visita il nostro ufficio"
+    },
+    "login": {
+        "text1": "Benvenuto su SwissPipsAI",
+        "text2": "Il miglior AI per investimenti al mondo",
+        "text3": "Accedi",
+        "text4": "Inserisci la tua email e password",
+        "text5": "Hai dimenticato la password?",
+        "text6": "Crea un nuovo account",
+        "text7": "Accedi",
+        "text8": "Inserisci il codice inviato alla tua email",
+        "text9": "Verifica"
+    },
+    "signup": {
+        "text1": "Registrati",
+        "text2": "Nome",
+        "text3": "Cognome",
+        "text4": "Numero di Telefono",
+        "text5": "Email",
+        "text6": "PIN a 6 cifre",
+        "text7": "Password",
+        "text8": "Conferma Password",
+        "text9": "Indirizzo",
+        "text10": "Data di Nascita",
+        "text11": "Paese",
+        "text12": "Stato",
+        "text13": "Immagine",
+        "text14": "Codice di Riferimento (opzionale)",
+        "text15": "Hai già un account?",
+        "text16": "Accedi",
+        "text17": "Verifica PIN",
+        "text18": "Inserisci il PIN",
+        "text19": "Verifica"
+    },
+    "dashboardSidebar": {
+        "text1": "Pannello di Controllo",
+        "text2": "Mercato",
+        "text3": "Trading Spot",
+        "text4": "Account",
+        "text5": "Portafoglio",
+        "text6": "Investimento",
+        "text7": "Deposito",
+        "text8": "Prelievo",
+        "text9": "Cronologia",
+        "text10": "Consiglia e Guadagna",
+        "text11": "Impostazioni",
+        "text12": "Disconnettersi"
+    },
+    "dashboardMain": {
+        "text1": "Cruscotto",
+        "text2": "Saldo attuale",
+        "text3": "Giorno precedente",
+        "text4": "Aggiungi fondi",
+        "text5": "Preleva",
+        "text6": "Investi ora",
+        "text7": "Panoramica del portafoglio",
+        "text8": "Valore del portafoglio",
+        "text9": "Profitto netto",
+        "text10": "Metriche delle prestazioni",
+        "text11": "ROI",
+        "text12": "Saldo di riferimento",
+        "text13": "Invita amici",
+        "text14": "Profitti giornalieri degli investimenti",
+        "text15": "Profitti totali giornalieri per tutti gli investimenti attivi",
+        "text16": "Visualizzazione dei profitti totali giornalieri per tutti gli investimenti attivi.",
+        "text17": "Depositi vs Prelievi",
+        "text18": "Dati aggregati",
+        "text19": "Visualizzazione di depositi e prelievi totali",
+        "text20": "Approfondimenti di mercato",
+        "text21": "Ripartizione degli investimenti"
+    },
+    "dashboardWallet": {
+        "text1": "Portafoglio",
+        "text2": "Giorno precedente",
+        "text3": "Deposito",
+        "text4": "Preleva",
+        "text5": "Panoramica del portafoglio",
+        "text6": "Valore del portafoglio",
+        "text7": "Profitto netto",
+        "text8": "Metriche delle prestazioni",
+        "text9": "ROI",
+        "text10": "Saldo di riferimento",
+        "text11": "Invita amici",
+        "text12": "Transazioni recenti",
+        "text13": "Depositi vs Prelievi",
+        "text14": "Dati aggregati",
+        "text15": "Visualizzazione di depositi e prelievi totali"
+    },
+    "dashboardInvestment": {
+        "text1": "Investimenti Attivi",
+        "text2": "Nuovo Investimento",
+        "text3": "Importo Investito",
+        "text4": "Progresso",
+        "text5": "Traccia Investimento"
+    },
+    "dashboardInvestmentDetail": {
+        "text1": "Torna agli investimenti",
+        "text2": "Aumenta l'Investimento",
+        "text3": "Importo Investito",
+        "text4": "Profitto Attuale",
+        "text5": "Data di Inizio",
+        "text6": "Data di Fine",
+        "text7": "giorni rimasti",
+        "text8": "Profitti Giornalieri",
+        "text9": "Performance dell'Investimento",
+        "text10": "Profitti mostrati per gli ultimi",
+        "text11": "giorni",
+        "text12": "Passa il mouse sul grafico per vedere i profitti esatti per giorno.",
+        "text13": "Importo",
+        "text14": "Dedurre da",
+        "text15": "Saldo",
+        "text16": "Seleziona Saldo"
+    },
+    "dashboardDeposit": {
+        "text1": "Deposita Fondi",
+        "text2": "Deposita Criptovaluta",
+        "text3": "Scegli la tua valuta preferita e segui i passaggi per effettuare un deposito.",
+        "text4": "Seleziona Valuta",
+        "text5": "Indirizzo di Deposito",
+        "text6": "Importo",
+        "text7": "Inserisci l'equivalente in USD ($) del",
+        "text8": "importo che hai depositato.",
+        "text9": "Indirizzo del Portafoglio di Deposito",
+        "text10": "Questo è l'indirizzo a cui stai inviando fondi.",
+        "text11": "ID Transazione",
+        "text12": "L'identificatore unico della tua transazione.",
+        "text13": "Ho Pagato"
+    },
+    "dashboardWithdraw": {
+        "text1": "Preleva Fondi",
+        "text2": "Saldo del Conto",
+        "text3": "Importo",
+        "text4": "Inserisci l'importo che desideri prelevare",
+        "text5": "max",
+        "text6": "Indirizzo del Portafoglio",
+        "text7": "Metodo di Prelievo",
+        "text8": "Rete",
+        "text9": "Specifica la rete per il prelievo (ad esempio, ERC20, TRC20)",
+        "text10": "Invia Richiesta di Prelievo"
+    },
+    "dashboardHistory": {
+        "text1": "Cronologia"
+    },
+    "dashboardRefer": {
+        "text1": "Referenze",
+        "text2": "Invita amici e guadagna premi per referenze di successo.",
+        "text3": "Guadagni Totali",
+        "text4": "Referenze Totali",
+        "text5": "verificato",
+        "text6": "in sospeso",
+        "text7": "Tasso di Conversione",
+        "text8": "Il Tuo Link di Riferimento",
+        "text9": "Invita via Email",
+        "text10": "Invia",
+        "text11": "Referenze"
+    },
+    "dashboardAccount": {
+        "text1": "Informazioni Account",
+        "text2": "Modifica Profilo",
+        "text3": "Foto Profilo",
+        "text4": "Nome",
+        "text5": "Cognome",
+        "text6": "Data di Nascita",
+        "text7": "Numero di Telefono",
+        "text8": "Email",
+        "text9": "Paese",
+        "text10": "Stato",
+        "text11": "Indirizzo",
+        "text12": "Annulla",
+        "text13": "Aggiorna Profilo"
+    },
+    "dashboardSettings": {
+        "text1": "Cambia Password",
+        "text2": "cambia la password del tuo account",
+        "text3": "Configura la tua password in modo che sia sicura. Potresti aver bisogno delle password per effettuare alcune transazioni nel sistema. Azioni sospette con la password potrebbero bloccarti accidentalmente fuori dal sistema!",
+        "text4": "Password Attuale",
+        "text5": "Nuova Password",
+        "text6": "Verifica Nuova Password",
+        "text7": "Aggiorna",
+        "text8": "Annulla",
+        "text9": "Codice di Verifica",
+        "text10": "Verifica"
+    },
+    "dashboardKyc": {
+        "text1": "Modulo KYC",
+        "text2": "Completa il tuo processo di verifica",
+        "text3": "Progresso",
+        "text4": "Numero di Identificazione Nazionale (SSN, NI, SIN, ecc.)",
+        "text5": "Parte Frontale del Documento",
+        "text6": "Parte Posteriore del Documento",
+        "text7": "Fotografia del Passaporto",
+        "text8": "Credenziali Non Scadute",
+        "text9": "Documento è Visibile",
+        "text10": "Invia"
+    },
+    "forgotPassword": {
+        "text1": "Password Dimenticata",
+        "text2": "Inserisci la tua email per ricevere un link per reimpostare la password.",
+        "text3": "Email",
+        "text4": "Invia Link per Reimpostare"
+    },
+    "resetPassword": {
+        "text1": "Reimposta Password",
+        "text2": "Inserisci la tua nuova password",
+        "text3": "Nuova Password",
+        "text4": "Conferma Password"
+    }
+}

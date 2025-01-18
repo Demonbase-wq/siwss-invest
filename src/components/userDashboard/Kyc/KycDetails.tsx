@@ -5,10 +5,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { FiUpload, FiFile } from "react-icons/fi";
 import { toast } from "sonner";
 import axios from "axios";
+import { useTranslation } from "@/translations/provider";
 
 interface KYCFormData {
-  ssn: string;
-  idNumber: string;
+  nin: string;
   idFront: string;
   idBack: string;
   passportPhoto: string;
@@ -60,7 +60,6 @@ const KYC: React.FC = () => {
 
       const kycData = {
         ...data,
-        idNumber: parseFloat(data.idNumber),
         idFront: idFrontUrl,
         idBack: idBackUrl,
         passportPhoto: passportPhotoUrl,
@@ -99,10 +98,9 @@ const KYC: React.FC = () => {
   };
 
   const watchFields = watch();
-  const totalFields = 7; // Total number of fields in the form
+  const totalFields = 6; // Total number of fields in the form
   const filledFields =
-    (watchFields.ssn ? 1 : 0) +
-    (watchFields.idNumber ? 1 : 0) +
+    (watchFields.nin ? 1 : 0) +
     (fileState.idFront ? 1 : 0) +
     (fileState.idBack ? 1 : 0) +
     (fileState.passportPhoto ? 1 : 0) +
@@ -112,24 +110,28 @@ const KYC: React.FC = () => {
 
   const truncateFileName = (name: string, maxLength: number = 20) => {
     if (name.length <= maxLength) return name;
-    const extension = name.split('.').pop();
-    const nameWithoutExtension = name.substring(0, name.lastIndexOf('.'));
+    const extension = name.split(".").pop();
+    const nameWithoutExtension = name.substring(0, name.lastIndexOf("."));
     return `${nameWithoutExtension.substring(0, maxLength - 3)}...${extension}`;
   };
+
+  const { translations } = useTranslation();
 
   return (
     <div className="min-h-screen flex items-start justify-center px-4 sm:px-6 lg:px-8">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl overflow-hidden mt-[47px] border-none">
         <div className="bg-primary text-white py-6 px-8 border-none">
-          <h2 className="text-3xl font-bold">KYC Form</h2>
+          <h2 className="text-3xl font-bold">{translations?.dashboardKyc?.text1}</h2>
           <p className="mt-2 text-primary-100">
-            Complete your verification process
+          {translations?.dashboardKyc?.text2}
           </p>
         </div>
         <div className="p-8">
           <div className="mb-6">
             <div className="flex justify-between mb-2">
-              <span className="text-sm font-medium text-gray-600">Progress</span>
+              <span className="text-sm font-medium text-gray-600">
+              {translations?.dashboardKyc?.text3}
+              </span>
               <span className="text-sm font-medium text-gray-600">
                 {Math.round(progressPercentage)}%
               </span>
@@ -142,23 +144,13 @@ const KYC: React.FC = () => {
             </div>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  State Security Number (SSN, NI, SIN, etc)
+                {translations?.dashboardKyc?.text4}
                 </label>
                 <input
-                  {...register("ssn", { required: true })}
-                  className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block p-2.5"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  ID Number
-                </label>
-                <input
-                  {...register("idNumber", { required: true })}
-                  type="number"
+                  {...register("nin", { required: true })}
                   className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block p-2.5"
                 />
               </div>
@@ -166,7 +158,7 @@ const KYC: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  ID Front
+                {translations?.dashboardKyc?.text5}
                 </label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                   <div className="space-y-1 text-center">
@@ -206,7 +198,7 @@ const KYC: React.FC = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  ID Back
+                {translations?.dashboardKyc?.text6}
                 </label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                   <div className="space-y-1 text-center">
@@ -246,7 +238,7 @@ const KYC: React.FC = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Passport Photograph
+                {translations?.dashboardKyc?.text7}
                 </label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                   <div className="space-y-1 text-center">
@@ -298,7 +290,7 @@ const KYC: React.FC = () => {
                   htmlFor="credentialsNotExpired"
                   className="ml-2 block text-sm text-gray-900"
                 >
-                  Credentials Not Expired
+                  {translations?.dashboardKyc?.text8}
                 </label>
               </div>
               <div className="flex items-center">
@@ -311,7 +303,7 @@ const KYC: React.FC = () => {
                   htmlFor="documentVisible"
                   className="ml-2 block text-sm text-gray-900"
                 >
-                  Document is Visible
+                  {translations?.dashboardKyc?.text9}
                 </label>
               </div>
             </div>
@@ -320,7 +312,7 @@ const KYC: React.FC = () => {
                 type="submit"
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               >
-                Submit
+                {translations?.dashboardKyc?.text10}
               </button>
             </div>
           </form>
@@ -331,4 +323,3 @@ const KYC: React.FC = () => {
 };
 
 export default KYC;
-

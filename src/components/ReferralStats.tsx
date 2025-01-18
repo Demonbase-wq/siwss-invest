@@ -1,6 +1,7 @@
 'use client';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatNumber } from "@/lib/util";
+import { useTranslation } from "@/translations/provider";
 import React from "react";
 import useSWR from "swr";
 
@@ -10,6 +11,7 @@ export default function ReferralStats() {
   const { data } = useSWR("/api/get-user", fetcher); // Fetch user details
   const { data: referrals } = useSWR("/api/get-referrals", fetcher); // Fetch referrals
   const [loading, setLoading] = React.useState(true);
+  const { translations } = useTranslation();
 
   React.useEffect(() => {
     if (data && referrals) {
@@ -47,7 +49,7 @@ export default function ReferralStats() {
       {/* Total Earnings */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Earnings</CardTitle>
+          <CardTitle className="text-sm font-medium">{translations?.dashboardRefer?.text3}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">${formatNumber(data?.referral_earnings)}</div>
@@ -57,12 +59,12 @@ export default function ReferralStats() {
       {/* Total Referrals */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Referrals</CardTitle>
+          <CardTitle className="text-sm font-medium">{translations?.dashboardRefer?.text4}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{totalReferrals}</div>
           <p className="text-xs text-muted-foreground">
-            {verifiedReferrals} verified, {pendingReferrals} pending
+            {verifiedReferrals} {translations?.dashboardRefer?.text5}, {pendingReferrals} {translations?.dashboardRefer?.text6}
           </p>
         </CardContent>
       </Card>
@@ -70,7 +72,7 @@ export default function ReferralStats() {
       {/* Conversion Rate */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Conversion Rate</CardTitle>
+          <CardTitle className="text-sm font-medium">{translations?.dashboardRefer?.text7}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{conversionRate}%</div>

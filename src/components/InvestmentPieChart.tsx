@@ -18,7 +18,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import React from "react";
-
+import { useTranslation } from "@/translations/provider";
 
 const chartConfig = {
   chrome: {
@@ -32,7 +32,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export default function InvestmentPieChart({ data }: any) {
-    console.log(data)
+  const { translations } = useTranslation();
   // Process transactions to calculate total deposits and withdrawals
   const transactions = data?.transactions || [];
   const totalDeposits = transactions
@@ -41,7 +41,7 @@ export default function InvestmentPieChart({ data }: any) {
         transaction.fields.type === "Deposit" &&
         transaction.fields.status === "Approved"
     )
-    .reduce((sum : any, transaction: any) => sum + transaction.fields.amount, 0);
+    .reduce((sum: any, transaction: any) => sum + transaction.fields.amount, 0);
 
   const totalWithdrawals = transactions
     .filter(
@@ -64,30 +64,27 @@ export default function InvestmentPieChart({ data }: any) {
   return (
     <Card className="flex flex-col flex-grow">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Deposits vs Withdrawals</CardTitle>
-        <CardDescription>Aggregated Data</CardDescription>
+        <CardTitle>{translations?.dashboardMain?.text17}</CardTitle>
+        <CardDescription>{translations?.dashboardMain?.text18}</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0 h-[20px]">
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square"
-        >
+        <ChartContainer config={chartConfig} className="mx-auto aspect-square">
           <PieChart>
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Pie
-             data={chartData}
-             dataKey="amount"
-             nameKey="name"
-             innerRadius={60}
-             outerRadius={100}
-             label
+              data={chartData}
+              dataKey="amount"
+              nameKey="name"
+              innerRadius={60}
+              outerRadius={100}
+              label
             />
           </PieChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="leading-none text-muted-foreground">
-        Showing total deposits and withdrawals
+        {translations?.dashboardMain?.text19}
         </div>
       </CardFooter>
     </Card>

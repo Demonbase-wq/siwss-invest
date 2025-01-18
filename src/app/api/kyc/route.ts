@@ -102,8 +102,7 @@ export async function POST(req: NextRequest) {
   }
 
   const {
-    ssn,
-    idNumber,
+    nin,
     idFront,
     idBack,
     passportPhoto,
@@ -150,8 +149,7 @@ export async function POST(req: NextRequest) {
     await kyc.create([
       {
         fields: {
-          ssn: ssn,
-          id_number: idNumber,
+          nin: nin,
           passport: passportPhoto,
           front: idFront,
           back: idBack,

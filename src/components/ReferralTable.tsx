@@ -10,6 +10,7 @@ import {
 import { AgGridReact } from "ag-grid-react";
 import { formatDate } from "@/lib/util";
 import useSWR from "swr";
+import { useTranslation } from "@/translations/provider";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -18,6 +19,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export default function ReferralTable() {
   const { data: users } = useSWR("/api/get-users", fetcher);
   const { data: referrals } = useSWR("/api/get-referrals", fetcher);
+  const { translations } = useTranslation();
 
   // Combine and memoize the row data
   const rowData = useMemo(() => {
@@ -106,7 +108,7 @@ export default function ReferralTable() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h4>Referrals</h4>
+        <h4>{translations?.dashboardRefer?.text11}</h4>
       </div>
       <div className="rounded-md">
         <div style={{ width: "100%", height: "100%" }}>

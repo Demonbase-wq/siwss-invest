@@ -1,6 +1,9 @@
+'use client'
+import { useTranslation } from '@/translations/provider';
 import React from "react";
 
 const AboutTwo = () => {
+  const { translations } = useTranslation();
   return (
     <div className="bg-primary pt-10  pb-[28px] flex items-center" id="home">
       <div className="mycontainer">
@@ -8,31 +11,27 @@ const AboutTwo = () => {
           <div className=" lg:w-[60%] flex flex-col gap-4 lg:items-center">
             <div className="flex flex-col gap-3">
               <h2 className="text-white text-[30px] hero-text font-bold lg:text-[40px] lg:leading-[4.2rem] lg:text-center">
-                Empowering Smart Investments with AI Precision
+              {translations?.aboutTwo?.text1}
               </h2>
               <p className="text-white lg:text-center lg:px-5 lg:text-[0.95rem] font-medium">
-                SwissPipsAI is revolutionizing the investment world with
-                AI-powered precision and unmatched reliability. Our platform
-                continues to grow rapidly, with investors around the globe
-                trusting us to deliver consistent returns and a seamless
-                experience.
+              {translations?.aboutTwo?.text2}
               </p>
             </div>
 
             <div className="lg:flex-row flex flex-col gap-3 lg:gap-10">
               <div className="flex flex-col gap-2">
                 <p className="text-white lg:text-[0.95rem] font-medium">
-                  Total Investments Managed
+                {translations?.aboutTwo?.text3}
                 </p>
-                <p className="title-span text-[20px] lg:text-[40px] font-bold">
+                <p className="text-gray-400 title-span text-[20px] lg:text-[40px] font-bold">
                   7,240,019
                 </p>
               </div>
               <div className="flex flex-col gap-2">
                 <p className="text-white lg:text-[0.95rem] font-medium">
-                  Annual Growth Rate
+                {translations?.aboutTwo?.text4}
                 </p>
-                <p className="title-span text-[20px] lg:text-[40px] font-bold">
+                <p className="title-span text-green-500 text-[20px] lg:text-[40px] font-bold">
                   300%
                 </p>
               </div>

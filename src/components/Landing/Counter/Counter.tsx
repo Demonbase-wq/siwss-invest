@@ -1,7 +1,10 @@
 import React from "react";
 import CountUp from "react-countup";
+import { useTranslation } from "@/translations/provider";
 
 const Counter = () => {
+  const { translations } = useTranslation();
+
   return (
     <div className="bg-primary pt-[110px] pr-0 pb-[50px]">
       <div className="mycontainer">
@@ -16,7 +19,7 @@ const Counter = () => {
                 <CountUp end={22382} start={0} suffix="+" />
               </h2>
               <h4 className="text-white font-medium text-[22px] lg:text-[24px] leading-[32px]">
-                All Members
+                {translations?.counter?.all_members || "All Members"}
               </h4>
             </div>
           </div>
@@ -30,7 +33,7 @@ const Counter = () => {
                 <CountUp end={500} start={0} suffix="k" prefix="$" />
               </h2>
               <h4 className="text-white font-medium text-[22px] lg:text-[24px] leading-[32px]">
-                Total Deposits
+                {translations?.counter?.total_deposits || "Total Deposits"}
               </h4>
             </div>
           </div>
@@ -44,7 +47,7 @@ const Counter = () => {
                 <CountUp end={80} start={0} suffix="+" />
               </h2>
               <h4 className="text-white font-medium text-[22px] lg:text-[24px] leading-[32px]">
-                All Members
+                {translations?.counter?.global_presence || "Global Presence"}
               </h4>
             </div>
           </div>

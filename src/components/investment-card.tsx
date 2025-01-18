@@ -1,3 +1,4 @@
+'use client'
 import {
   Card,
   CardContent,
@@ -11,6 +12,7 @@ import { ArrowUpRight, Timer } from "lucide-react";
 import Link from "next/link";
 import { DateTime } from "luxon"; // For timezone handling
 import useSWR from "swr"; // Fetch daily profits
+import { useTranslation } from "@/translations/provider";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -36,6 +38,8 @@ export default function InvestmentCard({
   userTimezone,
 }: InvestmentCardProps) {
   const { fields } = investment;
+      const { translations } = useTranslation();
+  
 
   // Fetch daily profits for the investment
   const { data: dailyProfitsResponse } = useSWR(
@@ -97,14 +101,14 @@ export default function InvestmentCard({
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex justify-between items-center">
-          <span className="text-sm text-muted-foreground">Amount Invested</span>
+          <span className="text-sm text-muted-foreground">{translations?.dashboardInvestment?.text3}</span>
           <span className="font-semibold">
             ${fields.amount.toLocaleString()}
           </span>
         </div>
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">Progress</span>
+            <span className="text-sm text-muted-foreground">{translations?.dashboardInvestment?.text4}</span>
             <span className="text-sm font-medium">{progress.toFixed(0)}%</span>
           </div>
           <Progress value={progress} className="w-full bg-white" />
@@ -127,7 +131,7 @@ export default function InvestmentCard({
       <CardFooter>
         <Button asChild className="w-full bg-accent">
           <Link href={`/dashboard/investments/investment?id=${investment.id}`}>
-            Track Investment
+          {translations?.dashboardInvestment?.text5}
           </Link>
         </Button>
       </CardFooter>

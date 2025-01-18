@@ -36,6 +36,7 @@ import { toast } from "sonner";
 import { BTCIcon, USDTIcon } from "@/lib/util";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "@/translations/provider";
 
 const formSchema = z.object({
   currency: z.enum(["BTC", "USDT-TRC20", "USDT-BEP20"]),
@@ -116,13 +117,14 @@ export default function DepositForm() {
   };
 
   const CurrencyIcon = currencyIcons[selectedCurrency];
+  const { translations } = useTranslation();
 
   return (
     <Card className="w-full max-w-2xl">
       <CardHeader>
-        <CardTitle>Deposit Cryptocurrency</CardTitle>
+        <CardTitle>{translations?.dashboardDeposit?.text2}</CardTitle>
         <CardDescription>
-          Choose your preferred currency and follow the steps to make a deposit.
+        {translations?.dashboardDeposit?.text3}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -133,7 +135,7 @@ export default function DepositForm() {
               name="currency"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Select Currency</FormLabel>
+                  <FormLabel>{translations?.dashboardDeposit?.text4}</FormLabel>
                   <Select
                     onValueChange={(value: keyof typeof walletAddresses) => {
                       field.onChange(value);
@@ -186,7 +188,7 @@ export default function DepositForm() {
                 <CurrencyIcon />
                 <div className="flex-grow">
                   <p className="text-sm font-medium">
-                    Deposit Address
+                  {translations?.dashboardDeposit?.text5}
                     {networkLabels[selectedCurrency] && (
                       <span className="ml-1 text-xs text-muted-foreground">
                         ({networkLabels[selectedCurrency]})
@@ -221,12 +223,12 @@ export default function DepositForm() {
               name="amount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Amount</FormLabel>
+                  <FormLabel>{translations?.dashboardDeposit?.text6}</FormLabel>
                   <FormControl className="p-6">
                     <Input placeholder="Enter deposit amount" {...field} />
                   </FormControl>
                   <FormDescription>
-                    Enter the USD ($) equivalent of the {selectedCurrency.split("-")[0]} amount you've deposited.
+                  {translations?.dashboardDeposit?.text7} {selectedCurrency.split("-")[0]} {translations?.dashboardDeposit?.text8}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -238,12 +240,12 @@ export default function DepositForm() {
               name="walletAddress"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Deposit Wallet Address</FormLabel>
+                  <FormLabel>{translations?.dashboardDeposit?.text9}</FormLabel>
                   <FormControl className="p-6">
                     <Input {...field} readOnly />
                   </FormControl>
                   <FormDescription>
-                    This is the address you're sending funds to.
+                  {translations?.dashboardDeposit?.text10}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -255,12 +257,12 @@ export default function DepositForm() {
               name="transactionHash"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Transaction Hash</FormLabel>
+                  <FormLabel>{translations?.dashboardDeposit?.text11}</FormLabel>
                   <FormControl className="p-6">
                     <Input placeholder="Enter transaction hash" {...field} />
                   </FormControl>
                   <FormDescription>
-                    The unique identifier for your transaction.
+                  {translations?.dashboardDeposit?.text12}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -274,7 +276,7 @@ export default function DepositForm() {
           className="bg-accent hover:bg-accent"
           onClick={form.handleSubmit(onSubmit)}
         >
-          I Have Paid
+          {translations?.dashboardDeposit?.text13}
         </Button>
       </CardFooter>
     </Card>

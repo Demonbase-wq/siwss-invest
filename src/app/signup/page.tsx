@@ -3,11 +3,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { GiCancel } from "react-icons/gi";
-import { GrStatusGood } from "react-icons/gr";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
+import { useTranslation } from "@/translations/provider";
 
 interface FormData {
   first_name: string;
@@ -33,11 +32,7 @@ const SignUp: React.FC = () => {
   );
   const [states, setStates] = useState<string[]>([]);
   const [step, setStep] = useState(1);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
   const [referralCode, setReferralCode] = useState<string>("");
-
   // Extract referral code from URL
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -122,6 +117,9 @@ const SignUp: React.FC = () => {
     return newBlob?.url ?? null;
   };
 
+  const { translations } = useTranslation();
+
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (data.pincode.length < 6) {
       toast.error("Pincode must be 6 digits or more");
@@ -181,38 +179,18 @@ const SignUp: React.FC = () => {
       {/* Background Overlay */}
       <div className="absolute inset-0 bg-[#181254] bg-opacity-60 z-0"></div>
 
-      <div className="bg-[#161150] p-8 rounded shadow-md w-full lg:max-w-[650px] z-10">
-        <dialog id="signup-modal" className="modal">
-          <div className="modal-box bg-white">
-            {error && (
-              <div className="flex items-center justify-center gap-3">
-                <GiCancel size={40} color="#ef4444" />
-                <p className="text-red-500">{error}</p>
-              </div>
-            )}
-            {success && (
-              <div className="flex items-center justify-center gap-3">
-                <GrStatusGood size={40} color="#22c55e" />
-                <p className="text-green-500">{success}</p>
-              </div>
-            )}
-          </div>
-        </dialog>
-        <dialog
-          id="loading-modal"
-          className={`modal bg-primary ${loading ? "opacity-100" : ""}`}
-        >
-          <div className="flex items-center justify-center gap-3">
-            <span className="loading loading-dots loading-lg bg-white"></span>
-          </div>
-        </dialog>
+      <div className="bg-[#161150] p-8 rounded shadow-md w-full lg:max-w-[650px] z-10 text-gray-400">
         {step === 1 && (
           <>
-            <h2 className="text-2xl font-bold mb-6 text-white">Sign Up</h2>
+            <h2 className="text-2xl font-bold mb-6 text-white">
+              {translations?.signup?.text1}
+            </h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                 <div className="flex-1">
-                  <label className="block mb-1">First Name</label>
+                  <label className="block mb-1">
+                    {translations?.signup?.text2}
+                  </label>
                   <input
                     type="text"
                     {...register("first_name", { required: true })}
@@ -220,7 +198,9 @@ const SignUp: React.FC = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="block mb-1">Last Name</label>
+                  <label className="block mb-1">
+                    {translations?.signup?.text3}
+                  </label>
                   <input
                     type="text"
                     {...register("last_name", { required: true })}
@@ -230,7 +210,9 @@ const SignUp: React.FC = () => {
               </div>
               <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                 <div className="flex-1">
-                  <label className="block mb-1">Phone Number</label>
+                  <label className="block mb-1">
+                    {translations?.signup?.text4}
+                  </label>
                   <input
                     type="tel"
                     {...register("phone", { required: true })}
@@ -238,7 +220,9 @@ const SignUp: React.FC = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="block mb-1">Email</label>
+                  <label className="block mb-1">
+                    {translations?.signup?.text5}
+                  </label>
                   <input
                     type="email"
                     {...register("email", { required: true })}
@@ -248,7 +232,9 @@ const SignUp: React.FC = () => {
               </div>
               <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                 <div className="flex-1">
-                  <label className="block mb-1">6-Digit Pincode</label>
+                  <label className="block mb-1">
+                    {translations?.signup?.text6}
+                  </label>
                   <input
                     type="text"
                     {...register("pincode", { required: true, maxLength: 6 })}
@@ -256,7 +242,9 @@ const SignUp: React.FC = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="block mb-1">Password</label>
+                  <label className="block mb-1">
+                    {translations?.signup?.text7}
+                  </label>
                   <input
                     type="password"
                     {...register("password", { required: true })}
@@ -266,7 +254,9 @@ const SignUp: React.FC = () => {
               </div>
               <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                 <div className="flex-1">
-                  <label className="block mb-1">Confirm Password</label>
+                  <label className="block mb-1">
+                    {translations?.signup?.text8}
+                  </label>
                   <input
                     type="password"
                     {...register("confirmPassword", { required: true })}
@@ -274,7 +264,9 @@ const SignUp: React.FC = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="block mb-1">Address</label>
+                  <label className="block mb-1">
+                    {translations?.signup?.text9}
+                  </label>
                   <input
                     type="text"
                     {...register("address", { required: true })}
@@ -284,7 +276,9 @@ const SignUp: React.FC = () => {
               </div>
               <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                 <div className="flex-1">
-                  <label className="block mb-1">Date of Birth</label>
+                  <label className="block mb-1">
+                    {translations?.signup?.text10}
+                  </label>
                   <input
                     type="date"
                     {...register("dob", { required: true })}
@@ -292,7 +286,9 @@ const SignUp: React.FC = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="block mb-1">Country</label>
+                  <label className="block mb-1">
+                    {translations?.signup?.text11}
+                  </label>
                   <select
                     {...register("country", { required: true })}
                     onChange={handleCountryChange}
@@ -309,7 +305,9 @@ const SignUp: React.FC = () => {
               </div>
               <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                 <div className="flex-1">
-                  <label className="block mb-1">State</label>
+                  <label className="block mb-1">
+                    {translations?.signup?.text12}
+                  </label>
                   <select
                     {...register("state", { required: true })}
                     className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
@@ -323,7 +321,9 @@ const SignUp: React.FC = () => {
                   </select>
                 </div>
                 <div className="flex-1">
-                  <label className="block mb-1">Image</label>
+                  <label className="block mb-1">
+                    {translations?.signup?.text13}
+                  </label>
                   <input
                     name="file"
                     ref={inputFileRef}
@@ -334,7 +334,9 @@ const SignUp: React.FC = () => {
                 </div>
               </div>
               <div>
-                <label className="block mb-1">Referral Code (optional)</label>
+                <label className="block mb-1">
+                  {translations?.signup?.text14}
+                </label>
                 <input
                   type="text"
                   {...register("referralCode")} // Automatically tracks the value
@@ -344,12 +346,12 @@ const SignUp: React.FC = () => {
               </div>
               <div className="flex items-center justify-end gap-5">
                 <div className="text-sm">
-                  <p>Already have an account?</p>
+                  <p>{translations?.signup?.text15}</p>
                 </div>
 
                 <div className="text-sm">
                   <Link href="/login" className="">
-                    Login
+                    {translations?.signup?.text16}
                   </Link>
                 </div>
               </div>
@@ -357,11 +359,7 @@ const SignUp: React.FC = () => {
                 type="submit"
                 className="w-full bg-accent text-white p-2 rounded"
               >
-                {loading ? (
-                  <span className="loading loading-spinner loading-sm bg-white"></span>
-                ) : (
-                  "Sign Up"
-                )}
+                {translations?.signup?.text1}
               </button>
             </form>
           </>
@@ -377,6 +375,8 @@ export default SignUp;
 const VerifyPin: React.FC = () => {
   const { register, handleSubmit } = useForm<{ pin: string }>();
   const router = useRouter();
+  const { translations } = useTranslation();
+
 
   const onSubmit: SubmitHandler<{ pin: string }> = async (data) => {
     const toastId = toast.loading("Verifying");
@@ -401,10 +401,10 @@ const VerifyPin: React.FC = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6">Verify Pin</h2>
+      <h2 className="text-2xl font-bold mb-6">{translations?.signup?.text17}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="block mb-1">Enter Pin</label>
+          <label className="block mb-1">{translations?.signup?.text18}</label>
           <input
             type="text"
             {...register("pin", { required: true })}
@@ -415,7 +415,7 @@ const VerifyPin: React.FC = () => {
           type="submit"
           className="w-full bg-accent text-white p-2 rounded"
         >
-          Verify
+          {translations?.signup?.text19}
         </button>
       </form>
     </div>

@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -29,6 +28,7 @@ import { AccountBalance } from "./AccountBalance";
 import { formatNumber } from "@/lib/util";
 import axios from "axios";
 import { toast } from "sonner";
+import { useTranslation } from "@/translations/provider";
 
 const formSchema = z.object({
   amount: z.string().refine((val) => {
@@ -44,8 +44,9 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function WithdrawalForm() {
   const { data } = useSWR("/api/get-user", fetcher);
-  const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(true);
+    const { translations } = useTranslation();
+  
 
   React.useEffect(() => {
     if (data) {
@@ -115,12 +116,12 @@ export default function WithdrawalForm() {
             name="amount"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Amount</FormLabel>
+                <FormLabel>{translations?.dashboardWithdraw?.text3}</FormLabel>
                 <FormControl>
                   <Input placeholder="0.00" {...field} />
                 </FormControl>
                 <FormDescription>
-                  Enter the amount you wish to withdraw (max: $
+                {translations?.dashboardWithdraw?.text4} ({translations?.dashboardWithdraw?.text5}: $
                   {formatNumber(data?.balance)})
                 </FormDescription>
                 <FormMessage />
@@ -132,7 +133,7 @@ export default function WithdrawalForm() {
             name="wallet_address"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Wallet Address</FormLabel>
+                <FormLabel>{translations?.dashboardWithdraw?.text6}</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter your wallet address" {...field} />
                 </FormControl>
@@ -145,7 +146,7 @@ export default function WithdrawalForm() {
             name="method"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Withdrawal Method</FormLabel>
+                <FormLabel>{translations?.dashboardWithdraw?.text7}</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -170,19 +171,19 @@ export default function WithdrawalForm() {
             name="network"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Network</FormLabel>
+                <FormLabel>{translations?.dashboardWithdraw?.text8}</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter the network" {...field} />
                 </FormControl>
                 <FormDescription>
-                  Specify the network for your withdrawal (e.g., ERC20, TRC20)
+                {translations?.dashboardWithdraw?.text9}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
           <Button type="submit" className="w-full bg-accent" disabled={form.formState.isSubmitting}>
-            Submit Withdrawal Request
+          {translations?.dashboardWithdraw?.text10}
           </Button>
         </form>
       </Form>

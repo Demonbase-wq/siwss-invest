@@ -1,7 +1,11 @@
+'use client'
+import { useTranslation } from '@/translations/provider';
 import React from 'react'
 
 
 const LogoutDesktop = () => {
+      const { translations } = useTranslation();
+    
 
     const logFunc = async () => {
         try {
@@ -35,7 +39,7 @@ const LogoutDesktop = () => {
                 </div>
             </dialog>
             <button onClick={logFunc}>
-                <p>Logout</p>
+                <p>{translations?.dashboardSidebar?.text12}</p>
             </button>
         </div>
     )

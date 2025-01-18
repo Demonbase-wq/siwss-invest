@@ -22,6 +22,7 @@ import { formatNumber } from "@/lib/util";
 import InvestmentPieChart from "@/components/InvestmentPieChart";
 import React from "react";
 import Link from "next/link";
+import { useTranslation } from "@/translations/provider";
 
 interface KPI {
   label: string;
@@ -39,6 +40,7 @@ export default function DashboardPage() {
   const { data: dailyProfits } = useSWR(`/api/userdailyprofits`, fetcher);
   const { data: marketNews } = useSWR(`/api/market-news`, fetcher);
   const [loading, setLoading] = React.useState(true);
+  const { translations } = useTranslation();
 
   React.useEffect(() => {
     if (investments && transactions && user && dailyProfits && marketNews) {
@@ -118,7 +120,9 @@ export default function DashboardPage() {
 
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-      <h2 className="text-3xl font-bold tracking-tight mb-4">Dashboard</h2>
+      <h2 className="text-3xl font-bold tracking-tight mb-4">
+        {translations?.dashboardMain?.text1}
+      </h2>
 
       {/* KPIs Section */}
       <div className="grid gap-4 md:grid-cols-3">
@@ -126,7 +130,7 @@ export default function DashboardPage() {
         <Card className="col-span-1">
           <CardHeader>
             <CardTitle className="text-sm font-medium">
-              Current Balance
+              {translations?.dashboardMain?.text2}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -145,7 +149,8 @@ export default function DashboardPage() {
                   <ArrowDownRight className="h-4 w-4 mr-1" />
                 )}
                 <span className="text-sm font-medium">
-                  ${yesterdayProfits.toLocaleString()} Yesterday
+                  ${yesterdayProfits.toLocaleString()}{" "}
+                  {translations?.dashboardMain?.text3}
                 </span>
               </div>
             </div>
@@ -153,21 +158,24 @@ export default function DashboardPage() {
               <div>
                 <Link href="/dashboard/deposit">
                   <Button variant="outline" className="w-full">
-                    <Plus className="mr-2 h-4 w-4" /> Add Funds
+                    <Plus className="mr-2 h-4 w-4" />{" "}
+                    {translations?.dashboardMain?.text4}
                   </Button>
                 </Link>
               </div>
               <div>
                 <Link href="/dashboard/withdraw">
                   <Button variant="outline" className="w-full">
-                    <MinusCircle className="mr-2 h-4 w-4" /> Withdraw
+                    <MinusCircle className="mr-2 h-4 w-4" />{" "}
+                    {translations?.dashboardMain?.text5}
                   </Button>
                 </Link>
               </div>
               <div>
                 <Link href="/dashboard/investments/new">
                   <Button variant="secondary" className="w-full">
-                    <TrendingUp className="mr-2 h-4 w-4" /> Invest Now
+                    <TrendingUp className="mr-2 h-4 w-4" />{" "}
+                    {translations?.dashboardMain?.text6}
                   </Button>
                 </Link>
               </div>
@@ -179,13 +187,15 @@ export default function DashboardPage() {
         <Card className="col-span-1">
           <CardHeader>
             <CardTitle className="text-sm font-medium">
-              Portfolio Overview
+              {translations?.dashboardMain?.text7}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 flex flex-col gap-3">
             <div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Portfolio Value</span>
+                <span className="text-sm font-medium">
+                  {translations?.dashboardMain?.text8}
+                </span>
                 <ArrowUpRight className="h-4 w-4 text-green-500" />
               </div>
               <div className="text-2xl font-bold">
@@ -197,14 +207,17 @@ export default function DashboardPage() {
             </div>
             <div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Net Profit</span>
+                <span className="text-sm font-medium">
+                  {translations?.dashboardMain?.text9}
+                </span>
                 <ArrowUpRight className="h-4 w-4 text-green-500" />
               </div>
               <div className="text-2xl font-bold">
                 ${totalEarned.toLocaleString()} ({netProfitPercentage}%)
               </div>
               <p className="text-xs text-green-500">
-                +{yesterdayProfitPercentage}% Yesterday
+                +{yesterdayProfitPercentage}%{" "}
+                {translations?.dashboardMain?.text3}
               </p>
             </div>
           </CardContent>
@@ -214,13 +227,15 @@ export default function DashboardPage() {
         <Card className="col-span-1">
           <CardHeader>
             <CardTitle className="text-sm font-medium">
-              Performance Metrics
+              {translations?.dashboardMain?.text10}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 flex flex-col gap-3">
             <div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">ROI</span>
+                <span className="text-sm font-medium">
+                  {translations?.dashboardMain?.text11}
+                </span>
                 <ArrowUpRight className="h-4 w-4 text-green-500" />
               </div>
               <div className="text-2xl font-bold flex items-center text-green-500 gap-5">
@@ -229,7 +244,9 @@ export default function DashboardPage() {
             </div>
             <div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Referral Balance</span>
+                <span className="text-sm font-medium">
+                  {translations?.dashboardMain?.text12}
+                </span>
                 <Users className="h-4 w-4 text-blue-500" />
               </div>
               <div className="text-2xl font-bold">
@@ -238,7 +255,8 @@ export default function DashboardPage() {
             </div>
             <Link href="/dashboard/refer&earn">
               <Button variant="outline" className="w-full">
-                <Users className="mr-2 h-4 w-4" /> Refer Friends
+                <Users className="mr-2 h-4 w-4" />{" "}
+                {translations?.dashboardMain?.text13}
               </Button>
             </Link>
           </CardContent>
@@ -261,7 +279,7 @@ export default function DashboardPage() {
         {/* Market Insights Card */}
         <Card className="w-full lg:w-[60%]">
           <CardHeader>
-            <CardTitle>Market Insights</CardTitle>
+            <CardTitle>{translations?.dashboardMain?.text20}</CardTitle>
           </CardHeader>
           <CardContent>
             <MarketInsights data={marketNews} />
@@ -271,7 +289,7 @@ export default function DashboardPage() {
         {/* Investment Breakdown Card */}
         <Card className="w-full lg:w-[40%]">
           <CardHeader>
-            <CardTitle>Investment Breakdown</CardTitle>
+            <CardTitle>{translations?.dashboardMain?.text21}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-8">

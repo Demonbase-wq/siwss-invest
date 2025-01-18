@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
 import useSWR from "swr"
+import { useTranslation } from "@/translations/provider"
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -15,6 +16,7 @@ export default function ReferralLink() {
   const [copied, setCopied] = useState(false)
   const { data, error } = useSWR("/api/get-user", fetcher);
   const [loading, setLoading] = React.useState(true);
+  const { translations } = useTranslation();
 
    React.useEffect(() => {
       if (data) {
@@ -51,7 +53,7 @@ export default function ReferralLink() {
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="referral-link">Your Referral Link</Label>
+        <Label htmlFor="referral-link">{translations?.dashboardRefer?.text8}</Label>
         <div className="flex space-x-2">
           <Input
             id="referral-link"

@@ -1,6 +1,9 @@
+'use client'
+import { useTranslation } from '@/translations/provider';
 import React from "react";
 
 const AboutFour = () => {
+  const { translations } = useTranslation();
   return (
     <div
       className="pt-10 lg:pt-[40px] lg:pb-[100px] pb-[28px] flex items-center"
@@ -10,16 +13,13 @@ const AboutFour = () => {
         <div className="px-4 flex-col gap-7 lg:gap-0 lg:flex-row flex lg:items-center">
           <div className="lg:flex-1 flex flex-col gap-5 lg:items-start">
             <p className="text-accent font-semibold text-[16px] sm:text-[20px] lg:text-[24px]">
-              Our Numbers Speak for Themselves
+            {translations?.aboutThree?.text1}
             </p>
             <h2 className="text-primary text-[30px] hero-text font-bold lg:text-[50px] lg:leading-[4.2rem]">
-              Investing Without Limits
+            {translations?.aboutThree?.text2}
             </h2>
             <p className="text-primary lg:text-left lg:text-[0.95rem] font-medium">
-              SwissPipsAI continues to grow rapidly, with investors from around
-              the globe trusting us to deliver consistent returns. Our
-              commitment to innovation and transparency has earned us the
-              loyalty of thousands of satisfied users.
+            {translations?.aboutThree?.text3}
             </p>
           </div>
           <div className="flex-1">
@@ -77,7 +77,7 @@ const AboutFour = () => {
               </div>
 
               <div className="flex items-center lg:justify-end">
-                <p className="font-medium text-primary">Verified Investor Reviews</p>
+                <p className="font-medium text-primary">{translations?.aboutThree?.text4}</p>
               </div>
             </div>
           </div>
