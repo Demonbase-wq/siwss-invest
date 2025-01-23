@@ -440,5 +440,33 @@
     "text2": "Geben Sie Ihr neues Passwort ein",
     "text3": "Neues Passwort",
     "text4": "Passwort Bestätigen"
+  },
+  "newInvestment": {
+    "text1": "Starterplan",
+    "text2": "Einzahlungsbereich",
+    "text3": "Wochen",
+    "text4": "Geschätzte Rendite (ROI)",
+    "text5": "Wichtige Merkmale",
+    "text6": "KI-gestützte Handelsalgorithmen",
+    "text7": "Niedriges Risiko bei der Anlagestrategie",
+    "text8": "Wachstumsplan",
+    "text9": "Erweiterte KI-Optimierung",
+    "text10": "Plan auswählen",
+    "text11": "Mittelrisiko bei der Anlagestrategie",
+    "text12": "Priorisierter Kundensupport",
+    "text13": "Premium-Plan",
+    "text14": "Fortschrittliche KI-Handelsalgorithmen",
+    "text15": "Exklusive Markteinblicke",
+    "text16": "Erweiterte risikoadjustierte Strategie",
+    "text17": "Höhere Renditen auf Investitionen",
+    "text18": "Bestätigen Sie Ihre Investition",
+    "text19": "Plan",
+    "text20": "Dauer",
+    "text21": "Name der Investition",
+    "text22": "Betrag",
+    "text23": "Ihr Guthaben",
+    "text24": "Investition Bestätigen",
+    "text25": "Wählen Sie einen Investitionsplan",
+    "text26": "Prognostizierte Renditen"
   }
 }

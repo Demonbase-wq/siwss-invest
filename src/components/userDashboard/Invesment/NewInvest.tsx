@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/translations/provider";
 import {
   Card,
   CardContent,
@@ -17,51 +18,52 @@ import useSWR from "swr";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const investmentPlans: InvestmentPlan[] = [
-  {
-    name: "Starter Plan",
-    minDeposit: 500,
-    maxDeposit: 1900,
-    duration: 6,
-    estimatedROI: 30,
-    features: [
-      "AI-powered trading algorithms",
-      "Low-risk investment strategy",
-      "Weekly performance reports",
-    ],
-  },
-  {
-    name: "Growth Plan",
-    minDeposit: 2000,
-    maxDeposit: 24900,
-    duration: 6,
-    estimatedROI: 30,
-    features: [
-      "Advanced AI optimization",
-      "Moderate-risk investment strategy",
-      "Daily performance updates",
-      "Priority customer support",
-    ],
-  },
-  {
-    name: "Premium Plan",
-    minDeposit: 25000,
-    maxDeposit: Infinity,
-    duration: 4,
-    estimatedROI: 20,
-    features: [
-      "Cutting-edge AI trading algorithms",
-      "Customized risk-adjusted strategy",
-      "Real-time performance tracking",
-      "Dedicated account manager",
-      "Exclusive market insights",
-    ],
-  },
-];
+
 
 export default function NewInvest() {
   const { data } = useSWR("/api/get-user", fetcher);
+  const { translations } = useTranslation();
   const [loading, setLoading] = useState(true);
+
+  const investmentPlans: InvestmentPlan[] = [
+    {
+      name: translations?.newInvestment?.text1,
+      minDeposit: 500,
+      maxDeposit: 1900,
+      duration: 6,
+      estimatedROI: 40,
+      features: [
+        translations?.newInvestment?.text6,
+        translations?.newInvestment?.text7,
+      ],
+    },
+    {
+      name: translations?.newInvestment?.text8,
+      minDeposit: 2000,
+      maxDeposit: 24900,
+      duration: 6,
+      estimatedROI: 40,
+      features: [
+        translations?.newInvestment?.text9,
+        translations?.newInvestment?.text11,
+        translations?.newInvestment?.text12,
+      ],
+    },
+    {
+      name: translations?.newInvestment?.text13,
+      minDeposit: 25000,
+      maxDeposit: Infinity,
+      duration: 4,
+      estimatedROI: 55,
+      features: [
+        translations?.newInvestment?.text14,
+        translations?.newInvestment?.text15,
+        translations?.newInvestment?.text16,
+        translations?.newInvestment?.text17,
+        translations?.newInvestment?.text12,
+      ],
+    },
+  ];
 
   useEffect(() => {
     if (data) {
@@ -82,9 +84,9 @@ export default function NewInvest() {
         </div>
       </dialog>
       <Button asChild className="mb-6">
-        <Link href="/dashboard/investments">← Back to Investments</Link>
+        <Link href="/dashboard/investments">← {translations?.dashboardInvestmentDetail?.text1}</Link>
       </Button>
-      <h1 className="text-3xl font-bold mb-6">Choose an Investment Plan</h1>
+      <h1 className="text-3xl font-bold mb-6">{translations?.newInvestment?.text25}</h1>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {investmentPlans.map((plan, index) => (
           <Card key={index} className="flex flex-col">
@@ -94,7 +96,7 @@ export default function NewInvest() {
             <CardContent className="flex-grow space-y-4">
               <div className="space-y-2">
                 <span className="text-sm text-muted-foreground">
-                  Deposit Range
+                  {translations?.newInvestment?.text2}
                 </span>
                 <p className="text-2xl font-semibold">
                   ${plan.minDeposit.toLocaleString()} -{" "}
@@ -106,17 +108,17 @@ export default function NewInvest() {
               <div className="space-y-2">
                 <div className="flex items-center">
                   <Timer className="w-4 h-4 mr-2 text-white" />
-                  <span>{plan.duration} weeks</span>
+                  <span>{plan.duration} {translations?.newInvestment?.text3}</span>
                 </div>
                 <div className="flex items-center text-green-500">
                   <Percent className="w-4 h-4 mr-1" />
                   <span className="font-semibold">
-                    Estimated ROI: {plan.estimatedROI}%
+                    {translations?.newInvestment?.text4}: {plan.estimatedROI}%
                   </span>
                 </div>
               </div>
               <div className="space-y-2">
-                <span className="text-sm font-semibold">Key Features:</span>
+                <span className="text-sm font-semibold">{translations?.newInvestment?.text5}:</span>
                 <ul className="space-y-1">
                   {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-center text-sm">
@@ -132,7 +134,7 @@ export default function NewInvest() {
                 className="w-full bg-random"
                 onClick={() => setSelectedPlan(plan)}
               >
-                Select Plan
+                {translations?.newInvestment?.text10}
               </Button>
             </CardFooter>
           </Card>

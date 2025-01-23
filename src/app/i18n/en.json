@@ -440,5 +440,33 @@
         "text2": "Enter your new password",
         "text3": "New Password",
         "text4": "Confirm Password"
+    },
+    "newInvestment": {
+        "text1": "Starter Plan",
+        "text2": "Deposit Range",
+        "text3": "weeks",
+        "text4": "Estimated ROI",
+        "text5": "Key Features",
+        "text6": "AI-powered trading algorithms",
+        "text7": "Low-risk investment strategy",
+        "text8": "Growth Plan",
+        "text9": "Advanced AI optimization",
+        "text10": "Select Plan",
+        "text11": "Moderate-risk investment strategy",
+        "text12": "Priority customer support",
+        "text13": "Premium Plan",
+        "text14": "Cutting-edge AI trading algorithms",
+        "text15": "Exclusive market insights",
+        "text16": "Advanced risk-adjusted strategy",
+        "text17": "Higher ROI on Investments",
+        "text18": "Confirm Your Investment",
+        "text19": "Plan",
+        "text20": "Duration",
+        "text21": "Investment Name",
+        "text22": "Amount",
+        "text23": "Your Balance",
+        "text24": "Confirm Investment",
+        "text25": "Choose an Investment Plan",
+        "text26": "Projected Returns"
     }
 }

@@ -440,5 +440,33 @@
         "text2": "Inserisci la tua nuova password",
         "text3": "Nuova Password",
         "text4": "Conferma Password"
-    }
+    },
+    "newInvestment": {
+    "text1": "Piano Iniziale",
+    "text2": "Intervallo di Deposito",
+    "text3": "settimane",
+    "text4": "ROI Stimato",
+    "text5": "Caratteristiche Principali",
+    "text6": "Algoritmi di trading basati sull'IA",
+    "text7": "Strategia di investimento a basso rischio",
+    "text8": "Piano di Crescita",
+    "text9": "Ottimizzazione avanzata dell'IA",
+    "text10": "Seleziona Piano",
+    "text11": "Strategia di investimento a rischio moderato",
+    "text12": "Assistenza clienti prioritaria",
+    "text13": "Piano Premium",
+    "text14": "Algoritmi di trading avanzati con IA",
+    "text15": "Approfondimenti di mercato esclusivi",
+    "text16": "Strategia avanzata regolata per il rischio",
+    "text17": "ROI più elevato sugli Investimenti",
+    "text18": "Conferma il Tuo Investimento",
+    "text19": "Piano",
+    "text20": "Durata",
+    "text21": "Nome dell'Investimento",
+    "text22": "Importo",
+    "text23": "Il Tuo Saldo",
+    "text24": "Conferma Investimento",
+    "text25": "Scegli un Piano di Investimento",
+    "text26": "Rendimenti Previsti"
+  }
 }

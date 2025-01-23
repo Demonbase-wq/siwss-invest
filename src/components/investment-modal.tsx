@@ -16,6 +16,7 @@ import { InvestmentPlan } from "@/lib/investment";
 import axios from "axios";
 import { toast } from "sonner";
 import { formatNumber } from "@/lib/util";
+import { useTranslation } from "@/translations/provider";
 
 interface InvestmentModalProps {
   plan: InvestmentPlan;
@@ -44,6 +45,7 @@ export default function InvestmentModal({
     }
   );
   const [error, setError] = useState("");
+  const { translations } = useTranslation();
   const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,16 +101,16 @@ export default function InvestmentModal({
       estimatedROI: plan.estimatedROI,
       duration: plan.duration,
     };
-    
+
     const toastId = toast.loading("Processing your investment...");
 
     try {
       const response = await axios.post("/api/new-investment", data);
-      const success = await response.data.success;
+      const message = await response.data.message;
       const error = await response.data.error;
-      if (success) {
+      if (message) {
         toast.dismiss(toastId);
-        toast.success(success);
+        toast.success(message);
         setInvestmentDetails({
           name: "",
           amount: 0,
@@ -131,21 +133,21 @@ export default function InvestmentModal({
     <Dialog open={true} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Confirm Your Investment</DialogTitle>
+          <DialogTitle>{translations?.newInvestment?.text18}</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <span className="col-span-4 text-sm">Plan: {plan.name}</span>
+            <span className="col-span-4 text-sm">{translations?.newInvestment?.text19}: {plan.name}</span>
             <span className="col-span-4 text-sm">
-              Estimated ROI: {plan.estimatedROI}%
+              {translations?.newInvestment?.text4}: {plan.estimatedROI}%
             </span>
             <span className="col-span-4 text-sm">
-              Duration: {plan.duration} weeks
+              {translations?.newInvestment?.text20}: {plan.duration} weeks
             </span>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <label htmlFor="name" className=" text-sm">
-              Investment Name
+              {translations?.newInvestment?.text21}
             </label>
             <Input
               id="name"
@@ -158,7 +160,7 @@ export default function InvestmentModal({
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <label htmlFor="amount" className="text-sm">
-              Amount
+              {translations?.newInvestment?.text22}
             </label>
             <Input
               id="amount"
@@ -180,14 +182,14 @@ export default function InvestmentModal({
           )}
           {!error && investmentDetails.amount > 0 && (
             <div className="text-sm">
-              Projected Returns: ${calculateReturns().toFixed(2)}
+              {translations?.newInvestment?.text26}: ${calculateReturns().toFixed(2)}
             </div>
           )}
-          <div className="text-sm">Your Balance: ${formatNumber(balance)}</div>
+          <div className="text-sm">{translations?.newInvestment?.text23}: ${formatNumber(balance)}</div>
         </div>
         <DialogFooter>
           <Button type="submit" onClick={handleSubmit}>
-            Confirm Investment
+            {translations?.newInvestment?.text24}
           </Button>
         </DialogFooter>
       </DialogContent>
