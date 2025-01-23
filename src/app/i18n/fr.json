@@ -52,7 +52,7 @@
             "details": {
                 "minimum_investment": "Investissement minimum : $500",
                 "maximum_investment": "Investissement maximum : $1900",
-                "roi": "Rendement : 30 %",
+                "roi": "Rendement : 40 %",
                 "duration": "Durée : 6 semaines"
             },
             "cta": "Commencer à investir"
@@ -62,7 +62,7 @@
             "details": {
                 "minimum_investment": "Investissement minimum : $1900",
                 "maximum_investment": "Investissement maximum : $25000",
-                "roi": "Rendement : 30 %",
+                "roi": "Rendement : 40 %",
                 "duration": "Durée : 6 semaines"
             },
             "cta": "Commencer à investir"
@@ -72,7 +72,7 @@
             "details": {
                 "minimum_investment": "Investissement minimum : $25000",
                 "maximum_investment": "Investissement maximum : ∞",
-                "roi": "Rendement : 20 %",
+                "roi": "Rendement : 55 %",
                 "duration": "Durée : 4 semaines"
             },
             "cta": "Commencer à investir"

@@ -52,7 +52,7 @@
       "details": {
         "minimum_investment": "Mindestinvestition: $500",
         "maximum_investment": "Maximalinvestition: $1900",
-        "roi": "Rendite: 30 %",
+        "roi": "Rendite: 40 %",
         "duration": "Dauer: 6 Wochen"
       },
       "cta": "Jetzt investieren"
@@ -62,7 +62,7 @@
       "details": {
         "minimum_investment": "Mindestinvestition: $1900",
         "maximum_investment": "Maximalinvestition: $25000",
-        "roi": "Rendite: 30 %",
+        "roi": "Rendite: 40 %",
         "duration": "Dauer: 6 Wochen"
       },
       "cta": "Jetzt investieren"
@@ -72,7 +72,7 @@
       "details": {
         "minimum_investment": "Mindestinvestition: $25000",
         "maximum_investment": "Maximalinvestition: ∞",
-        "roi": "Rendite: 20 %",
+        "roi": "Rendite: 55 %",
         "duration": "Dauer: 4 Wochen"
       },
       "cta": "Jetzt investieren"

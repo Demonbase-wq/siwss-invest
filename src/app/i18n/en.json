@@ -52,7 +52,7 @@
             "details": {
                 "minimum_investment": "Minimum investment: $500",
                 "maximum_investment": "Maximum investment: $1900",
-                "roi": "Roi: 30%",
+                "roi": "Roi: 40%",
                 "duration": "Duration: 6 weeks"
             },
             "cta": "Start Investing"
@@ -62,7 +62,7 @@
             "details": {
                 "minimum_investment": "Minimum investment: $1900",
                 "maximum_investment": "Maximum investment: $25000",
-                "roi": "Roi: 30%",
+                "roi": "Roi: 40%",
                 "duration": "Duration: 6 weeks"
             },
             "cta": "Start Investing"
@@ -72,7 +72,7 @@
             "details": {
                 "minimum_investment": "Minimum investment: $25000",
                 "maximum_investment": "Maximum investment: ∞",
-                "roi": "Roi: 20%",
+                "roi": "Roi: 55%",
                 "duration": "Duration: 4 weeks"
             },
             "cta": "Start Investing"

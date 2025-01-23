@@ -30,7 +30,7 @@ const Plan = () => {
                     "Maximum investment: $1,900"}
                 </li>
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
-                  {translations?.plan?.silver_plan?.details?.roi || "Roi: 30%"}
+                  {translations?.plan?.silver_plan?.details?.roi || "Roi: 40%"}
                 </li>
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
                   {translations?.plan?.silver_plan?.details?.duration ||
@@ -60,7 +60,7 @@ const Plan = () => {
                     "Maximum investment: $25,000"}
                 </li>
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
-                  {translations?.plan?.gold_plan?.details?.roi || "Roi: 30%"}
+                  {translations?.plan?.gold_plan?.details?.roi || "Roi: 40%"}
                 </li>
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
                   {translations?.plan?.gold_plan?.details?.duration ||
@@ -90,7 +90,7 @@ const Plan = () => {
                     "Maximum investment: ∞"}
                 </li>
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
-                  {translations?.plan?.platinum_plan?.details?.roi || "Roi: 20%"}
+                  {translations?.plan?.platinum_plan?.details?.roi || "Roi: 55%"}
                 </li>
                 <li className="p-[14px_5px] text-[17px] font-semibold border-dotted border-[#666] border-[1px]">
                   {translations?.plan?.platinum_plan?.details?.duration ||

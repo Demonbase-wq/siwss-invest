@@ -52,7 +52,7 @@
             "details": {
                 "minimum_investment": "Inversión mínima: $500",
                 "maximum_investment": "Inversión máxima: $1900",
-                "roi": "Retorno: 30 %",
+                "roi": "Retorno: 40 %",
                 "duration": "Duración: 6 semanas"
             },
             "cta": "Comenzar a invertir"
@@ -62,7 +62,7 @@
             "details": {
                 "minimum_investment": "Inversión mínima: $1900",
                 "maximum_investment": "Inversión máxima: $25000",
-                "roi": "Retorno: 30 %",
+                "roi": "Retorno: 40 %",
                 "duration": "Duración: 6 semanas"
             },
             "cta": "Comenzar a invertir"
@@ -72,7 +72,7 @@
             "details": {
                 "minimum_investment": "Inversión mínima: $25000",
                 "maximum_investment": "Inversión máxima: ∞",
-                "roi": "Retorno: 20 %",
+                "roi": "Retorno: 55 %",
                 "duration": "Duración: 4 semanas"
             },
             "cta": "Comenzar a invertir"
