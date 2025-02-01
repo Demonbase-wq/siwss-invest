@@ -136,24 +136,34 @@ export default function InvestmentTrackingPage() {
       </dialog>
     );
   }
+  const startDate = DateTime.fromISO(investment.fields.start_date, {
+    zone: "UTC",
+  })
+    .setZone(timezone)
+    .startOf("day"); // Align to start of the day
 
-  const startDate = DateTime.fromISO(investment.fields.start_date).setZone(
-    timezone
-  );
-  const endDate = DateTime.fromISO(investment.fields.end_date).setZone(
-    timezone
-  );
+  const endDate = DateTime.fromISO(investment.fields.end_date, { zone: "UTC" })
+    .setZone(timezone)
+    .startOf("day"); // Align to start of the day
 
   const formattedStartDate = startDate.toLocaleString(DateTime.DATE_MED);
   const formattedEndDate = endDate.toLocaleString(DateTime.DATE_MED);
 
-  const now = DateTime.now().setZone(timezone);
+  const now = DateTime.now().setZone(timezone).startOf("day"); // Align to start of the day
 
   const totalDuration = endDate.diff(startDate, "days").days;
   const elapsed = Math.max(0, now.diff(startDate, "days").days);
   const progress = Math.min(100, (elapsed / totalDuration) * 100);
 
-  const daysLeft = Math.max(0, Math.floor(totalDuration - elapsed));
+  // Calculate days left
+  let daysLeft;
+  if (now < startDate) {
+    daysLeft = Math.floor(totalDuration); // Investment hasn't started yet
+  } else if (now >= endDate) {
+    daysLeft = 0; // Investment has ended
+  } else {
+    daysLeft = Math.floor(totalDuration - elapsed); // Ongoing investment
+  }
 
   const dailyProfits = dailyProfitsResponse?.dailyProfits || [];
   const currentProfit = dailyProfits.reduce(
@@ -167,12 +177,12 @@ export default function InvestmentTrackingPage() {
     100
   ).toFixed(2);
 
-  
-
   return (
     <div className="container mx-auto px-4 py-8">
       <Button asChild className="mb-6">
-        <Link href="/dashboard/investments">← {translations?.dashboardInvestmentDetail?.text1}</Link>
+        <Link href="/dashboard/investments">
+          ← {translations?.dashboardInvestmentDetail?.text1}
+        </Link>
       </Button>
       <Card className="w-full max-w-3xl">
         <CardHeader className="flex flex-row items-center justify-between">
@@ -181,16 +191,20 @@ export default function InvestmentTrackingPage() {
           </CardTitle>
           <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-accent">{translations?.dashboardInvestmentDetail?.text2}</Button>
+              <Button className="bg-accent">
+                {translations?.dashboardInvestmentDetail?.text2}
+              </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>{translations?.dashboardInvestmentDetail?.text2}</DialogTitle>
+                <DialogTitle>
+                  {translations?.dashboardInvestmentDetail?.text2}
+                </DialogTitle>
               </DialogHeader>
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="amount" className="text-right">
-                  {translations?.dashboardInvestmentDetail?.text13}
+                    {translations?.dashboardInvestmentDetail?.text13}
                   </Label>
                   <Input
                     id="amount"
@@ -202,21 +216,26 @@ export default function InvestmentTrackingPage() {
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="balance" className="text-right">
-                  {translations?.dashboardInvestmentDetail?.text14}
+                    {translations?.dashboardInvestmentDetail?.text14}
                   </Label>
                   <Select
                     onValueChange={setSelectedBalance}
                     value={selectedBalance}
                   >
                     <SelectTrigger className="col-span-3">
-                      <SelectValue placeholder={translations?.dashboardInvestmentDetail?.text16} />
+                      <SelectValue
+                        placeholder={
+                          translations?.dashboardInvestmentDetail?.text16
+                        }
+                      />
                     </SelectTrigger>
                     <SelectContent className="bg-primary">
                       <SelectItem value="balance">
-                      {translations?.dashboardInvestmentDetail?.text15} (${formatNumber(userData?.balance)})
+                        {translations?.dashboardInvestmentDetail?.text15} ($
+                        {formatNumber(userData?.balance)})
                       </SelectItem>
                       <SelectItem value="referral_earnings">
-                      {translations?.dashboardMain?.text12} ($
+                        {translations?.dashboardMain?.text12} ($
                         {formatNumber(userData?.referral_earnings)})
                       </SelectItem>
                     </SelectContent>
@@ -224,7 +243,7 @@ export default function InvestmentTrackingPage() {
                 </div>
               </div>
               <Button className="bg-accent" onClick={handleIncreaseInvestment}>
-              {translations?.dashboardInvestmentDetail?.text2}
+                {translations?.dashboardInvestmentDetail?.text2}
               </Button>
             </DialogContent>
           </Dialog>
@@ -233,7 +252,7 @@ export default function InvestmentTrackingPage() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <span className="text-sm text-muted-foreground">
-              {translations?.dashboardInvestmentDetail?.text3}
+                {translations?.dashboardInvestmentDetail?.text3}
               </span>
               <div className="flex items-center">
                 <DollarSign className="w-5 h-5 mr-2 text-white" />
@@ -244,7 +263,7 @@ export default function InvestmentTrackingPage() {
             </div>
             <div className="space-y-2">
               <span className="text-sm text-muted-foreground">
-              {translations?.dashboardInvestmentDetail?.text4}
+                {translations?.dashboardInvestmentDetail?.text4}
               </span>
               <div className="flex items-center text-green-500">
                 <ArrowUpRight className="w-5 h-5 mr-2" />
@@ -256,7 +275,9 @@ export default function InvestmentTrackingPage() {
           </div>
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">{translations?.dashboardInvestment?.text4}</span>
+              <span className="text-sm text-muted-foreground">
+                {translations?.dashboardInvestment?.text4}
+              </span>
               <span className="text-sm font-medium">
                 {progress.toFixed(0)}%
               </span>
@@ -265,14 +286,18 @@ export default function InvestmentTrackingPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <span className="text-sm text-muted-foreground">{translations?.dashboardInvestmentDetail?.text5}</span>
+              <span className="text-sm text-muted-foreground">
+                {translations?.dashboardInvestmentDetail?.text5}
+              </span>
               <div className="flex items-center">
                 <Calendar className="w-5 h-5 mr-2 text-white" />
                 <span className="font-medium">{formattedStartDate}</span>
               </div>
             </div>
             <div className="space-y-2">
-              <span className="text-sm text-muted-foreground">{translations?.dashboardInvestmentDetail?.text6}</span>
+              <span className="text-sm text-muted-foreground">
+                {translations?.dashboardInvestmentDetail?.text6}
+              </span>
               <div className="flex items-center">
                 <Calendar className="w-5 h-5 mr-2 text-white" />
                 <span className="font-medium">{formattedEndDate}</span>
@@ -282,7 +307,9 @@ export default function InvestmentTrackingPage() {
           <div className="flex items-center mt-5">
             <Timer className="w-5 h-5 mr-2 text-white" />
             <span className="text-lg font-medium">
-              {daysLeft > 0 ? `${daysLeft} ${translations?.dashboardInvestmentDetail?.text7}` : "Completed"}
+              {daysLeft > 0
+                ? `${daysLeft} ${translations?.dashboardInvestmentDetail?.text7}`
+                : "Completed"}
             </span>
           </div>
         </CardContent>

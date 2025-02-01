@@ -56,6 +56,7 @@ export async function POST(request: Request) {
     const depositAmount = amount as number;
     const newBalance = (balance || 0) + depositAmount;
     await users.update(user_id as string, { balance: newBalance });
+    const name = `${user?.fields.first_name} ${user?.fields.last_name}`;
 
     const formattedUpdatedDate = new Intl.DateTimeFormat("en-US", {
       year: "numeric",
@@ -129,7 +130,7 @@ export async function POST(request: Request) {
                 <h1>Deposit Approved</h1>
             </div>
             <div class="content">
-                <p>Dear [User's Name],</p>
+                <p>Dear ${name},</p>
                 <p>Great news! Your deposit has been approved and credited to your account. Here are the details:</p>
                 <div class="deposit-details">
                     <p><strong>Amount:</strong> ${amount}</p>

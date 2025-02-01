@@ -10,8 +10,8 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-//   debug: true, 
-//   logger: true, 
+  //   debug: true,
+  //   logger: true,
 });
 
 function createTemplate(
@@ -142,16 +142,34 @@ export async function POST(request: Request) {
       },
     ]);
     const date = transaction[0]?.fields.date as string;
+    console.log(date);
     const txId = transaction[0]?.id;
-    const formattedDate = new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      timeZone: user?.timezone as string, // Set your desired timezone
-    }).format(new Date(date));
+    // Validate the date
+    let formattedDate;
+    if (date && !isNaN(new Date(date).getTime())) {
+      // If the date is valid, format it
+      formattedDate = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        timeZone: user?.timezone as string, // Set your desired timezone
+      }).format(new Date(date));
+    } else {
+      // If the date is invalid, use the current date as a fallback
+      console.warn("Invalid date value, using current date as fallback.");
+      formattedDate = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        timeZone: user?.timezone as string, // Set your desired timezone
+      }).format(new Date());
+    }
 
     const name = `${user.first_name} ${user.last_name}`;
 

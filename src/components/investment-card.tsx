@@ -65,18 +65,18 @@ export default function InvestmentCard({
   // Parse dates and convert them to the user's timezone
   const startDate = DateTime.fromISO(fields.start_date, { zone: "UTC" })
     .setZone(userTimezone)
-    .startOf("day"); // Start of the day in user's timezone
+    .startOf("day"); // Align to start of the day
 
   const endDate = DateTime.fromISO(fields.end_date, { zone: "UTC" })
     .setZone(userTimezone)
-    .startOf("day");
+    .startOf("day"); // Align to start of the day
 
-  const now = DateTime.now().setZone(userTimezone).startOf("day");
+  const now = DateTime.now().setZone(userTimezone).startOf("day"); // Align to start of the day
 
   // Calculate progress
-  const totalDuration = endDate.diff(startDate, "days").days; // Total duration in days
-  let elapsed = now.diff(startDate, "days").days; // Elapsed days
-  elapsed = Math.max(0, elapsed); // Ensure elapsed is non-negative
+  // Calculate total duration and elapsed days
+  const totalDuration = endDate.diff(startDate, "days").days;
+  const elapsed = Math.max(0, now.diff(startDate, "days").days);
 
   const progress = Math.min(100, (elapsed / totalDuration) * 100);
 
@@ -84,13 +84,14 @@ export default function InvestmentCard({
   const totalDays = Math.ceil(totalDuration);
   const elapsedDays = Math.ceil(elapsed);
 
+  // Calculate days left
   let daysLeft;
   if (now < startDate) {
-    daysLeft = totalDays; // Investment hasn't started yet
+    daysLeft = Math.floor(totalDuration); // Investment hasn't started yet
   } else if (now >= endDate) {
     daysLeft = 0; // Investment has ended
   } else {
-    daysLeft = totalDays - elapsedDays; // Ongoing investment
+    daysLeft = Math.floor(totalDuration - elapsed); // Ongoing investment
   }
 
   return (
