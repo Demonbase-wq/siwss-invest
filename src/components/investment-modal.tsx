@@ -138,9 +138,9 @@ export default function InvestmentModal({
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <span className="col-span-4 text-sm">{translations?.newInvestment?.text19}: {plan.name}</span>
-            <span className="col-span-4 text-sm">
+            {/* <span className="col-span-4 text-sm">
               {translations?.newInvestment?.text4}: {plan.estimatedROI}%
-            </span>
+            </span> */}
             <span className="col-span-4 text-sm">
               {translations?.newInvestment?.text20}: {plan.duration} weeks
             </span>
@@ -180,11 +180,11 @@ export default function InvestmentModal({
               {error}
             </div>
           )}
-          {!error && investmentDetails.amount > 0 && (
+          {/* {!error && investmentDetails.amount > 0 && (
             <div className="text-sm">
               {translations?.newInvestment?.text26}: ${calculateReturns().toFixed(2)}
             </div>
-          )}
+          )} */}
           <div className="text-sm">{translations?.newInvestment?.text23}: ${formatNumber(balance)}</div>
         </div>
         <DialogFooter>

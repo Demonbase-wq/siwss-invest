@@ -149,7 +149,7 @@ export default function DashboardPage() {
                   <ArrowDownRight className="h-4 w-4 mr-1" />
                 )}
                 <span className="text-sm font-medium">
-                  ${yesterdayProfits.toLocaleString()}{" "}
+                  ${yesterdayProfits.toLocaleString()}
                   {translations?.dashboardMain?.text3}
                 </span>
               </div>
@@ -158,7 +158,7 @@ export default function DashboardPage() {
               <div>
                 <Link href="/dashboard/deposit">
                   <Button variant="outline" className="w-full">
-                    <Plus className="mr-2 h-4 w-4" />{" "}
+                    <Plus className="mr-2 h-4 w-4" />
                     {translations?.dashboardMain?.text4}
                   </Button>
                 </Link>
@@ -166,7 +166,7 @@ export default function DashboardPage() {
               <div>
                 <Link href="/dashboard/withdraw">
                   <Button variant="outline" className="w-full">
-                    <MinusCircle className="mr-2 h-4 w-4" />{" "}
+                    <MinusCircle className="mr-2 h-4 w-4" />
                     {translations?.dashboardMain?.text5}
                   </Button>
                 </Link>
@@ -201,9 +201,9 @@ export default function DashboardPage() {
               <div className="text-2xl font-bold">
                 ${portfolioValue.toLocaleString()}
               </div>
-              <p className="text-xs flex items-center gap-3 text-green-500">
+              {/* <p className="text-xs flex items-center gap-3 text-green-500">
                 +{netProfitPercentage}% <TrendingUp className="mr-2 h-4 w-4" />
-              </p>
+              </p> */}
             </div>
             <div>
               <div className="flex justify-between items-center">
@@ -212,13 +212,14 @@ export default function DashboardPage() {
                 </span>
                 <ArrowUpRight className="h-4 w-4 text-green-500" />
               </div>
-              <div className="text-2xl font-bold">
-                ${totalEarned.toLocaleString()} ({netProfitPercentage}%)
+              <div className="text-2xl font-bold text-green-500">
+                +${totalEarned.toLocaleString()} 
+                {/* ({netProfitPercentage}%) */}
               </div>
-              <p className="text-xs text-green-500">
+              {/* <p className="text-xs text-green-500">
                 +{yesterdayProfitPercentage}%{" "}
                 {translations?.dashboardMain?.text3}
-              </p>
+              </p> */}
             </div>
           </CardContent>
         </Card>
@@ -231,7 +232,7 @@ export default function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 flex flex-col gap-3">
-            <div>
+            {/* <div>
               <div className="flex justify-between items-center">
                 <span className="text-sm font-medium">
                   {translations?.dashboardMain?.text11}
@@ -241,7 +242,7 @@ export default function DashboardPage() {
               <div className="text-2xl font-bold flex items-center text-green-500 gap-5">
                 {netProfitPercentage}% <TrendingUp className="mr-2 h-4 w-4" />
               </div>
-            </div>
+            </div> */}
             <div>
               <div className="flex justify-between items-center">
                 <span className="text-sm font-medium">
@@ -329,7 +330,8 @@ export default function DashboardPage() {
                         </p>
                       </div>
                       <div className="ml-auto flex items-center gap-4 font-medium text-green-500">
-                        {currentProfitROI}% <TrendingUp className="h-4 w-4" />
+                        {/* {currentProfitROI}%  */}
+                        <TrendingUp className="h-4 w-4" />
                       </div>
                     </div>
                   );

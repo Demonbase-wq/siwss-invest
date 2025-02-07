@@ -110,12 +110,12 @@ export default function NewInvest() {
                   <Timer className="w-4 h-4 mr-2 text-white" />
                   <span>{plan.duration} {translations?.newInvestment?.text3}</span>
                 </div>
-                <div className="flex items-center text-green-500">
+                {/* <div className="flex items-center text-green-500">
                   <Percent className="w-4 h-4 mr-1" />
                   <span className="font-semibold">
                     {translations?.newInvestment?.text4}: {plan.estimatedROI}%
                   </span>
-                </div>
+                </div> */}
               </div>
               <div className="space-y-2">
                 <span className="text-sm font-semibold">{translations?.newInvestment?.text5}:</span>
