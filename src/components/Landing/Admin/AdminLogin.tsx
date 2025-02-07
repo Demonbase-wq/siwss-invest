@@ -50,9 +50,10 @@ export default function AdminLogin() {
     values: z.infer<typeof formSchema>
   ) => {
     const toastId = toast.loading("Logging in, please wait...");
+    const formattedEmail = values.email.toLowerCase();
 
     try {
-      await adminAction(values.email, values.password, values.route);
+      await adminAction(formattedEmail, values.password, values.route);
       toast.dismiss(toastId);
       toast.success(
         "Login succesfull!! you will be redirected to the dashboard page shortly"

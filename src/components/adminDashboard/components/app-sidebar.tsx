@@ -112,7 +112,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <div className="px-2">
           <Link href="/">
             <img
-              src="/nav-logo.png"
+              src="/logo.png"
               alt="logo"
               className=""
             />

@@ -121,11 +121,12 @@ export async function POST(request: Request) {
     const dobString = new Date(req.dob).toISOString().split("T")[0];
 
     const hashedPassword = await bcrypt.hash(req.password, 10);
+    const formattedEmail = req.email.toLowerCase();
 
     const userData = {
       first_name: req.first_name,
       last_name: req.last_name,
-      email: req.email,
+      email: formattedEmail,
       phone: req.phone,
       country: req.country,
       dob: dobString,
