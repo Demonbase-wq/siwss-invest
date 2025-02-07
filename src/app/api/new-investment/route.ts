@@ -162,7 +162,6 @@ export async function POST(request: Request) {
                                     <p><strong>Amount Invested:</strong> ${amount}</p>
                                     <p><strong>Start Date:</strong> ${formattedStartDate}</p>
                                     <p><strong>Expected End Date:</strong> ${formattedEndDate}</p>
-                                    <p><strong>Expected Return:</strong> ${totalEarnings}</p>
                                 </div>
                                 <p>Your investment has been successfully initiated and our team will manage it according to the selected investment strategy. You can track the performance of your investment at any time through your account dashboard.</p>
                                 <p>Here are a few important points to remember:</p>
