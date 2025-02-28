@@ -31,7 +31,7 @@ const ContactTwo = () => {
 
                   <div>
                     <h5 className="text-primary font-bold">{translations?.contact?.text12}</h5>
-                    <p className="text-primary font-medium">+1(516)252-6667</p>
+                    <p className="text-primary font-medium">+1(415)649-9363</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">

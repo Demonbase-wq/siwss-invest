@@ -6,7 +6,7 @@ const PrivacyOne = () => {
       <div className="mycontainer">
         <div className="px-4">
           <h1 className="text-3xl lg:text-4xl font-bold text-primary text-center mb-8">
-            Privacy Policy for CmTradingPro
+            Privacy Policy for SwissPipsAI
           </h1>
 
           <div className="space-y-8">
@@ -15,7 +15,7 @@ const PrivacyOne = () => {
                 1. Introduction
               </h2>
               <p className="text-lg text-gray-700">
-                At <strong>CmTradingPro</strong>, we value your privacy. This
+                At <strong>SwissPipsAI</strong>, we value your privacy. This
                 Privacy Policy outlines the types of personal information we
                 collect, how we use it, and the steps we take to protect it. By
                 using our services, you consent to the collection and use of
@@ -117,7 +117,7 @@ const PrivacyOne = () => {
                 You have the right to access, update, or delete your personal
                 information. If you wish to exercise these rights or have any
                 concerns about your data, please contact us at{" "}
-                <strong>support@cmtradingpro.com</strong>.
+                <strong>support@swisspipsai.com</strong>.
               </p>
             </section>
 
@@ -154,7 +154,7 @@ const PrivacyOne = () => {
               <p className="text-lg text-gray-700">
                 If you have any questions about this Privacy Policy or how we
                 handle your personal information, please contact us at{" "}
-                <strong>support@cmtradingpro.com</strong> or via the contact
+                <strong>support@swisspipsai.com</strong> or via the contact
                 details provided on our website.
               </p>
             </section>

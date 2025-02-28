@@ -6,7 +6,7 @@ const TermOne = () => {
       <div className="mycontainer">
         <div className="px-4">
           <h1 className="text-3xl lg:text-4xl font-bold text-primary text-center mb-8">
-            Terms & Conditions for CmTradingPro
+            Terms & Conditions for SwissPipsAI
           </h1>
 
           <div className="space-y-8">
@@ -15,16 +15,16 @@ const TermOne = () => {
                 1. Introduction
               </h2>
               <p className="text-lg text-gray-700">
-                Welcome to <strong>CmTradingPro</strong>. By accessing or using
+                Welcome to <strong>SwissPipsAI</strong>. By accessing or using
                 our website, services, or any related applications provided by{" "}
-                <strong>CmTradingPro</strong>, you agree to comply with and be
+                <strong>SwissPipsAI</strong>, you agree to comply with and be
                 bound by the following terms and conditions. These terms and
-                conditions outline your obligations when using the CmTradingPro
+                conditions outline your obligations when using the SwissPipsAI
                 platform. If you do not agree with these terms, please refrain
                 from using our services.
               </p>
               <p className="text-lg text-gray-700">
-                <strong>CmTradingPro</strong> reserves the right to update,
+                <strong>SwissPipsAI</strong> reserves the right to update,
                 modify, or change these terms at any time. The most current
                 version of the terms will be available on this page. By
                 continuing to use our services after any updates, you agree to
@@ -37,7 +37,7 @@ const TermOne = () => {
                 2. Use of Our Services
               </h2>
               <p className="text-lg text-gray-700">
-                You agree to use the <strong>CmTradingPro</strong> platform and
+                You agree to use the <strong>SwissPipsAI</strong> platform and
                 services in a lawful manner and in compliance with all relevant
                 regulations and laws. You may not use our services for any
                 illegal activity, fraud, or misconduct. The platform is intended
@@ -59,7 +59,7 @@ const TermOne = () => {
                   activities that occur under your account.
                 </li>
                 <li>
-                  You must notify <strong>CmTradingPro</strong> immediately if
+                  You must notify <strong>SwissPipsAI</strong> immediately if
                   you suspect unauthorized access to your account.
                 </li>
               </ul>
@@ -70,8 +70,8 @@ const TermOne = () => {
                 3. Trading and Investment
               </h2>
               <p className="text-lg text-gray-700">
-                By using <strong>CmTradingPro</strong>, you acknowledge and
-                agree to the following:
+                By using <strong>SwissPipsAI</strong>, you acknowledge and agree
+                to the following:
               </p>
               <ul className="list-disc pl-6 text-lg text-gray-700">
                 <li>
@@ -97,7 +97,7 @@ const TermOne = () => {
                 4. Limitation of Liability
               </h2>
               <p className="text-lg text-gray-700">
-                <strong>CmTradingPro</strong> will not be liable for any damages
+                <strong>SwissPipsAI</strong> will not be liable for any damages
                 arising from the use of our services, including any direct,
                 indirect, incidental, special, or consequential damages. This
                 includes loss of profits, loss of data, or any other damages
@@ -110,7 +110,7 @@ const TermOne = () => {
                 5. Account Termination
               </h2>
               <p className="text-lg text-gray-700">
-                <strong>CmTradingPro</strong> reserves the right to suspend or
+                <strong>SwissPipsAI</strong> reserves the right to suspend or
                 terminate your account at any time for any reason, including but
                 not limited to violations of our terms, fraud, or suspicious
                 activity. In the event of account termination, any funds
@@ -136,10 +136,9 @@ const TermOne = () => {
                 7. Governing Law
               </h2>
               <p className="text-lg text-gray-700">
-                These terms and conditions are governed by the laws of [Your
-                Country/State]. Any disputes arising from the use of our
+                These terms and conditions are governed by the laws of US. Any disputes arising from the use of our
                 services will be subject to the jurisdiction of the courts in
-                [Your Location].
+                US.
               </p>
             </section>
 
@@ -152,9 +151,9 @@ const TermOne = () => {
                 please contact us at:
               </p>
               <ul className="text-lg text-gray-700">
-                <li>Email: support@cmtradingpro.com</li>
-                <li>Phone: +123 456 7890</li>
-                <li>Address: 123 Trading St., Financial City, XYZ</li>
+                <li>Email: support@swisspipsai.com</li>
+                <li>Phone: +1(415)649-9363</li>
+                <li>Address: Garden City, NY</li>
               </ul>
             </section>
           </div>
