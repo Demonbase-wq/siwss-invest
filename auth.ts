@@ -103,7 +103,7 @@ const config = {
             const user = json.user;
             return user;
           } else {
-            const response = await fetch(`http://localhost:3000/api/verify`, {
+            const response = await fetch(`https://www.swisspipsai.com/api/verify`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -137,7 +137,7 @@ const config = {
       if (token) {
         // Fetch the latest user data from the database
         const response = await axios.get(
-          `http://localhost:3000/api/session-user?id=${token.sub}`
+          `https://www.swisspipsai.com/api/session-user?id=${token.sub}`
         );
         const user = await response.data;
         session.user.id = token.sub as string;
