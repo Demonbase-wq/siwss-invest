@@ -43,7 +43,7 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar();
   const session = useSession();
-  const kycVerfied = session.data?.user.kyc === "Verified";
+  // const kycVerfied = session.data?.user.kyc === "Verified";
   const { translations } = useTranslation();
 
   return (
@@ -56,7 +56,7 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
+                <AvatarImage src='https://allvthbsw3pitbwu.public.blob.vercel-storage.com/user-AFy52awmfTbfmnIqF4uCRpgEZrKaq6' alt={user.name} />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -75,7 +75,7 @@ export function NavUser({
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarImage src='https://allvthbsw3pitbwu.public.blob.vercel-storage.com/user-AFy52awmfTbfmnIqF4uCRpgEZrKaq6' alt={user.name} />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -98,7 +98,7 @@ export function NavUser({
                   {translations?.dashboardSidebar?.text11}
                 </DropdownMenuItem>
               </Link>
-              <Link
+              {/* <Link
                 href="/dashboard/kyc-details"
                 className={`${kycVerfied ? "hidden" : ""}`}
               >
@@ -106,7 +106,7 @@ export function NavUser({
                   <Cog />
                   Kyc
                 </DropdownMenuItem>
-              </Link>
+              </Link> */}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>

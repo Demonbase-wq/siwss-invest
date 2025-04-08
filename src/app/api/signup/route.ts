@@ -10,9 +10,9 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-//   debug: true, 
-//   logger: true, 
-})
+  //   debug: true,
+  //   logger: true,
+});
 
 interface FormData {
   first_name: string;
@@ -96,14 +96,13 @@ function createTemplate(name: any, pincode: any) {
             <h1>Welcome to Our Platform</h1>
         </div>
         <div class="content">
-            <p>Dear ${name},</p>
-            <p>Thank you for signing up with us. We're excited to have you on board!</p>
-            <p>Your account has been successfully created. To complete your registration, please use the following pincode:</p>
-            <div class="pincode">${pincode}</div>
-            <p>Please enter this pincode on our website to verify your account.</p>
-            <p>If you have any questions or need assistance, please don't hesitate to contact our support team.</p>
-            <a href="https://swisspipsai.com" class="button">Visit Our Platform</a>
+          <p>Dear ${name},</p>
+          <p>Thank you for signing up with us. We're excited to have you on board!</p>
+          <p>Your account has been successfully created</p>
+          <p>If you have any questions or need assistance, please don't hesitate to contact our support team. We're here to help!</p>
+          <a href="https://swisspipsai.com" class="button">Visit Our Platform</a>
         </div>
+
         <div class="footer">
             <p>&copy; 2025 SwissPipsAi. All rights reserved.</p>
         </div>
@@ -116,7 +115,7 @@ function createTemplate(name: any, pincode: any) {
 
 export async function POST(request: Request) {
   const req: FormData = await request.json();
-  
+
   try {
     const dobString = new Date(req.dob).toISOString().split("T")[0];
 
@@ -132,9 +131,9 @@ export async function POST(request: Request) {
       dob: dobString,
       address: req.address,
       password: hashedPassword,
-      pincode: req.pincode,
+      // pincode: req.pincode,
       state: req.state,
-      img: req.img,
+      // img: req.img,
       timezone: req.timezone,
     };
 
@@ -173,7 +172,7 @@ export async function POST(request: Request) {
         }
       }
 
-      const name = `${newUser[0].fields.first_name} ${newUser[0].fields.last_name}`
+      const name = `${newUser[0].fields.first_name} ${newUser[0].fields.last_name}`;
 
       // Send the welcome email
       transporter.verify(function (error, success) {
@@ -196,12 +195,9 @@ export async function POST(request: Request) {
       if (result.response.includes("Ok")) {
         return Response.json({ success: true }, { status: 200 });
       } else {
-        return Response.json(
-          { error: "Error Signing Up." },
-          { status: 500 }
-        );
+        return Response.json({ error: "Error Signing Up." }, { status: 500 });
       }
-    } 
+    }
   } catch (error) {
     console.log(error);
     return Response.json({ catchError: error }, { status: 200 });

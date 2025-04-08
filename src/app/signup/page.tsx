@@ -13,20 +13,20 @@ interface FormData {
   last_name: string;
   phone: string;
   email: string;
-  pincode: string;
   dob: Date;
   password: string;
   confirmPassword: string;
   country: string;
   state: string;
   address: string;
-  img: string;
+  // img: string;
   referralCode: string;
   timezone: string; // Add timezone field
 }
 
 const SignUp: React.FC = () => {
-  const inputFileRef = useRef<HTMLInputElement>(null);
+  // const inputFileRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
   const [countries, setCountries] = useState<{ name: string; iso2: string }[]>(
     []
   );
@@ -101,31 +101,25 @@ const SignUp: React.FC = () => {
     }
   };
 
-  const handleImageUpload = async (): Promise<string | null> => {
-    if (!inputFileRef.current?.files) {
-      throw new Error("No file selected");
-    }
+  // const handleImageUpload = async (): Promise<string | null> => {
+  //   if (!inputFileRef.current?.files) {
+  //     throw new Error("No file selected");
+  //   }
 
-    const file = inputFileRef.current.files[0];
+  //   const file = inputFileRef.current.files[0];
 
-    const response = await fetch(`/api/upload-image?filename=${file.name}`, {
-      method: "POST",
-      body: file,
-    });
+  //   const response = await fetch(`/api/upload-image?filename=${file.name}`, {
+  //     method: "POST",
+  //     body: file,
+  //   });
 
-    const newBlob = await response.json();
-    return newBlob?.url ?? null;
-  };
+  //   const newBlob = await response.json();
+  //   return newBlob?.url ?? null;
+  // };
 
   const { translations } = useTranslation();
 
-
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    if (data.pincode.length < 6) {
-      toast.error("Pincode must be 6 digits or more");
-      return;
-    }
-
     if (data.password.length < 8) {
       toast.error("Your password must be 8 or more characters");
       return;
@@ -138,15 +132,15 @@ const SignUp: React.FC = () => {
 
     const toastId = toast.loading("Signing you up, please wait...");
     try {
-      const imgURL = await handleImageUpload();
-      if (!imgURL) {
-        toast.dismiss(toastId);
-        toast.error("Image upload failed");
-        return;
-      }
+      // const imgURL = await handleImageUpload();
+      // if (!imgURL) {
+      //   toast.dismiss(toastId);
+      //   toast.error("Image upload failed");
+      //   return;
+      // }
 
-      setValue("img", imgURL);
-      data.img = imgURL;
+      // setValue("img", imgURL);
+      // data.img = imgURL;
 
       console.log(data);
 
@@ -156,9 +150,9 @@ const SignUp: React.FC = () => {
 
       if (response.data.success) {
         toast.dismiss(toastId);
-        toast.success("Sign up successful, please check your email.");
+        toast.success("Sign up successful, redirecting you to login.....");
         reset();
-        setStep(2);
+        router.push("/login");
       }
       if (response?.data.catchError) {
         toast.dismiss(toastId);
@@ -233,16 +227,6 @@ const SignUp: React.FC = () => {
               <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                 <div className="flex-1">
                   <label className="block mb-1">
-                    {translations?.signup?.text6}
-                  </label>
-                  <input
-                    type="text"
-                    {...register("pincode", { required: true, maxLength: 6 })}
-                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
-                  />
-                </div>
-                <div className="flex-1">
-                  <label className="block mb-1">
                     {translations?.signup?.text7}
                   </label>
                   <input
@@ -251,8 +235,6 @@ const SignUp: React.FC = () => {
                     className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   />
                 </div>
-              </div>
-              <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                 <div className="flex-1">
                   <label className="block mb-1">
                     {translations?.signup?.text8}
@@ -260,16 +242,6 @@ const SignUp: React.FC = () => {
                   <input
                     type="password"
                     {...register("confirmPassword", { required: true })}
-                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
-                  />
-                </div>
-                <div className="flex-1">
-                  <label className="block mb-1">
-                    {translations?.signup?.text9}
-                  </label>
-                  <input
-                    type="text"
-                    {...register("address", { required: true })}
                     className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   />
                 </div>
@@ -287,6 +259,28 @@ const SignUp: React.FC = () => {
                 </div>
                 <div className="flex-1">
                   <label className="block mb-1">
+                    {translations?.signup?.text9}
+                  </label>
+                  <input
+                    type="text"
+                    {...register("address", { required: true })}
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col lg:flex-row lg:items-center gap-4">
+                {/* <div className="flex-1">
+                  <label className="block mb-1">
+                    {translations?.signup?.text10}
+                  </label>
+                  <input
+                    type="date"
+                    {...register("dob", { required: true })}
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
+                  />
+                </div> */}
+                <div className="flex-1">
+                  <label className="block mb-1">
                     {translations?.signup?.text11}
                   </label>
                   <select
@@ -302,8 +296,25 @@ const SignUp: React.FC = () => {
                     ))}
                   </select>
                 </div>
+
+                <div className="flex-1">
+                  <label className="block mb-1">
+                    {translations?.signup?.text12}
+                  </label>
+                  <select
+                    {...register("state", { required: true })}
+                    className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
+                  >
+                    <option value="">Select State</option>
+                    {states.map((state) => (
+                      <option key={state} value={state}>
+                        {state}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
-              <div className="flex flex-col lg:flex-row lg:items-center gap-4">
+              {/* <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                 <div className="flex-1">
                   <label className="block mb-1">
                     {translations?.signup?.text12}
@@ -332,7 +343,7 @@ const SignUp: React.FC = () => {
                     className="w-full bg-transparent p-2 border border-[#666666] rounded focus:outline-none"
                   />
                 </div>
-              </div>
+              </div> */}
               <div>
                 <label className="block mb-1">
                   {translations?.signup?.text14}
@@ -377,7 +388,6 @@ const VerifyPin: React.FC = () => {
   const router = useRouter();
   const { translations } = useTranslation();
 
-
   const onSubmit: SubmitHandler<{ pin: string }> = async (data) => {
     const toastId = toast.loading("Verifying");
     try {
@@ -401,7 +411,9 @@ const VerifyPin: React.FC = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6">{translations?.signup?.text17}</h2>
+      <h2 className="text-2xl font-bold mb-6">
+        {translations?.signup?.text17}
+      </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label className="block mb-1">{translations?.signup?.text18}</label>

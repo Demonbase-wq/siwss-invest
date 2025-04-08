@@ -76,12 +76,12 @@ function createTemplate(name: any) {
 <body>
     <div class="container">
         <div class="header">
-            <h1>KYC Verification Approved</h1>
+            <h1>Account Approved</h1>
         </div>
         <div class="content">
             <p>Dear ${name},</p>
-            <p>Congratulations! Your Know Your Customer (KYC) verification has been successfully completed and approved.</p>
-            <p>With your KYC verification now complete, you have full access to all features and services on our platform.</p>
+            <p>Congratulations! Your account has been successfully reviewed and approved.</p>
+            <p>With your account now approved, you have full access to all features and services on our platform.</p>
             <p>If you notice any changes in your account that you believe are incorrect, or if you have any questions about your verified status, please contact our support team immediately.</p>
             <a href="https://swisspipsai.com/dashboard" class="button">Explore Your Account</a>
         </div>
@@ -129,7 +129,7 @@ export async function POST(req: NextRequest) {
     const mailOptions = {
         from: '"Swiss Pips AI" <noreply@swisspipsai.com>',
         to: email,
-        subject: "KYC Verification Approved",
+        subject: "Account Approved",
         html: createTemplate(name),
     }
 

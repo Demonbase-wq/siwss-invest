@@ -9,7 +9,7 @@ const Pending = () => {
                 <div className="px-4">
                     <div>
                         <div className='text-primary text-[14px] lg:text-[16px] bg-[#eaf1ff] p-3 rounded-lg border-[1px] border-primary'>
-                            Alert! Your account is currently under review, Please upload your KYC documents to expedite the process. <Link href='/dashboard/kyc-details'>go to kyc page</Link> </div>
+                            Alert! Your account is currently under review, You will be notified when your account has been approved. </div>
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@ const Pending = () => {
                 <div className="px-4">
                     <div>
                         <div className='text-primary text-[14px] lg:text-[16px] bg-[#eaf1ff] p-3 rounded-lg border-[1px] border-primary'>
-                            Alert! Your account is currently under review, Please upload your KYC documents to expedite the process. <Link href='/dashboard/kyc-details' className="underline">go to kyc page</Link></div>
+                        Alert! Your account is currently under review, You will be notified when your account has been approved.</div>
                     </div>
                 </div>
             </div>

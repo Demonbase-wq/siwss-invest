@@ -178,13 +178,13 @@ export default function ProfileForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <div className="flex items-center space-x-4">
                 <Avatar className="w-24 h-24">
-                  <AvatarImage src={data.img} alt="Profile picture" />
+                  <AvatarImage src='https://allvthbsw3pitbwu.public.blob.vercel-storage.com/user-AFy52awmfTbfmnIqF4uCRpgEZrKaq6' alt="Profile picture" />
                   <AvatarFallback>
                     {data.first_name?.[0]}
                     {data.last_name?.[0]}
                   </AvatarFallback>
                 </Avatar>
-                <div>
+                {/* <div>
                   <FormLabel htmlFor="picture">
                     {translations?.dashboardAccount?.text3}
                   </FormLabel>
@@ -194,7 +194,7 @@ export default function ProfileForm() {
                     ref={inputFileRef}
                     className="w-full max-w-xs"
                   />
-                </div>
+                </div> */}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

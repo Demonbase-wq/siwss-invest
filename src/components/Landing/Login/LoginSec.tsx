@@ -29,6 +29,7 @@ const LoginPage: React.FC = () => {
       router.push("/dashboard");
     } catch (error) {
       console.log(error);
+      toast.dismiss(toastId);
       toast.error("Error logging in");
     }
   };
