@@ -91,10 +91,12 @@ function createTemplate(name: string, vcode: any){
 
 export async function POST(request: Request) {
     const { email, password } = await request.json();
+    const formattedEmail = email.toLowerCase();
+
 
     try {
         const records = await users.select({
-            filterByFormula: `{email} = '${email}'`,
+            filterByFormula: `{email} = '${formattedEmail}'`,
         }).firstPage();
 
         if (records.length === 0) {
