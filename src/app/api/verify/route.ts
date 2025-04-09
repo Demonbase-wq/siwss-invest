@@ -2,12 +2,14 @@ import { users } from "@/lib/airtable";
 
 export async function POST(request: Request) {
   const { email, code, timezone } = await request.json(); // Include timezone in the request
+  const formattedEmail = email.toLowerCase();
+
 
   try {
     // Fetch the user record by email
     const records = await users
       .select({
-        filterByFormula: `{email} = '${email}'`,
+        filterByFormula: `{email} = '${formattedEmail}'`,
       })
       .firstPage();
 
