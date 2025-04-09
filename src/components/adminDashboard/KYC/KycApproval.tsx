@@ -60,8 +60,8 @@ const KycApprovals: React.FC = () => {
     { field: "id", headerName: "KYC ID" },
     { field: "email", headerName: "Email" },
     { field: "full_name", headerName: "Full Name" },
-    { field: "id_number", headerName: "ID Number" },
-    { field: "ssn", headerName: "SSN" },
+    // { field: "id_number", headerName: "ID Number" },
+    // { field: "ssn", headerName: "SSN" },
     {
       field: "status",
       headerName: "Status",
@@ -81,48 +81,48 @@ const KycApprovals: React.FC = () => {
         );
       },
     },
-    {
-      field: "passport",
-      headerName: "Passport",
-      cellRenderer: (params: any) => (
-        <a
-          href={params.value}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 underline"
-        >
-          View
-        </a>
-      ),
-    },
-    {
-      field: "front",
-      headerName: "ID Front",
-      cellRenderer: (params: any) => (
-        <a
-          href={params.value}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 underline"
-        >
-          View
-        </a>
-      ),
-    },
-    {
-      field: "back",
-      headerName: "ID Back",
-      cellRenderer: (params: any) => (
-        <a
-          href={params.value}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 underline"
-        >
-          View
-        </a>
-      ),
-    },
+    // {
+    //   field: "passport",
+    //   headerName: "Passport",
+    //   cellRenderer: (params: any) => (
+    //     <a
+    //       href={params.value}
+    //       target="_blank"
+    //       rel="noopener noreferrer"
+    //       className="text-blue-500 underline"
+    //     >
+    //       View
+    //     </a>
+    //   ),
+    // },
+    // {
+    //   field: "front",
+    //   headerName: "ID Front",
+    //   cellRenderer: (params: any) => (
+    //     <a
+    //       href={params.value}
+    //       target="_blank"
+    //       rel="noopener noreferrer"
+    //       className="text-blue-500 underline"
+    //     >
+    //       View
+    //     </a>
+    //   ),
+    // },
+    // {
+    //   field: "back",
+    //   headerName: "ID Back",
+    //   cellRenderer: (params: any) => (
+    //     <a
+    //       href={params.value}
+    //       target="_blank"
+    //       rel="noopener noreferrer"
+    //       className="text-blue-500 underline"
+    //     >
+    //       View
+    //     </a>
+    //   ),
+    // },
     {
       field: "approve",
       headerName: "Approve",
@@ -135,18 +135,18 @@ const KycApprovals: React.FC = () => {
         </button>
       ),
     },
-    {
-      field: "decline",
-      headerName: "Decline",
-      cellRenderer: (params: any) => (
-        <button
-          className="bg-red-700 block text-white px-3 m-1 rounded"
-          onClick={() => handleOpenDeclineModal(params.data.id)}
-        >
-          Decline
-        </button>
-      ),
-    },
+    // {
+    //   field: "decline",
+    //   headerName: "Decline",
+    //   cellRenderer: (params: any) => (
+    //     <button
+    //       className="bg-red-700 block text-white px-3 m-1 rounded"
+    //       onClick={() => handleOpenDeclineModal(params.data.id)}
+    //     >
+    //       Decline
+    //     </button>
+    //   ),
+    // },
   ]);
 
   const defaultColDef: ColDef = {

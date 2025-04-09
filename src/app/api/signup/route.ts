@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
-import { referrals, users } from "@/lib/airtable";
+import { kyc, referrals, users } from "@/lib/airtable";
 import nodemailer from "nodemailer";
+
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -145,6 +146,14 @@ export async function POST(request: Request) {
 
     if (newUser && newUser.length > 0) {
       const newUserId = newUser[0].id; // Airtable record ID of the new user
+
+      await kyc.create([
+        {
+          fields: {
+            user_id: newUserId,
+          },
+        },
+      ]);
 
       // Handle referral logic if a referral code is provided
       if (req.referralCode) {
